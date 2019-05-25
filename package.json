@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/Veetaha/query-builder-website#readme",
   "dependencies": {
+    "@covalent/text-editor": "^2.0.0",
     "@hapi/joi": "^15.0.3",
     "@ngxs/form-plugin": "^3.4.3",
     "@ngxs/router-plugin": "^3.4.3",

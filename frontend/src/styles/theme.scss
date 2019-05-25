@@ -4,7 +4,8 @@
 
 $typography: mat-typography-config(
     $font-family: 'Roboto, monospace',
-    $headline: mat-typography-level(32px, 48px, 700)
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500)
 );
 
 @include mat-core($typography); // $typography is an **optional** argument for the mat-core
@@ -19,7 +20,8 @@ $theme: map-merge(mat-light-theme($primary, $accent, $warn), (
     snack-bar-info:    mat-color($mat-blue, 700), // second argument is required!
     snack-bar-success: mat-color($mat-green, 500),
     snack-bar-warning: mat-color($mat-yellow, 500),
-    snack-bar-error:   mat-color($mat-red, 500)
+    snack-bar-error:   mat-color($mat-red, 500),
+    footer-bgnd:       mat-color($primary)
 ));
 
 // Include theme styles for core and each component used in your app.
@@ -28,3 +30,4 @@ $theme: map-merge(mat-light-theme($primary, $accent, $warn), (
 @include angular-material-theme($theme);
 @include covalent-theme($theme, $typography); // $typography is an **optional** argument for the covalent-theme
 @include covalent-markdown-theme($theme);
+@include covalent-layout()

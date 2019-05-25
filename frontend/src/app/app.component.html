@@ -5,7 +5,7 @@
 
     <td-navigation-drawer 
         flex 
-        sidenavTitle="Covalent" 
+        sidenavTitle="ts-nestjs-angular-template" 
         logo="teradata-dark" 
         name="Vitaly Kryvenko" 
         email="email@gmail.com"
@@ -20,7 +20,7 @@
         </button>
 
         <div td-toolbar-content>
-            <app-dashboard class="dashboard"></app-dashboard>
+            <app-dashboard></app-dashboard>
         </div>
 
         <mat-progress-bar
@@ -28,15 +28,14 @@
             color="primary"
             value="0"
         ></mat-progress-bar>
-        
-        <main class="main">
-            <router-outlet></router-outlet>
-        </main>
-
-        <td-layout-footer>
-            <app-footer></app-footer>
-        </td-layout-footer> 
-
+        <div class="content-root">
+            <main class="main">
+                <router-outlet></router-outlet>
+            </main>
+            <footer class="footer">
+                <app-footer></app-footer>
+            </footer>
+        </div>
     </td-layout-nav>
 
 </td-layout>

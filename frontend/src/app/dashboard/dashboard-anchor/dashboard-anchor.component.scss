@@ -1,0 +1,10 @@
+.dashboard {
+    &__home-btn {
+        font-weight: 300;
+        font-size: 1.1em;
+        margin: auto 30px;
+    }
+    &__link--active {
+        background-color: rgb(105, 98, 98)
+    }
+}

@@ -1,33 +1,26 @@
 <ng-container *veeLet="client$ | async as client">
 
 <nav layout="row" layout-margin>
-    <a mat-button 
-        flex
-        routerLink="/"
-        class="home-btn"
-    >Tant</a>
 
-    <a mat-button 
-        flex 
-        routerLink="/developer"
-    >Documentation</a>
+
+    <app-dashboard-anchor flex routePath="/" class="dashboard-home-btn" exactMatch>
+        <span class="dashboard-home-btn__text">Tnat</span>
+    </app-dashboard-anchor>
+
+    <app-dashboard-anchor flex routePath="/developer">Documentation</app-dashboard-anchor>
 
     <ng-container *appIfClientRole="authRouteMap.getRoleLimitFor('sign-in'); else elseForNotGuest">
 
-        <a mat-button flex routerLink="/sign-in">Sign in</a>
-
-        <a *appIfClientRole="authRouteMap.getRoleLimitFor('sign-up')"
+        <app-dashboard-anchor flex routePath="/sign-in">Sign in</app-dashboard-anchor>
+        <app-dashboard-anchor *appIfClientRole="authRouteMap.getRoleLimitFor('sign-up')"
             flex
-            mat-button
-            routerLink="/sign-up"
-        >Sign up</a>
-
+            routePath="/sign-up"
+        > Sign up
+        </app-dashboard-anchor>
+        
     </ng-container>
     <ng-template #elseForNotGuest>
-        <a mat-button
-            flex
-            (click)="signOut()"
-        >Sign out</a>
+        <a mat-button flex (click)="signOut()">Sign out</a>
     </ng-template>
 
 </nav>

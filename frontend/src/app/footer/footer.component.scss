@@ -1,7 +1,14 @@
-.footer-main {
-    height: 100%;
+@import 'theme';
+
+.footer-root {
+    background-color: map-get($theme, footer-bgnd);
+    color: white;
     margin: 10px 0 0 0;
     text-align: center;
-    font-size: 1.5rem;
     padding: 20px;
+}
+
+.external-site-logo {
+    height: 1.5em;
+    margin-bottom: 5px;
 }

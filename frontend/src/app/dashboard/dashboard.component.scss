@@ -1,5 +1,14 @@
-.home-btn {
-    font-weight: 300;
-    font-size: 1.1em;
-    margin: auto 30px;
+.dashboard {
+    &-root {
+        margin: 0;
+    }
+
+    &-home-btn {
+        margin: auto 30px;
+
+        &__text {
+            font-weight: 800;
+            font-size: 1.1em;
+        }
+    }
 }

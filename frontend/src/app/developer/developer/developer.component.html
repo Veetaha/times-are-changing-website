@@ -6,8 +6,8 @@
         <mat-card-title>API documentation</mat-card-title>
         <mat-card-subtitle>GraphQL</mat-card-subtitle>
     </mat-card-header>
-    <figure class="developer-promo">
-        <img mat-card-image
+    <figure mat-card-image class="developer-promo">
+        <img 
             src="/assets/developer-promo.jpg" 
             alt="Build tools photo"
             class="developer-promo__image"
@@ -15,7 +15,7 @@
     </figure>
     <mat-card-content> 
         <!-- markdown start-->
-        <p>Welcome to <strong>QueryBuilder</strong> backend API documentation.</p>
+        <p>Welcome to <strong>ts-nestjs-angular-template</strong> backend API documentation.</p>
 
         <p>
             All interaction with the web-server is done via <code>GraphQL</code> query
@@ -25,11 +25,14 @@
         <h2 id="playground">Playground</h2>
         
         <p>
-            Visit our <a href="/gql">graphql playground</a> in order to try our 
-            API right now. If you want to authorize requests from the playground
-            markdown end
+            Visit our 
+            <a mat-stroked-button href="/gql" target="_blank">
+                graphql playground
+            </a> 
+            in order to try our API right now. If you want to authorize requests 
+            from the playground markdown end
             <!-- 
-                matTooltip disabled attribute should always be 'false', 
+                matTooltip `disabled` attribute should always be `false`, 
                 thats why didn't set this directive directly onto the button
             -->
             <span [matTooltip]="clientAuthToken == null 
@@ -75,9 +78,15 @@
         </p>
         <h2>GraphQL docs</h2>
         <p>
-            <a href="/gql/docs">You can view GraphQL API documentation here</a>, 
+            You can view GraphQL API documentation
+            <a mat-stroked-button href="/gql/docs" target="_blank">here</a>, 
             it was generated automatically by
-            <a href="https://www.npmjs.com/package/@2fd/graphdoc"><code>'graphdoc'</code></a>.
+            <a mat-stroked-button 
+                href="https://www.npmjs.com/package/@2fd/graphdoc"
+                target="_blank"
+            >
+                <code>'graphdoc'</code>
+            </a>.
         </p>
         <!-- markdown end-->
 

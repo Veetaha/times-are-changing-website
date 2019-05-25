@@ -6,10 +6,10 @@ import { ErrorModule        } from './error/error.module';
 import { AuthModule         } from './auth/auth.module';
 import { AppComponent       } from './app.component';
 import { HomeComponent      } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeveloperModule    } from './developer/developer.module';
 import { FooterComponent    } from './footer/footer.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
     imports: [   
@@ -17,11 +17,11 @@ import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer
         DeveloperModule,
         AuthModule,
         ErrorModule,
-        AppRoutingModule
+        AppRoutingModule,
+        DashboardModule
     ],
     declarations: [
         AppComponent,
-        DashboardComponent,
         HomeComponent,
         FooterComponent,
         NavigationDrawerComponent

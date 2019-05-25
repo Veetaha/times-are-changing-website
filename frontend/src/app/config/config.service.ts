@@ -26,7 +26,7 @@ export class ConfigService {
     readonly uploadcarePublicApiKey = '93d19e223c7ee0f0581a';
     readonly markdownEditorOptions: EditorOption;
     readonly snackBarOpts: MatSnackBarConfig = {
-        duration: 4000,
+        duration: 400000,
         horizontalPosition: 'left',
         verticalPosition: 'bottom',
     };
