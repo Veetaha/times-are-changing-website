@@ -1,0 +1,23 @@
+<ngx-uploadcare-widget *ngIf="shouldDisplayButton; else elseDontDisplayButton"
+    #ucWidget
+    [value]="fileUrl"
+    [public-key]="config.uploadcarePublicApiKey"
+    [images-only]="true"
+    [preview-step]="true"
+    (on-upload-complete)="onUploadComplete($event.cdnUrl)"
+    crop="free"
+></ngx-uploadcare-widget>
+
+<ng-template #elseDontDisplayButton>
+
+    <ngx-uploadcare-widget-custom #ucWidget
+        [value]="fileUrl"
+        [public-key]="config.uploadcarePublicApiKey"
+        [images-only]="true"
+        [preview-step]="true"
+        (on-upload-complete)="onUploadComplete($event.cdnUrl)"
+        crop="free"
+    >
+    </ngx-uploadcare-widget-custom>
+
+</ng-template>

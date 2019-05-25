@@ -1,0 +1,82 @@
+{
+  "name": "query-builder-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Fullstack TypeScript, NestJS, Angular7+ project.",
+  "main": "backend/dist/backend/src/main.js",
+  "scripts": {
+    "test": "                   (cd backend  && npm run test)",
+    "build": "                  (cd frontend && npm run build)",
+    "backend:container:start": "(cd backend && npm run start)",
+    "backend:container:dev": "  (cd backend && npm run dev)",
+    "frontend:dev": "           (cd frontend && npm run dev)",
+    "modules-graph:backend": "  (cd backend  && npm run create-modules-graph)",
+    "modules-graph:frontend": " (cd frontend && npm run create-modules-graph)",
+    "modules-graph": "npm-run-all --parallel create-modules-graph:backend create-modules-graph:frontend",
+    "start": "docker-compose up",
+    "gen:fragment-types": "ts-node ./scripts/generate-fragment-types.ts",
+    "backend:dev": "docker-compose --file debug.docker-compose.yml run --rm --service-ports tnat-web-debug",
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend",
+    "gql:docs": "graphdoc --endpoint http://localhost/gql --force --output ./common/docs/gql",
+    "gql:codegen": "gql-gen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Veetaha/ts-nestjs-angular-template.git"
+  },
+  "keywords": [
+    "project",
+    "template"
+  ],
+  "author": "Vitaly Kryvenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Veetaha/query-builder-website/issues"
+  },
+  "homepage": "https://github.com/Veetaha/query-builder-website#readme",
+  "dependencies": {
+    "@hapi/joi": "^15.0.3",
+    "@ngxs/form-plugin": "^3.4.3",
+    "@ngxs/router-plugin": "^3.4.3",
+    "@ngxs/storage-plugin": "^3.4.3",
+    "@ngxs/store": "^3.4.3",
+    "async-mutex": "^0.1.3",
+    "class-transformer": "latest",
+    "class-transformer-validator": "^0.7.1",
+    "class-validator": "latest",
+    "coveralls": "^3.0.3",
+    "graphql": "^14.2.1",
+    "joi": "^14.3.1",
+    "lodash": "latest",
+    "mathjs": "latest",
+    "node-fetch": "^2.5.0",
+    "reflect-metadata": "latest",
+    "rimraf": "latest",
+    "rxjs": "latest",
+    "ts-node": "latest",
+    "ts-typedefs": "^2.5.1",
+    "tslib": "^1.9.3",
+    "typesafe-joi": "latest",
+    "typescript-collections": "latest",
+    "yaml": "latest"
+  },
+  "devDependencies": {
+    "@2fd/graphdoc": "^2.4.0",
+    "@graphql-codegen/cli": "^1.1.3",
+    "@graphql-codegen/typescript": "^1.1.3",
+    "@graphql-codegen/typescript-apollo-angular": "^1.1.3",
+    "@graphql-codegen/typescript-operations": "^1.1.3",
+    "@types/graphql": "^14.2.0",
+    "@types/lodash": "latest",
+    "@types/mathjs": "latest",
+    "@types/node": "latest",
+    "@types/node-fetch": "^2.3.3",
+    "@types/yaml": "latest",
+    "madge": "^3.4.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "latest",
+    "tslint": "latest",
+    "tsuml": "0.0.1-alpha.8",
+    "typescript": "^3.4.5"
+  }
+}

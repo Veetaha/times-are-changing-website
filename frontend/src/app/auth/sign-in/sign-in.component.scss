@@ -1,0 +1,12 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+}
+.text-input, .submit-button {
+    margin-top: 20px;
+}
+
+.text-input__element {
+    width: 100%;
+}

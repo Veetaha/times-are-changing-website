@@ -1,0 +1,45 @@
+<ng-container *veeLet="isAwaitingResponses$ | async as isAwaitingResponses">
+
+
+<td-layout>
+
+    <td-navigation-drawer 
+        flex 
+        sidenavTitle="Covalent" 
+        logo="teradata-dark" 
+        name="Vitaly Kryvenko" 
+        email="email@gmail.com"
+    >
+        <app-navigation-drawer></app-navigation-drawer>
+    </td-navigation-drawer>
+
+    <td-layout-nav>
+
+        <button mat-icon-button td-menu-button tdLayoutToggle>
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <div td-toolbar-content>
+            <app-dashboard class="dashboard"></app-dashboard>
+        </div>
+
+        <mat-progress-bar
+            [mode]="isAwaitingResponses ? 'indeterminate' : 'determinate'"
+            color="primary"
+            value="0"
+        ></mat-progress-bar>
+        
+        <main class="main">
+            <router-outlet></router-outlet>
+        </main>
+
+        <td-layout-footer>
+            <app-footer></app-footer>
+        </td-layout-footer> 
+
+    </td-layout-nav>
+
+</td-layout>
+
+
+</ng-container>

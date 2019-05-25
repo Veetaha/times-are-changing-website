@@ -1,0 +1,5 @@
+schemaPath: http://localhost/gql
+includes: [ "frontend/src/app/**/*.gql" ]
+extensions:
+    endpoints:
+        default: http://localhost/gql

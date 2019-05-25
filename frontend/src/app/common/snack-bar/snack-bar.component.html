@@ -1,0 +1,12 @@
+<h1 class="mat-title">
+    <mat-icon>{{
+        {
+            info:    'info',
+            success: 'done',
+            warning: 'warning',
+            error:   'error'
+        }[data.severity]
+    }}</mat-icon>
+    {{data.title}}
+</h1>
+<p class="mat-body-1">{{data.body}}</p>

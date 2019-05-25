@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+        "module":           "commonjs",
+        "moduleResolution": "node",
+        "target":           "esnext",
+
+        "typeRoots": [ 
+            "node_modules/@types",
+            "common/ambient-declarations"
+        ],
+
+        "declaration":     false,
+        "declarationMap":  false, 
+        "sourceMap":       false, 
+    
+        "allowJs":                      false,
+        "esModuleInterop":              true, 
+        "allowSyntheticDefaultImports": true,
+
+        "emitDecoratorMetadata":  true,
+        "experimentalDecorators": true,
+        "importHelpers":          true,
+        
+        "strict":                           true,
+        "noUnusedLocals":                   true,
+        "noUnusedParameters":               true,
+        "noImplicitAny":                    true,
+        "noImplicitThis":                   true,
+        "noImplicitReturns":                true,
+        "noFallthroughCasesInSwitch":       true,
+        "strictBindCallApply":              true,
+        "strictFunctionTypes":              true,
+        "strictNullChecks":                 true,
+        "strictPropertyInitialization":     true,
+        "forceConsistentCasingInFileNames": true,
+        "noStrictGenericChecks":            false,
+        "allowUnreachableCode":             false,
+
+        "alwaysStrict": true,
+        "pretty":       true
+    }
+}

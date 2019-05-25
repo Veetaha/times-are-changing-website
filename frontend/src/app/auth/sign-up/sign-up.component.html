@@ -1,0 +1,50 @@
+<ng-container *veeLet="isFetchingClient$ | async as isFetchingClient">
+
+<form
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+    class="form"
+    ngxsForm="signUp"
+    
+>
+<mat-form-field appearance="outline">
+        <mat-label>Login</mat-label>
+        <input matInput
+            required
+            [maxlength]="limits.user.login.max - 1"
+            [minlength]="limits.user.login.min"
+            formControlName="login" 
+            type="text"
+        />
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput
+            required
+            [maxlength]="limits.user.password.max - 1"
+            [minlength]="limits.user.password.min"
+            formControlName="password" 
+            type="password"
+        />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput
+            required
+            [maxlength]="limits.user.name.max - 1"
+            [minlength]="limits.user.name.min"
+            formControlName="name"
+            type="text"
+        />
+    </mat-form-field>
+
+    <button mat-raised-button
+        [disabled]="form.invalid || isFetchingClient"
+        type="submit"
+        color="primary"
+    >Sign up</button>
+</form>
+    
+</ng-container>

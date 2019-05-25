@@ -1,0 +1,9 @@
+version: '3'
+services: 
+    tnat-web: # ts-nestjs-angular-template (tnat)
+        build: .
+        ports:
+            - ${PORT}:${PORT}
+            - 9229:9229
+        env_file: .env
+        

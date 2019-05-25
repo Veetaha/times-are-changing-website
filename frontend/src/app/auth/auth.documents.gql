@@ -1,0 +1,26 @@
+fragment EntireUser on User {
+    __typename
+    creationDate
+    lastUpdateDate
+    role
+    name
+    login
+    avatarId: avatarIdOrDefault
+}
+
+fragment EntireClientAndToken on UserAndToken {
+    token
+    client: user { ...EntireUser }
+}
+
+query getMe {
+    getMe { ...EntireUser }
+}
+
+mutation signUp($params: SignUpInput!) {
+    signUp(params: $params) { ...EntireClientAndToken }
+}
+
+mutation signIn($params: SignInInput!) {
+    signIn(params: $params) { ...EntireClientAndToken }
+}

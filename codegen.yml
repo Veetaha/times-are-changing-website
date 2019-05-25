@@ -1,0 +1,15 @@
+schema:    common/schema.gql
+documents: frontend/src/app/**/*.gql
+overwrite: true
+watch:     true
+config:
+    scalars:
+        DateTime: string
+generates:
+    frontend/src/app/gql/generated.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - typescript-apollo-angular
+
+

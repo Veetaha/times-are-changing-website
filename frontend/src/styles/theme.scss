@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+@import '~@covalent/markdown/markdown-theme';
+
+$typography: mat-typography-config(
+    $font-family: 'Roboto, monospace',
+    $headline: mat-typography-level(32px, 48px, 700)
+);
+
+@include mat-core($typography); // $typography is an **optional** argument for the mat-core
+
+$primary: mat-palette($mat-blue);
+$accent:  mat-palette($mat-orange);
+$warn:    mat-palette($mat-red);
+
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: map-merge(mat-light-theme($primary, $accent, $warn), (
+    snack-bar-info:    mat-color($mat-blue, 700), // second argument is required!
+    snack-bar-success: mat-color($mat-green, 500),
+    snack-bar-warning: mat-color($mat-yellow, 500),
+    snack-bar-error:   mat-color($mat-red, 500)
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($theme);
+@include covalent-theme($theme, $typography); // $typography is an **optional** argument for the covalent-theme
+@include covalent-markdown-theme($theme);

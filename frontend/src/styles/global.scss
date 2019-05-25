@@ -1,0 +1,29 @@
+@import "theme.scss";
+
+[ng-reflect-router-link] {
+    cursor: pointer;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.snack-bar {
+    &-info {
+        background-color: map-get($theme, snack-bar-info);
+    }
+    &-success {
+        background-color: map-get($theme, snack-bar-success);
+    }
+    &-warning {
+        color: black;
+        background-color: map-get($theme, snack-bar-warning);
+    }
+    &-error {
+        background-color: map-get($theme, snack-bar-error);
+    }
+}
+
+@debug map-get($theme, snack-bar-warning);

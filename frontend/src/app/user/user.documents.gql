@@ -1,0 +1,11 @@
+query getUsersPage($params: UserPaginationInput!) {
+    getUsersPage(params: $params) {
+        total
+        data {
+            role
+            name
+            login
+            avatarId: avatarIdOrDefault
+        }
+    }
+}

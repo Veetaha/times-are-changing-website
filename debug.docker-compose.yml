@@ -1,0 +1,12 @@
+version: '3'
+services: 
+    tnat-web-debug: # ts-nestjs-angular-template (tnat)
+        build:
+            context: '.'
+            dockerfile: debug.dockerfile
+        volumes:
+            - .:/home/${USER}/my/projects/ts-nestjs-angular-template
+        ports:
+            - ${PORT}:${PORT}
+            - 9229:9229
+        env_file: .env

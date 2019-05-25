@@ -1,0 +1,88 @@
+<ng-container *veeLet="clientAuthToken$ | async as clientAuthToken">
+
+
+<mat-card header="Backend API docs" subheader="Graphql" styleClass="ui-card-shadow">
+    <mat-card-header>
+        <mat-card-title>API documentation</mat-card-title>
+        <mat-card-subtitle>GraphQL</mat-card-subtitle>
+    </mat-card-header>
+    <figure class="developer-promo">
+        <img mat-card-image
+            src="/assets/developer-promo.jpg" 
+            alt="Build tools photo"
+            class="developer-promo__image"
+        >
+    </figure>
+    <mat-card-content> 
+        <!-- markdown start-->
+        <p>Welcome to <strong>QueryBuilder</strong> backend API documentation.</p>
+
+        <p>
+            All interaction with the web-server is done via <code>GraphQL</code> query
+            language protocol, that simplifies the data flow drastically.
+        </p>
+        
+        <h2 id="playground">Playground</h2>
+        
+        <p>
+            Visit our <a href="/gql">graphql playground</a> in order to try our 
+            API right now. If you want to authorize requests from the playground
+            markdown end
+            <!-- 
+                matTooltip disabled attribute should always be 'false', 
+                thats why didn't set this directive directly onto the button
+            -->
+            <span [matTooltip]="clientAuthToken == null 
+                ? 'You need to be authorized in the first place'
+                : 'Your auth token will be written to the clipboard'
+            ">
+                <button mat-raised-button ngxClipboard
+                    [disabled]="clientAuthToken == null"
+                    [cbContent]="clientAuthToken"                
+                    (click)="notifyTokenCopied()"
+                    tooltipPosition="top"
+                >
+                    click here in order to copy your auth token to clipboard
+                </button>
+            </span>
+            <!-- markdown start-->
+            and set the *HTTP* headers in the lower panel.
+        </p>
+        
+<pre><code>{{'{'}}
+    "Authorization": "Bearer ${{'{'}}Ctrl+V{{'}'}}"
+{{'}'}}
+</code></pre>
+        
+        <h2>Authorization</h2>
+        
+        <p>
+            The API consists of <em>queries</em> and <em>mutations</em> and
+            in order to do some <em>queries</em> and most of the <em>mutations</em>
+            you have to be authorized. To perform authorization, you should use 
+            <code>signIn()</code> <em>mutation</em>
+            that returns you <code>UserAndToken</code> object with the client account payload and 
+            <strong>JWT</strong> auth token. In order to authenticate your requests
+            you should place this token into <em>HTTP</em> 
+            <code>"Authorization"</code> header.
+        </p>
+        
+        <pre><code>Authorization: Bearer ${{'{'}}token{{'}'}}</code></pre>
+        
+        <p>
+            Replace <code>${{'{'}}token{{'}'}}</code> with the string that is stored in 
+            <code>UserAndToken.token</code> property and you'll get your request authenticated.
+        </p>
+        <h2>GraphQL docs</h2>
+        <p>
+            <a href="/gql/docs">You can view GraphQL API documentation here</a>, 
+            it was generated automatically by
+            <a href="https://www.npmjs.com/package/@2fd/graphdoc"><code>'graphdoc'</code></a>.
+        </p>
+        <!-- markdown end-->
+
+    </mat-card-content>
+</mat-card>
+
+
+</ng-container>
