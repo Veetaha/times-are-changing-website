@@ -1,6 +1,9 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/markdown/markdown-theme';
+@import '~@covalent/highlight/highlight-theme';
+
+
 
 $typography: mat-typography-config(
     $font-family: 'Roboto, monospace',
@@ -30,4 +33,5 @@ $theme: map-merge(mat-light-theme($primary, $accent, $warn), (
 @include angular-material-theme($theme);
 @include covalent-theme($theme, $typography); // $typography is an **optional** argument for the covalent-theme
 @include covalent-markdown-theme($theme);
-@include covalent-layout()
+@include covalent-layout();
+@include covalent-highlight-theme();

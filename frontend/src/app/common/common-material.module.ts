@@ -11,6 +11,7 @@ import { MatInputModule        } from '@angular/material/input';
 import { MatCardModule         } from '@angular/material/card';
 import { MatTooltipModule      } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule    } from '@angular/material/expansion';
 
 @NgModule({
     exports: [
@@ -23,7 +24,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
         MatInputModule,
         MatCardModule,
         MatTooltipModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatExpansionModule
     ]
 })
 export class CommonMaterialModule { }

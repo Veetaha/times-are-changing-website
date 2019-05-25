@@ -154,5 +154,15 @@ your action property.
 Your routing module is a target for static analysis, thus must not have function 
 for creating `Routes`. See [this discussion](https://www.bountysource.com/issues/52474675-angular-5-upgrade-can-t-get-lazy-loading-to-work).
 
+---
+
 ### Teradata Covalent ported flexbox layout doesn't work
 Don't forget to `@include covalent-layout()` mixin in your scss.
+
+---
+
+### MatSnackBarRef dismiss() method is not working
+You need to run this method inside of `NgZone`
+```ts
+this.zone.run(() => this.snackBarRef.dismiss());
+```

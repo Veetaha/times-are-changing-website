@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { Component, Inject, NgZone } from '@angular/core';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 import { SnackBarData } from './snack-bar-data.interface';
 
@@ -10,5 +10,14 @@ import { SnackBarData } from './snack-bar-data.interface';
 })
 export class SnackBarComponent {
     
-    constructor(@Inject(MAT_SNACK_BAR_DATA) readonly data: SnackBarData) { }
+    constructor(
+        @Inject(MAT_SNACK_BAR_DATA) readonly data: SnackBarData,
+        readonly snackBarRef: MatSnackBarRef<SnackBarComponent>,
+        private readonly zone: NgZone
+    ) { }
+    
+    closeSnackBar() {
+        // Running it inside of `NgZone` is crutial!
+        this.zone.run(() => this.snackBarRef.dismiss());
+    }
 }

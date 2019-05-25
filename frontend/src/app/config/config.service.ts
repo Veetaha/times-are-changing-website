@@ -1,6 +1,4 @@
 import { Injectable      } from '@angular/core';
-import { EditorOption    } from 'angular-markdown-editor';
-import { MarkdownService } from 'ngx-markdown';
 
 import { ApolloClientOptions } from 'apollo-client';
 import { InMemoryCache       } from 'apollo-cache-inmemory';
@@ -16,17 +14,15 @@ import { MatSnackBarConfig } from '@angular/material/snack-bar';
 
 type NgxsModuleOptions = NonNullable<Parameters<(typeof NgxsModule)['forRoot']>[1]>;
 
-// @dynamic
+
 @Injectable({ providedIn: 'root' })
-// @dynamic
 export class ConfigService {
 
     static readonly isDevelopmentMode = isDevelopmentMode;
     
     readonly uploadcarePublicApiKey = '93d19e223c7ee0f0581a';
-    readonly markdownEditorOptions: EditorOption;
     readonly snackBarOpts: MatSnackBarConfig = {
-        duration: 400000,
+        duration: 4000,
         horizontalPosition: 'left',
         verticalPosition: 'bottom',
     };
@@ -36,13 +32,9 @@ export class ConfigService {
     
 
     constructor(
-        httpLink: HttpLink, 
-        markdown: MarkdownService
+        httpLink: HttpLink
     ) {
         this.httpLinkHandler = httpLink.create({ uri: '/gql' });
-        this.markdownEditorOptions = {
-            parser: input => markdown.compile(input.trim())
-        };
     }
 
     static createNgxsLoggerPluginOptions(): NgxsLoggerPluginOptions {
