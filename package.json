@@ -16,7 +16,7 @@
     "start": "docker-compose up",
     "gen:fragment-types": "ts-node ./scripts/generate-fragment-types.ts",
     "backend:dev": "docker-compose --file debug.docker-compose.yml run --rm --service-ports tnat-web-debug",
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend",
+    "postinstall": "npm install --prefix frontend && npm install --prefix backend",
     "gql:docs": "graphdoc --endpoint http://localhost/gql --force --output ./common/docs/gql",
     "gql:codegen": "gql-gen"
   },
@@ -31,9 +31,9 @@
   "author": "Vitaly Kryvenko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Veetaha/query-builder-website/issues"
+    "url": "https://github.com/Veetaha/ts-nestjs-angular-template/issues"
   },
-  "homepage": "https://github.com/Veetaha/query-builder-website#readme",
+  "homepage": "https://github.com/Veetaha/ts-nestjs-angular-template#readme",
   "dependencies": {
     "@covalent/highlight": "^2.0.1",
     "@hapi/joi": "^15.0.3",
