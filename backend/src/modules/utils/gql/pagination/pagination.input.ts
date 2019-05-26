@@ -32,7 +32,7 @@ export function PaginationInput<
     sort:   SortClass
 }: PaginationInputOpts<TEntityClass, TFilterClass, TSortClass>) {
 
-    @InputType(`Meta${PropsFilterClass.name}`)
+    @InputType(`${EntityClass.name}FilterInput`)
     class MetaEntityFilterInput extends ObjFilterInput(EntityClass, PropsFilterClass) {}
 
     @InputType({ isAbstract: true })

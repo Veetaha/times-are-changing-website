@@ -28,17 +28,17 @@ export type DateFilterInput = {
     eq?: Maybe<Scalars["DateTime"]>;
     /** Defines `target <> param` SQL logical expression. */
     neq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target <= param` SQL logical expression */
+    /** Defines `target <= param` SQL logical expression. */
     geq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target <= param` SQL logical expression */
+    /** Defines `target <= param` SQL logical expression. */
     leq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target > param` SQL logical expression */
+    /** Defines `target > param` SQL logical expression. */
     gt?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target < param` SQL logical expression */
+    /** Defines `target < param` SQL logical expression. */
     lt?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target IN param` SQL logical expression */
+    /** Defines `target IN param` SQL logical expression. */
     in?: Maybe<Array<Scalars["DateTime"]>>;
-    /** Defines `target NOT IN param` SQL logical expression */
+    /** Defines `target NOT IN param` SQL logical expression. */
     nin?: Maybe<Array<Scalars["DateTime"]>>;
 };
 
@@ -49,13 +49,6 @@ export enum FilterUnion {
     Nand = "Nand",
     Nor = "Nor"
 }
-
-export type MetaUserPropsFilterInput = {
-    /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
-    unionMode?: Maybe<FilterUnion>;
-    /** Per-property filters. */
-    props: UserPropsFilterInput;
-};
 
 export type Mutation = {
     /** Returns `UserAndToken` for the client according to the given `credentials`. */
@@ -137,17 +130,17 @@ export type StringFilterInput = {
     eq?: Maybe<Scalars["String"]>;
     /** Defines `target <> param` SQL logical expression. */
     neq?: Maybe<Scalars["String"]>;
-    /** Defines `target ILIKE param` SQL logical expression */
-    ilike?: Maybe<Scalars["String"]>;
-    /** Defines `target NOT ILIKE param` SQL logical expression */
-    nilike?: Maybe<Scalars["String"]>;
-    /** Defines `target LIKE param` SQL logical expression */
-    like?: Maybe<Scalars["String"]>;
-    /** Defines `target NOT LIKE param` SQL logical expression */
-    nlike?: Maybe<Scalars["String"]>;
-    /** Defines `target IN param` SQL logical expression */
+    /** Applies `param` POSIX case-insensitive regular expression to `target`. */
+    iregexp?: Maybe<Scalars["String"]>;
+    /** Applies `param` POSIX case-insensitive regular expression to `target` and negates the result. */
+    niregexp?: Maybe<Scalars["String"]>;
+    /** Applies `param` POSIX case-sensitive regular expression to `target`. */
+    regexp?: Maybe<Scalars["String"]>;
+    /** Applies `param` POSIX case-sensitive regular expression to `target` and negates the result. */
+    nregexp?: Maybe<Scalars["String"]>;
+    /** Defines `target IN param` SQL logical expression. */
     in?: Maybe<Array<Scalars["String"]>>;
-    /** Defines `target NOT IN param` SQL logical expression */
+    /** Defines `target NOT IN param` SQL logical expression. */
     nin?: Maybe<Array<Scalars["String"]>>;
 };
 
@@ -175,6 +168,13 @@ export type UserAndToken = {
     token: Scalars["String"];
 };
 
+export type UserFilterInput = {
+    /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
+    unionMode?: Maybe<FilterUnion>;
+    /** Per-property filters. */
+    props: UserPropsFilterInput;
+};
+
 export type UserPage = {
     /** Contains an array of items payload for this page. */
     data: Array<User>;
@@ -188,7 +188,7 @@ export type UserPaginationInput = {
     /** Offset that defines an index of the beginning of the page of items. It must be an integer that is >= 0. */
     offset: Scalars["Int"];
     /** Defines limitations for the items of the returned page. */
-    filter?: Maybe<MetaUserPropsFilterInput>;
+    filter?: Maybe<UserFilterInput>;
     /** Defines sorting order for the items according to their property values. */
     sort?: Maybe<UserSortInput>;
 };
@@ -216,9 +216,9 @@ export type UserRoleFilterInput = {
     eq?: Maybe<UserRole>;
     /** Defines `target <> param` SQL logical expression. */
     neq?: Maybe<UserRole>;
-    /** Defines `target IN param` SQL logical expression */
+    /** Defines `target IN param` SQL logical expression. */
     in?: Maybe<Array<UserRole>>;
-    /** Defines `target NOT IN param` SQL logical expression */
+    /** Defines `target NOT IN param` SQL logical expression. */
     nin?: Maybe<Array<UserRole>>;
 };
 
@@ -281,7 +281,7 @@ export type GetUsersPageQuery = { __typename?: "Query" } & {
             data: Array<
                 { __typename?: "User" } & Pick<
                     User,
-                    "role" | "name" | "login"
+                    "role" | "name" | "login" | "creationDate"
                 > & { avatarId: User["avatarIdOrDefault"] }
             >;
         };
@@ -370,6 +370,7 @@ export const GetUsersPageDocument = gql`
                 name
                 login
                 avatarId: avatarIdOrDefault
+                creationDate
             }
         }
     }

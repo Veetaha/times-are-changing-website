@@ -10,8 +10,9 @@ import { CommonNgxsModule     } from './common-ngxs.module';
 import { CommonMaterialModule } from './common-material.module';
 import { CommonCovalentModule } from './common-covalent.module';
 
-import { UploadImageComponent    } from './upload-image/upload-image.component';
-import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import { SnackBarComponent    } from './snack-bar/snack-bar.component';
+import { PaginationModule     } from './pagination/pagination.module';
 
 const reexports = [
     VeeModule,
@@ -21,7 +22,8 @@ const reexports = [
     CommonMaterialModule,
     CommonCovalentModule,
     UcWidgetModule,
-    ClipboardModule
+    ClipboardModule,
+    PaginationModule
 ];
 
 @NgModule({

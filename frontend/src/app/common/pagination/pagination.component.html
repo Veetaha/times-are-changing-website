@@ -1,0 +1,42 @@
+
+<ng-container *ngIf="page; else elseDataNotLoaded">
+    <td-search-input
+        [debounce]="400"
+        [placeholder]="searchInputPlaceholder"
+        [showUnderline]="true"
+        (searchDebounce)="fetchPage({ offset: 0, search: $event })"
+    >
+    </td-search-input>
+    <mat-paginator #paginator
+        [length]         ="page!.total"
+        [pageSize]       ="paginationInput.limit"
+        [pageIndex]      ="paginationInput.offset / paginationInput.limit"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="
+            fetchPage({
+                offset: $event.pageIndex * $event.pageSize,
+                limit:  $event.pageSize
+            });
+        "
+        color="primary"
+        showFirstLastButtons="showFirstLastButtons"
+    ></mat-paginator>
+
+    <ng-container *ngTemplateOutlet="templateRef; context: { $implicit: page.data }">
+    </ng-container>
+
+    <p *ngIf="page!.data.length === 0" class="text-muted">
+        <strong>{{nothingWasFoundMessage}}</strong>
+    </p>
+    <small *ngIf="paginationInput.search" class="text-muted">
+        Search results for "{{paginationInput.search}}"
+    </small>
+
+</ng-container>
+<ng-template #elseDataNotLoaded>
+    <mat-progress-spinner
+        color="accent"
+        mode="indeterminate"
+        class="centered-block"
+    ></mat-progress-spinner>
+</ng-template>

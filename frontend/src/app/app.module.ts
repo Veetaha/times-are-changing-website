@@ -8,8 +8,9 @@ import { AppComponent       } from './app.component';
 import { HomeComponent      } from './home/home.component';
 import { DeveloperModule    } from './developer/developer.module';
 import { FooterComponent    } from './footer/footer.component';
+import { DashboardModule    } from './dashboard/dashboard.module';
+import { UserModule         } from './user/user.module';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
     imports: [   
@@ -17,8 +18,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
         DeveloperModule,
         AuthModule,
         ErrorModule,
+        UserModule,
         AppRoutingModule,
-        DashboardModule
+        DashboardModule,
     ],
     declarations: [
         AppComponent,

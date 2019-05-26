@@ -43,6 +43,7 @@
     "class-transformer-validator": "^0.7.1",
     "class-validator": "latest",
     "coveralls": "^3.0.3",
+    "escape-string-regexp": "^2.0.0",
     "graphql": "^14.2.1",
     "joi": "^14.3.1",
     "lodash": "latest",

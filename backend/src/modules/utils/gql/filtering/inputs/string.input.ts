@@ -15,17 +15,17 @@ export class StringFilterInput extends AbstractFilterInput {
     @StringField({ nullable: true, description: getDescr(FilterOperator.Neq) }) 
     [FilterOperator.Neq]?: Nullable<string>;
 
-    @StringField({ nullable: true, description: getDescr(FilterOperator.Ilike) }) 
-    [FilterOperator.Ilike]?: Nullable<string>;
+    @StringField({ nullable: true, description: getDescr(FilterOperator.Iregexp) }) 
+    [FilterOperator.Iregexp]?: Nullable<string>;
 
-    @StringField({ nullable: true, description: getDescr(FilterOperator.Nilike) }) 
-    [FilterOperator.Nilike]?: Nullable<string>;
+    @StringField({ nullable: true, description: getDescr(FilterOperator.Niregexp) }) 
+    [FilterOperator.Niregexp]?: Nullable<string>;
 
-    @StringField({ nullable: true, description: getDescr(FilterOperator.Like) }) 
-    [FilterOperator.Like]?: Nullable<string>;
+    @StringField({ nullable: true, description: getDescr(FilterOperator.Regexp) }) 
+    [FilterOperator.Regexp]?: Nullable<string>;
 
-    @StringField({ nullable: true, description: getDescr(FilterOperator.Nlike) }) 
-    [FilterOperator.Nlike]?: Nullable<string>;
+    @StringField({ nullable: true, description: getDescr(FilterOperator.Nregexp) }) 
+    [FilterOperator.Nregexp]?: Nullable<string>;
 
     @StringArrField({ nullable: true, description: getDescr(FilterOperator.In) })  
     [FilterOperator.In]?: Nullable<string[]>;

@@ -28,22 +28,22 @@ input DateFilterInput {
   """Defines `target <> param` SQL logical expression."""
   neq: DateTime
 
-  """Defines `target <= param` SQL logical expression"""
+  """Defines `target <= param` SQL logical expression."""
   geq: DateTime
 
-  """Defines `target <= param` SQL logical expression"""
+  """Defines `target <= param` SQL logical expression."""
   leq: DateTime
 
-  """Defines `target > param` SQL logical expression"""
+  """Defines `target > param` SQL logical expression."""
   gt: DateTime
 
-  """Defines `target < param` SQL logical expression"""
+  """Defines `target < param` SQL logical expression."""
   lt: DateTime
 
-  """Defines `target IN param` SQL logical expression"""
+  """Defines `target IN param` SQL logical expression."""
   in: [DateTime!]
 
-  """Defines `target NOT IN param` SQL logical expression"""
+  """Defines `target NOT IN param` SQL logical expression."""
   nin: [DateTime!]
 }
 
@@ -60,16 +60,6 @@ enum FilterUnion {
   Or
   Nand
   Nor
-}
-
-input MetaUserPropsFilterInput {
-  """
-  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
-  """
-  unionMode: FilterUnion
-
-  """Per-property filters."""
-  props: UserPropsFilterInput!
 }
 
 type Mutation {
@@ -147,22 +137,26 @@ input StringFilterInput {
   """Defines `target <> param` SQL logical expression."""
   neq: String
 
-  """Defines `target ILIKE param` SQL logical expression"""
-  ilike: String
+  """Applies `param` POSIX case-insensitive regular expression to `target`."""
+  iregexp: String
 
-  """Defines `target NOT ILIKE param` SQL logical expression"""
-  nilike: String
+  """
+  Applies `param` POSIX case-insensitive regular expression to `target` and negates the result.
+  """
+  niregexp: String
 
-  """Defines `target LIKE param` SQL logical expression"""
-  like: String
+  """Applies `param` POSIX case-sensitive regular expression to `target`."""
+  regexp: String
 
-  """Defines `target NOT LIKE param` SQL logical expression"""
-  nlike: String
+  """
+  Applies `param` POSIX case-sensitive regular expression to `target` and negates the result.
+  """
+  nregexp: String
 
-  """Defines `target IN param` SQL logical expression"""
+  """Defines `target IN param` SQL logical expression."""
   in: [String!]
 
-  """Defines `target NOT IN param` SQL logical expression"""
+  """Defines `target NOT IN param` SQL logical expression."""
   nin: [String!]
 }
 
@@ -201,6 +195,16 @@ type UserAndToken {
   token: String!
 }
 
+input UserFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Per-property filters."""
+  props: UserPropsFilterInput!
+}
+
 type UserPage {
   """Contains an array of items payload for this page."""
   data: [User!]!
@@ -223,7 +227,7 @@ input UserPaginationInput {
   offset: Int!
 
   """Defines limitations for the items of the returned page."""
-  filter: MetaUserPropsFilterInput
+  filter: UserFilterInput
 
   """
   Defines sorting order for the items according to their property values.
@@ -259,10 +263,10 @@ input UserRoleFilterInput {
   """Defines `target <> param` SQL logical expression."""
   neq: UserRole
 
-  """Defines `target IN param` SQL logical expression"""
+  """Defines `target IN param` SQL logical expression."""
   in: [UserRole!]
 
-  """Defines `target NOT IN param` SQL logical expression"""
+  """Defines `target NOT IN param` SQL logical expression."""
   nin: [UserRole!]
 }
 

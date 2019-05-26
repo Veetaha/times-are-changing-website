@@ -1,0 +1,20 @@
+<app-pagination [pageFetcher]="usersPageFetcher">
+    <td-data-table *appPageBody="let users" 
+        [data]="users"
+        [columns]="tableColumnsConfig"
+    >
+    <ng-container *tdDataTableTemplate="'role'; value as role">
+        <span *ngIf="role === 'Admin'; else elseNotAdmin"
+            class="user-role"
+        > ADMIN
+        </span>
+        <ng-template #elseNotAdmin>
+            <mat-icon>person</mat-icon>
+        </ng-template>
+
+    </ng-container>
+    <ng-container *tdDataTableTemplate="'creationDate'; value as creationDate">
+        {{ creationDate | timeDifference }}   
+    </ng-container>
+    </td-data-table>
+</app-pagination>

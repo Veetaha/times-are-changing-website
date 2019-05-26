@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { } from 'sqlstring';
 import { Nullable, Debug, Obj } from 'ts-typedefs';
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata';
 
@@ -111,10 +112,10 @@ export class FilterBuilder
             case FilterOperator.Leq:    return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Leq, operand);
             case FilterOperator.In:     return this.tryCreateIn   (this.getColumnName(meta), operand as Nullable<unknown[]>, true);
             case FilterOperator.Nin:    return this.tryCreateIn   (this.getColumnName(meta), operand as Nullable<unknown[]>, false);
-            case FilterOperator.Like:   return this.tryCreateLike (this.getColumnName(meta), operand as Nullable<string>, true);
-            case FilterOperator.Nlike:  return this.tryCreateLike (this.getColumnName(meta), operand as Nullable<string>, false);
-            case FilterOperator.Ilike:  return this.tryCreateIlike(this.getColumnName(meta), operand as Nullable<string>, true);
-            case FilterOperator.Nilike: return this.tryCreateIlike(this.getColumnName(meta), operand as Nullable<string>, false);
+            case FilterOperator.Regexp:   return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Regexp,   operand);
+            case FilterOperator.Nregexp:  return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Nregexp,  operand);
+            case FilterOperator.Iregexp:  return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Iregexp,  operand);
+            case FilterOperator.Niregexp: return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Niregexp, operand);
             default: throw new Debug.UnreachableCodeError(operator);
         }
     }
@@ -202,27 +203,6 @@ export class FilterBuilder
     private tryCreateIn(columnName: string, operand: Nullable<unknown[]>, shouldBeIn: boolean) {
         return operand == null ? '' : 
             `${columnName}${this.getNotIf(!shouldBeIn)}IN (:...${this.createParam(operand)})`;
-    }
-
-    /**
-     * Tries to add `LIKE` or `NOT LIKE` filtering to the query for the given `operand`.
-     * Does nothing if `operand == null`.
-     * 
-     * @param columnName Name of the column to create filter for.
-     * @param operand    Pattern to pass to `LIKE` operator.
-     * @param shouldLike If `false`, then `NOT` operator is used, otherwise no negation is added.
-     */
-    private tryCreateLike(columnName: string, operand: Nullable<string>, shouldBeLike: boolean) {
-        return operand == null ? '' : 
-            `${columnName}${this.getNotIf(!shouldBeLike)}LIKE :${this.createParam(operand)}`;
-    }
-
-    /**
-     * Same as `tryCreateLike` but for `ILIKE`
-     */
-    private tryCreateIlike(columnName: string, operand: Nullable<string>, shouldBeIlike: boolean) {
-        return operand == null ? '' : 
-            `${columnName}${this.getNotIf(!shouldBeIlike)}ILIKE :${this.createParam(operand)}`;
     }
 
     /**

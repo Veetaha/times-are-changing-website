@@ -7,25 +7,27 @@ export const enum FilterOperator {
     Geq   = 'geq',
     In    = 'in',
     Nin   = 'nin',
-    Like  = 'like',
-    Nlike = 'nlike',
-    Ilike  = 'ilike',
-    Nilike = 'nilike'
+    Regexp   = 'regexp',
+    Nregexp  = 'nregexp',
+    Iregexp  = 'iregexp',
+    Niregexp = 'niregexp'
 }
 
 const operatorDescription = {
-    [FilterOperator.Eq]:     "Defines `target == param` SQL logical expression.",
-    [FilterOperator.Neq]:    "Defines `target <> param` SQL logical expression.",
-    [FilterOperator.Lt]:     "Defines `target < param` SQL logical expression",
-    [FilterOperator.Leq]:    "Defines `target <= param` SQL logical expression",
-    [FilterOperator.Gt]:     "Defines `target > param` SQL logical expression",
-    [FilterOperator.Geq]:    "Defines `target <= param` SQL logical expression",
-    [FilterOperator.In]:     "Defines `target IN param` SQL logical expression",
-    [FilterOperator.Nin]:    "Defines `target NOT IN param` SQL logical expression",
-    [FilterOperator.Like]:   "Defines `target LIKE param` SQL logical expression",
-    [FilterOperator.Nlike]:  "Defines `target NOT LIKE param` SQL logical expression",
-    [FilterOperator.Ilike]:  "Defines `target ILIKE param` SQL logical expression",
-    [FilterOperator.Nilike]: "Defines `target NOT ILIKE param` SQL logical expression"
+    [FilterOperator.Eq]:      "Defines `target == param` SQL logical expression.",
+    [FilterOperator.Neq]:     "Defines `target <> param` SQL logical expression.",
+    [FilterOperator.Lt]:      "Defines `target < param` SQL logical expression.",
+    [FilterOperator.Leq]:     "Defines `target <= param` SQL logical expression.",
+    [FilterOperator.Gt]:      "Defines `target > param` SQL logical expression.",
+    [FilterOperator.Geq]:     "Defines `target <= param` SQL logical expression.",
+    [FilterOperator.In]:      "Defines `target IN param` SQL logical expression.",
+    [FilterOperator.Nin]:     "Defines `target NOT IN param` SQL logical expression.",
+    [FilterOperator.Regexp]:  "Applies `param` POSIX case-sensitive regular expression to `target`.",
+    [FilterOperator.Iregexp]: "Applies `param` POSIX case-insensitive regular expression to `target`.",
+    [FilterOperator.Nregexp]:  
+    "Applies `param` POSIX case-sensitive regular expression to `target` and negates the result.",
+    [FilterOperator.Niregexp]: 
+    "Applies `param` POSIX case-insensitive regular expression to `target` and negates the result.",
 };
 
 export function getDescr(operator: FilterOperator) {

@@ -6,6 +6,7 @@ query getUsersPage($params: UserPaginationInput!) {
             name
             login
             avatarId: avatarIdOrDefault
+            creationDate
         }
     }
 }

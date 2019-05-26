@@ -18,15 +18,17 @@ export abstract class AbstractFilterInput<TInputType = unknown> {
     })
     unionMode?: Nullable<FilterUnion>;
 
-    [FilterOperator.Eq   ]?: Nullable<TInputType>;
-    [FilterOperator.Neq  ]?: Nullable<TInputType>;
-    [FilterOperator.Gt   ]?: Nullable<TInputType>;
-    [FilterOperator.Geq  ]?: Nullable<TInputType>;
-    [FilterOperator.Lt   ]?: Nullable<TInputType>;
-    [FilterOperator.Leq  ]?: Nullable<TInputType>;
-    [FilterOperator.Like ]?: Nullable<string>;
-    [FilterOperator.Nlike]?: Nullable<string>;
-    [FilterOperator.In   ]?: Nullable<TInputType[]>;
-    [FilterOperator.Nin  ]?: Nullable<TInputType[]>;
+    [FilterOperator.Eq]?:       Nullable<TInputType>;
+    [FilterOperator.Neq]?:      Nullable<TInputType>;
+    [FilterOperator.Gt]?:       Nullable<TInputType>;
+    [FilterOperator.Geq]?:      Nullable<TInputType>;
+    [FilterOperator.Lt]?:       Nullable<TInputType>;
+    [FilterOperator.Leq]?:      Nullable<TInputType>;
+    [FilterOperator.Regexp]?:   Nullable<string>;
+    [FilterOperator.Nregexp]?:  Nullable<string>;
+    [FilterOperator.Iregexp]?:  Nullable<string>;
+    [FilterOperator.Niregexp]?: Nullable<string>;
+    [FilterOperator.In]?:       Nullable<TInputType[]>;
+    [FilterOperator.Nin]?:      Nullable<TInputType[]>;
 
 }
