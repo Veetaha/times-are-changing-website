@@ -1,11 +1,11 @@
 version: '3'
 services: 
-    tnat-web-debug: # ts-nestjs-angular-template (tnat)
+    tac-web-debug: # times-are-changing (tac)
         build:
             context: '.'
             dockerfile: debug.dockerfile
         volumes:
-            - .:/home/${USER}/my/projects/ts-nestjs-angular-template
+            - .:/home/${USER}/my/projects/times-are-changing
         ports:
             - ${PORT}:${PORT}
             - 9229:9229

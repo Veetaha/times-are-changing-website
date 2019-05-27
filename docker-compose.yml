@@ -1,6 +1,6 @@
 version: '3'
 services: 
-    tnat-web: # ts-nestjs-angular-template (tnat)
+    tac-web: # times-are-changing (tac)
         build: .
         ports:
             - ${PORT}:${PORT}

@@ -1,5 +1,5 @@
 {
-  "name": "ts-nestjs-angular-template",
+  "name": "times-are-changing-website",
   "private": true,
   "version": "1.0.0",
   "description": "Fullstack TypeScript, NestJS, Angular7+ project.",
@@ -15,14 +15,14 @@
     "modules-graph": "npm-run-all --parallel create-modules-graph:backend create-modules-graph:frontend",
     "start": "docker-compose up",
     "gen:fragment-types": "ts-node ./scripts/generate-fragment-types.ts",
-    "backend:dev": "docker-compose --file debug.docker-compose.yml run --rm --service-ports tnat-web-debug",
+    "backend:dev": "docker-compose --file debug.docker-compose.yml run --rm --service-ports tac-web-debug",
     "postinstall": "npm install --prefix frontend && npm install --prefix backend",
     "gql:docs": "graphdoc --endpoint http://localhost/gql --force --output ./common/docs/gql",
     "gql:codegen": "gql-gen"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Veetaha/ts-nestjs-angular-template.git"
+    "url": "git+https://github.com/Veetaha/times-are-changing-website.git"
   },
   "keywords": [
     "project",
@@ -31,9 +31,9 @@
   "author": "Vitaly Kryvenko",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Veetaha/ts-nestjs-angular-template/issues"
+    "url": "https://github.com/Veetaha/times-are-changing-website/issues"
   },
-  "homepage": "https://github.com/Veetaha/ts-nestjs-angular-template#readme",
+  "homepage": "https://github.com/Veetaha/times-are-changing-website#readme",
   "dependencies": {
     "@hapi/joi": "^15.0.3",
     "@ngxs/router-plugin": "^3.4.3",

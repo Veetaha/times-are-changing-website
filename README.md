@@ -1,9 +1,9 @@
-# ts-nestjs-angular-template fullstack project
+# Times are Changing game website (fullstack project)
 
-[Click here to open the deployed app](https://tnat.herokuapp.com/)
+[Click here to open the deployed app](https://tac.herokuapp.com/)
 
-[![Build Status](https://travis-ci.com/Veetaha/ts-nestjs-angular-template.svg?branch=master)](https://travis-ci.com/Veetaha/ts-nestjs-angular-template) 
-[![Coverage Status](https://coveralls.io/repos/github/Veetaha/ts-nestjs-angular-template/badge.svg?branch=master)](https://coveralls.io/github/Veetaha/ts-nestjs-angular-template?branch=master)
+[![Build Status](https://travis-ci.com/Veetaha/times-are-changing-website.svg?branch=master)](https://travis-ci.com/Veetaha/times-are-changing-website) 
+[![Coverage Status](https://coveralls.io/repos/github/Veetaha/times-are-changing-website/badge.svg?branch=master)](https://coveralls.io/github/Veetaha/times-are-changing-website?branch=master)
 
 ## Development stack
 
@@ -31,7 +31,7 @@ the project directory will be mounted into the container working directory.
 npm i
 npm run backend:dev
 ```
-This command creates `tnat-web-debug` image and runs it as a docker container that 
+This command creates `tac-web-debug` image and runs it as a docker container that 
 represents the backend side of your app. 
 
 The server will listen for a debugging client on port `9229`. 
@@ -45,7 +45,7 @@ The backend app will automatically restart on changes in the source code thanks 
 ```bash
 npm run docker
 ```
-This command creates `tnat-web` image and runs it as a docker container with minimum overhead.
+This command creates `tac-web` image and runs it as a docker container with minimum overhead.
 
 ### Tests
 
