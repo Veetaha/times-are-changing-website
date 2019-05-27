@@ -13,8 +13,15 @@
         </ng-template>
 
     </ng-container>
-    <ng-container *tdDataTableTemplate="'creationDate'; value as creationDate">
-        {{ creationDate | timeDifference }}   
-    </ng-container>
+    <div *tdDataTableTemplate="'creationDate'; value as creationDate" layout="row" flex>
+        <span flex>
+        {{ creationDate | timeAgo }} 
+        </span>
+        <small flex class="user-creation-date">
+        <time [dateTime]="creationDate">
+            ({{creationDate | date: 'd MMM y HH:mm'}})
+        </time>
+        </small>
+    </div>
     </td-data-table>
 </app-pagination>

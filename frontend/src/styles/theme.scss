@@ -24,7 +24,8 @@ $theme: map-merge(mat-light-theme($primary, $accent, $warn), (
     snack-bar-success: mat-color($mat-green, 500),
     snack-bar-warning: mat-color($mat-yellow, 500),
     snack-bar-error:   mat-color($mat-red, 500),
-    footer-bgnd:       mat-color($primary)
+    footer-bgnd:       mat-color($primary),
+    muted-text:        mat-color($mat-grey, 700)
 ));
 
 // Include theme styles for core and each component used in your app.
