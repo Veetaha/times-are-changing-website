@@ -11,6 +11,7 @@ import { FooterComponent    } from './footer/footer.component';
 import { DashboardModule    } from './dashboard/dashboard.module';
 import { UserModule         } from './user/user.module';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
+import { MediaComponent } from './media/media.component';
 
 @NgModule({
     imports: [   
@@ -26,7 +27,8 @@ import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer
         AppComponent,
         HomeComponent,
         FooterComponent,
-        NavigationDrawerComponent
+        NavigationDrawerComponent,
+        MediaComponent
     ],
     bootstrap: [AppComponent]
 })

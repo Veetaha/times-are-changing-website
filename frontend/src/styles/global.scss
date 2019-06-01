@@ -1,5 +1,14 @@
 @import "theme.scss";
 
+// override bootstrap styles
+button:focus {
+    outline: none;
+}
+a:hover {
+    color: inherit;
+}
+// end override
+
 [ng-reflect-router-link] {
     cursor: pointer;
 }

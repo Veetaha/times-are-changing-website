@@ -18,13 +18,13 @@ const routes = [
         component: SignInComponent,
         data:      allow(UserRole.Guest),
         canActivate
-    } as const,
+    },
     {
         path:      'sign-up',
         component: SignUpComponent,
         data:      allow(UserRole.Guest),
         canActivate
-    } as const
+    }
 ];
 
 

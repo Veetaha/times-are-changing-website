@@ -1,0 +1,32 @@
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="media-tab-icon">photo</mat-icon>Gallery
+        </ng-template>
+        <mdb-carousel animation="slide">
+            <mdb-carousel-item *ngFor="let imageSrc of screenshotSrcs">
+                <figure class="media-img-carousel-item">
+                    <img [src]="imageSrc" class="media-img-carousel-item__payload" >
+                </figure>
+            </mdb-carousel-item>
+        </mdb-carousel>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="media-tab-icon">videocam</mat-icon>Videos
+        </ng-template>
+        <mdb-carousel [interval]="0" animation="slide" class="media-video-carousel">
+            <mdb-carousel-item *ngFor="let ytVideoSrc of ytVideoSrcs">
+                <div class="media-vid-carousel-item">
+                    <iframe 
+                        [src]="ytVideoSrc" 
+                        class="media-vid-carousel-item__payload" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            </mdb-carousel-item>
+        </mdb-carousel>
+    </mat-tab>
+</mat-tab-group>

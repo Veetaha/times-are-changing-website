@@ -23,7 +23,7 @@ export class PaginationComponent<TData> implements OnInit  {
         this.isSearchEnabled = value === '' || Boolean(value);
     }
 
-    @ContentChild(PageBodyDirective, { read: TemplateRef, static: true }) 
+    @ContentChild(PageBodyDirective, { read: TemplateRef }) 
     templateRef?: TemplateRef<PaginationCtx<TData>>;
   	    
   	page?: Nullable<Page<TData>> = null;

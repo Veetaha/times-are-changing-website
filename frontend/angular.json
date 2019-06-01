@@ -28,7 +28,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/global.scss"
+                "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+                "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+                "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+                "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+                "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+                "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+                "src/styles/global.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -38,8 +44,7 @@
             "scripts": [
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/hammerjs/hammer.min.js"
-            ],
-            "es5BrowserSupport": false
+            ]
           },
           "configurations": {
             "production": {

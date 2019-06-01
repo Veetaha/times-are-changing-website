@@ -20,6 +20,5 @@
       "dom",
       "esnext.asynciterable"
     ]
-  },
-  "files": ["src/main.ts"]
+  }
 }
