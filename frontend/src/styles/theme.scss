@@ -1,7 +1,23 @@
+$project-modules-path: '/home/veetaha/my/projects/times-are-changing-website/frontend/node_modules';
+
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/markdown/markdown-theme';
 @import '~@covalent/highlight/highlight-theme';
+
+// path-error workaround
+$fa-font-path: '#{$project-modules-path}/fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+// path-error workaround
+$roboto-font-path: '#{$project-modules-path}/angular-bootstrap-md/font/roboto/';
+$image-path: '#{$project-modules-path}/angular-bootstrap-md/img/';
+@import '~angular-bootstrap-md/scss/bootstrap/bootstrap.scss';
+@import '~angular-bootstrap-md/scss/mdb-free.scss';
+
 
 
 

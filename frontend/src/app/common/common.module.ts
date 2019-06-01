@@ -2,6 +2,7 @@ import { NgModule        } from '@angular/core';
 import { BrowserModule   } from '@angular/platform-browser';
 import { UcWidgetModule  } from 'ngx-uploadcare-widget';
 import { ClipboardModule } from 'ngx-clipboard';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { VeeModule     } from '@utils/vee/vee.module';
 import { GraphQLModule } from '@app/gql/gql.module';
@@ -23,7 +24,8 @@ const reexports = [
     CommonCovalentModule,
     UcWidgetModule,
     ClipboardModule,
-    PaginationModule
+    PaginationModule,
+    MDBBootstrapModule
 ];
 
 @NgModule({

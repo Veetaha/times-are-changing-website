@@ -71,9 +71,13 @@ export class AuthState implements NgxsOnInit {
         if (token != null) {
             ctx.setState(createFetchingClientSnap(token));
             // you should subscribe to this observable when moving this code to ngxsOnInit()
-            return this.auth.getMe().pipe(tap(
-                client => ctx.setState(createAuthSnap({ token, client }))
-            ));
+            return this.auth.getMe().pipe(
+                tap(client => ctx.setState(createAuthSnap({ token, client }))),
+                catchError(() => {
+                    ctx.setState(stableUnAuthSnap);
+                    throw new Error('Could not restore previous client session.');
+                })
+            );
         } else {
             ctx.setState(stableUnAuthSnap);
         }

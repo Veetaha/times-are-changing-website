@@ -28,14 +28,17 @@
               "src/assets"
             ],
             "styles": [
-                "src/styles/global.scss"
+              "src/styles/global.scss"
             ],
             "stylePreprocessorOptions": {
-                "includePaths": [
-                    "src/styles"
-                ]
+              "includePaths": [
+                "src/styles"
+              ]
             },
-            "scripts": [],
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js"
+            ],
             "es5BrowserSupport": false
           },
           "configurations": {

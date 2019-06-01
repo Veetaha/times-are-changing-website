@@ -16,5 +16,5 @@ const routes = [
     exports: [RouterModule]
 })
 export class UserRoutingModule { 
-    static readonly routeMap = RouteMap.create(routes).routeMap;
+    static readonly routeMap = new RouteMap(routes);
 }

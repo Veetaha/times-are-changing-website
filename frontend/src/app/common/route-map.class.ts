@@ -18,10 +18,6 @@ export class RouteMap<TPaths extends string> {
         );
     }
 
-    static create<TPaths extends string>(routes: RouteArray<TPaths>): RouteMapAndArray<TPaths> {
-        return { routeMap: new RouteMap(routes), routes };
-    }
-
     getRoleLimitFor(path: TPaths) {
         const roleLimit = this.routeMap[path].data;
         if (roleLimit == null) {

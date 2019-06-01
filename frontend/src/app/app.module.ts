@@ -20,7 +20,7 @@ import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer
         ErrorModule,
         UserModule,
         AppRoutingModule,
-        DashboardModule,
+        DashboardModule
     ],
     declarations: [
         AppComponent,

@@ -18,13 +18,13 @@ const routes = [
         component: SignInComponent,
         data:      allow(UserRole.Guest),
         canActivate
-    },
+    } as const,
     {
         path:      'sign-up',
         component: SignUpComponent,
         data:      allow(UserRole.Guest),
         canActivate
-    }
+    } as const
 ];
 
 
@@ -33,5 +33,5 @@ const routes = [
     exports: [RouterModule]
 })
 export class AuthRoutingModule { 
-    static readonly routeMap = RouteMap.create(routes).routeMap;
+    static readonly routeMap = new RouteMap(routes);
 }

@@ -8,8 +8,8 @@
     height: 100%;
 }
 .main {
-    margin: auto;
-    width: 80%;
+    padding: 10%;
+    flex-grow: 1;
 }
 .footer {
     flex-shrink: 0;

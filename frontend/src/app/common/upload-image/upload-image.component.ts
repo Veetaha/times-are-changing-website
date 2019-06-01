@@ -21,7 +21,7 @@ export type FileUrlChangeHandler = (fileUrl: string) => void;
 export class UploadImageComponent implements ControlValueAccessor {
 
     @Input() shouldDisplayButton!: boolean;
-    @ViewChild('ucWidget') ucWidget!: UcWidgetComponent | UcWidgetCustomComponent;
+    @ViewChild('ucWidget', {static: true}) ucWidget!: UcWidgetComponent | UcWidgetCustomComponent;
 
     fileUrl!: string;
     notifyFileUrlChanged: FileUrlChangeHandler = _.noop;
