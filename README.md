@@ -1,6 +1,6 @@
 # Times are Changing game website (fullstack project)
 
-[Click here to open the deployed app](https://tac.herokuapp.com/)
+[Click here to open the deployed app](https://times-are-changing.herokuapp.com/)
 
 [![Build Status](https://travis-ci.com/Veetaha/times-are-changing-website.svg?branch=master)](https://travis-ci.com/Veetaha/times-are-changing-website) 
 [![Coverage Status](https://coveralls.io/repos/github/Veetaha/times-are-changing-website/badge.svg?branch=master)](https://coveralls.io/github/Veetaha/times-are-changing-website?branch=master)
