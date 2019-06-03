@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>Float</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+    <ul>
+        <li  title="Query">
+            <a href="query.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Query
+            </a>
+        </li>
+        <li  title="Mutation">
+            <a href="mutation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Mutation
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+    <ul>
+        <li  title="Boolean">
+            <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Boolean
+            </a>
+        </li>
+        <li  title="DateTime">
+            <a href="datetime.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DateTime
+            </a>
+        </li>
+        <li class="slds-is-active" title="Float">
+            <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Float
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
+            </a>
+        </li>
+        <li  title="String">
+            <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+    <ul>
+        <li  title="FilterUnion">
+            <a href="filterunion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                FilterUnion
+            </a>
+        </li>
+        <li  title="SortingOrder">
+            <a href="sortingorder.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SortingOrder
+            </a>
+        </li>
+        <li  title="UserRole">
+            <a href="userrole.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserRole
+            </a>
+        </li>
+        <li  title="__DirectiveLocation">
+            <a href="directivelocation.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __DirectiveLocation
+            </a>
+        </li>
+        <li  title="__TypeKind">
+            <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __TypeKind
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+    <ul>
+        <li  title="News">
+            <a href="news.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                News
+            </a>
+        </li>
+        <li  title="NewsComment">
+            <a href="newscomment.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsComment
+            </a>
+        </li>
+        <li  title="NewsCommentPage">
+            <a href="newscommentpage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsCommentPage
+            </a>
+        </li>
+        <li  title="NewsPage">
+            <a href="newspage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsPage
+            </a>
+        </li>
+        <li  title="NewsRating">
+            <a href="newsrating.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRating
+            </a>
+        </li>
+        <li  title="NewsRatingPage">
+            <a href="newsratingpage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRatingPage
+            </a>
+        </li>
+        <li  title="User">
+            <a href="user.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                User
+            </a>
+        </li>
+        <li  title="UserAndToken">
+            <a href="userandtoken.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserAndToken
+            </a>
+        </li>
+        <li  title="UserPage">
+            <a href="userpage.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserPage
+            </a>
+        </li>
+        <li  title="__Directive">
+            <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Directive
+            </a>
+        </li>
+        <li  title="__EnumValue">
+            <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __EnumValue
+            </a>
+        </li>
+        <li  title="__Field">
+            <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Field
+            </a>
+        </li>
+        <li  title="__InputValue">
+            <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __InputValue
+            </a>
+        </li>
+        <li  title="__Schema">
+            <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Schema
+            </a>
+        </li>
+        <li  title="__Type">
+            <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Type
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Input Objects</h4>
+    <ul>
+        <li  title="AdminUpdateUserInput">
+            <a href="adminupdateuserinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                AdminUpdateUserInput
+            </a>
+        </li>
+        <li  title="BooleanFilterInput">
+            <a href="booleanfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                BooleanFilterInput
+            </a>
+        </li>
+        <li  title="CreateNewsCommentInput">
+            <a href="createnewscommentinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateNewsCommentInput
+            </a>
+        </li>
+        <li  title="CreateNewsInput">
+            <a href="createnewsinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateNewsInput
+            </a>
+        </li>
+        <li  title="DateFilterInput">
+            <a href="datefilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DateFilterInput
+            </a>
+        </li>
+        <li  title="IntFilterInput">
+            <a href="intfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                IntFilterInput
+            </a>
+        </li>
+        <li  title="NewsCommentFilterInput">
+            <a href="newscommentfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsCommentFilterInput
+            </a>
+        </li>
+        <li  title="NewsCommentPaginationInput">
+            <a href="newscommentpaginationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsCommentPaginationInput
+            </a>
+        </li>
+        <li  title="NewsCommentPropsFilterInput">
+            <a href="newscommentpropsfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsCommentPropsFilterInput
+            </a>
+        </li>
+        <li  title="NewsCommentSortInput">
+            <a href="newscommentsortinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsCommentSortInput
+            </a>
+        </li>
+        <li  title="NewsFilterInput">
+            <a href="newsfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsFilterInput
+            </a>
+        </li>
+        <li  title="NewsPaginationInput">
+            <a href="newspaginationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsPaginationInput
+            </a>
+        </li>
+        <li  title="NewsPropsFilterInput">
+            <a href="newspropsfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsPropsFilterInput
+            </a>
+        </li>
+        <li  title="NewsRatingFilterInput">
+            <a href="newsratingfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRatingFilterInput
+            </a>
+        </li>
+        <li  title="NewsRatingPaginationInput">
+            <a href="newsratingpaginationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRatingPaginationInput
+            </a>
+        </li>
+        <li  title="NewsRatingPropsFilterInput">
+            <a href="newsratingpropsfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRatingPropsFilterInput
+            </a>
+        </li>
+        <li  title="NewsRatingSortInput">
+            <a href="newsratingsortinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsRatingSortInput
+            </a>
+        </li>
+        <li  title="NewsSortInput">
+            <a href="newssortinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                NewsSortInput
+            </a>
+        </li>
+        <li  title="SignInInput">
+            <a href="signininput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SignInInput
+            </a>
+        </li>
+        <li  title="SignUpInput">
+            <a href="signupinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SignUpInput
+            </a>
+        </li>
+        <li  title="SortInput">
+            <a href="sortinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                SortInput
+            </a>
+        </li>
+        <li  title="StringFilterInput">
+            <a href="stringfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                StringFilterInput
+            </a>
+        </li>
+        <li  title="UpdateNewsCommentInput">
+            <a href="updatenewscommentinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateNewsCommentInput
+            </a>
+        </li>
+        <li  title="UpdateNewsInput">
+            <a href="updatenewsinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateNewsInput
+            </a>
+        </li>
+        <li  title="UpdateUserInput">
+            <a href="updateuserinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UpdateUserInput
+            </a>
+        </li>
+        <li  title="UserFilterInput">
+            <a href="userfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserFilterInput
+            </a>
+        </li>
+        <li  title="UserPaginationInput">
+            <a href="userpaginationinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserPaginationInput
+            </a>
+        </li>
+        <li  title="UserPropsFilterInput">
+            <a href="userpropsfilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserPropsFilterInput
+            </a>
+        </li>
+        <li  title="UserRoleFilterInput">
+            <a href="userrolefilterinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserRoleFilterInput
+            </a>
+        </li>
+        <li  title="UserSortInput">
+            <a href="usersortinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                UserSortInput
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+    <ul>
+        <li  title="deprecated">
+            <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                deprecated
+            </a>
+        </li>
+        <li  title="include">
+            <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                include
+            </a>
+        </li>
+        <li  title="skip">
+            <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                skip
+            </a>
+        </li>
+    </ul>
+</div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+    <div class="container slds-grid">
+        <div>
+        <button class="slds-button js-toggle-navigation less-than-medium">
+            <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+            <span class="slds-text-title--caps">Types<span>
+        </button>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="slds-text-title--caps slds-text-color--weak">SCALAR</p>
+        <h1 class="slds-text-heading--large">Float</h1>
+        <div class="slds-text-body--regular"><p>The <code>Float</code> scalar type represents signed double-precision fractional values as specified by <a href="https://en.wikipedia.org/wiki/IEEE_floating_point">IEEE 754</a>. </p>
+</div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#graphql-schema-definition">
+                <i class="material-icons">link</i>
+            </a>
+            GraphQL Schema definition
+        </h2>
+        <code class="highlight"><ul class="code" style="padding-left:28px"><li><span class="keyword operator ts">scalar</span> <span class="identifier">Float</span></li></ul></code>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="require-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#require-by">
+                <i class="material-icons">link</i>
+            </a>
+            Require by
+        </h2>
+        <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em>null</em></a><li></ul>
+    </div>
+</section>
+<footer>
+<div class="container slds-p-around--large">
+    <p class="slds-text-align--right slds-text-title--caps">
+        Generated with <a href="https://github.com/2fd/graphdoc#readme" target="_blank">graphdoc 2.4.0</a>
+    </p>
+</div>
+</footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>

@@ -3,16 +3,44 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-input AdminUserUpdateInput {
+input AdminUpdateUserInput {
   """New user name."""
   name: String
 
   """New user avatar id. This is currently an uploadcare image uiud."""
-  avatarId: String
+  avatarImgId: String
 
   """Defines the login of the user to update"""
   login: String!
   role: UserRole
+}
+
+"""Filter input parameters for `Boolean` type."""
+input BooleanFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Defines `target == param` SQL logical expression."""
+  eq: Boolean
+
+  """Defines `target <> param` SQL logical expression."""
+  neq: Boolean
+}
+
+input CreateNewsCommentInput {
+  """Id of the news to add a comment to."""
+  newsId: Int!
+
+  """Comment markdown body text."""
+  body: String!
+}
+
+input CreateNewsInput {
+  title: String!
+  body: String!
+  promoImgId: String
 }
 
 """Filter input parameters for `Date` type."""
@@ -62,6 +90,38 @@ enum FilterUnion {
   Nor
 }
 
+"""Filter input parameters for `Int` type."""
+input IntFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Defines `target == param` SQL logical expression."""
+  eq: Int
+
+  """Defines `target <> param` SQL logical expression."""
+  neq: Int
+
+  """Defines `target <= param` SQL logical expression."""
+  geq: Int
+
+  """Defines `target <= param` SQL logical expression."""
+  leq: Int
+
+  """Defines `target > param` SQL logical expression."""
+  gt: Int
+
+  """Defines `target < param` SQL logical expression."""
+  lt: Int
+
+  """Defines `target IN param` SQL logical expression."""
+  in: [Int!]
+
+  """Defines `target NOT IN param` SQL logical expression."""
+  nin: [Int!]
+}
+
 type Mutation {
   """
   Returns `UserAndToken` for the client according to the given `credentials`.
@@ -74,19 +134,327 @@ type Mutation {
   signUp(params: SignUpInput!): UserAndToken!
 
   """Requires auth. Updates current client data and returns it."""
-  updateMe(params: UserUpdateInput!): User!
+  updateMe(params: UpdateUserInput!): User!
 
   """
   Requires 'Admin' rights. Updates user by the given login and returns it, but
   retuns `null` if there nothing was found for the given login.
   """
-  updateUser(params: AdminUserUpdateInput!): User
+  updateUser(params: AdminUpdateUserInput!): User
+
+  """
+  Requires auth. Creates or updates existing rating the client gave to the news.
+  """
+  rateNews(
+    """Id of the news to rate."""
+    newsId: Int!
+
+    """`true` if user has liked the news, `false` means a dislike."""
+    hasLiked: Boolean!
+  ): NewsRating!
+
+  """
+  Requires auth. Deletes rating instance on behalf of the client. Returns `true` if deletion was successful.
+  """
+  deleteNewsRating(newsId: Float!): Boolean!
+
+  """Requires auth. Creates news on behalf of the client and returns it."""
+  createNews(params: CreateNewsInput!): News!
+
+  """
+  Requires auth. Updates news and returns it, but throws if news doesn't exist or client has no rights to mutate the news.
+  """
+  updateNews(params: UpdateNewsInput!): News!
+
+  """
+  Requires auth. Deletes the news by id and returns `true`, but throws if news
+  doesn't exist or client has no rights to mutate the news.
+  """
+  deleteNewsById(id: Int!): Boolean!
+
+  """Requires auth. Creates comment on news from behalf of the client."""
+  createNewsComment(params: CreateNewsCommentInput!): NewsComment!
+
+  """
+  Requires auth. Updates news comment and returns it, but throws if comment
+  doesn't exist or client has no rights to mutate the comment.
+  """
+  updateNewsComment(params: UpdateNewsCommentInput!): NewsComment!
+
+  """
+  Requires auth. Deletes news comment with the given `id`. Returns `true` if
+  deletion was successful. Throws if client has no rights to delete the target news comment.
+  """
+  deleteNewsCommentById(id: Int!): Boolean!
+}
+
+type News {
+  """`News` unique identifier."""
+  id: Int!
+
+  """Date when this news was created."""
+  creationDate: DateTime!
+
+  """Date when this news was updated last time."""
+  lastUpdateDate: DateTime!
+
+  """Login of the user that created this news."""
+  creatorLogin: String!
+
+  """Human-readable sentence that laconically describes this news."""
+  title: String!
+
+  """
+  News main body markdown text, it may be vulnerable XSS attacks, be sure to
+  sanitize it on the client side after having converted it to HTML.
+  """
+  body: String!
+
+  """
+  Id (from `UploadCare` file-hosting service) of the image to display as the introduction to the news.
+  """
+  promoImgId: String
+
+  """Total amoutn of likes for this news."""
+  likesAmount: Int!
+
+  """Total amount of dislikes for this news."""
+  dislikesAmount: Int!
+
+  """Total amount of comments for this news."""
+  commentsAmount: Int!
+
+  """
+  Returns the rating that the client has set to this news or `null` if client is
+  not authenticated or he hasn't set any rating to the target news yet.
+  """
+  myRating: NewsRating
+
+  """
+  Returns existing news `promoImgId` or default one if former was not set.
+  """
+  promoImgIdOrDefault: String!
+
+  """Returns the user that created this news."""
+  creator: User!
+}
+
+"""
+Represents users' thoughts about particular news that they express in text.
+"""
+type NewsComment {
+  """`NewsComment` unique identifier."""
+  id: Int!
+
+  """Date when this comment was created."""
+  creationDate: DateTime!
+
+  """Date when this comment was updated last time."""
+  lastUpdateDate: DateTime!
+
+  """Login of the user that created this comment."""
+  commentatorLogin: String!
+
+  """Id of the news that the user commented on."""
+  newsId: Int!
+
+  """
+  Comment body markdown text, it may be vulnerable XSS attacks, be sure to
+  sanitize it on the client side after having converted it to HTML.
+  """
+  body: String!
+
+  """Returns the user that commented on the given `news`."""
+  commentator: User!
+
+  """Returns the news that was commented by the `commentator`."""
+  news: News!
+}
+
+input NewsCommentFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Per-property filters."""
+  props: NewsCommentPropsFilterInput!
+}
+
+type NewsCommentPage {
+  """Contains an array of items payload for this page."""
+  data: [NewsComment!]!
+
+  """
+  Total number of items a client can query with this request. It must me an integer that is >= 0.
+  """
+  total: Int!
+}
+
+input NewsCommentPaginationInput {
+  """
+  Maximum amount of items to return for page. It must be an integer within the range [0, 500]
+  """
+  limit: Int!
+
+  """
+  Offset that defines an index of the beginning of the page of items. It must be an integer that is >= 0.
+  """
+  offset: Int!
+
+  """Defines limitations for the items of the returned page."""
+  filter: NewsCommentFilterInput
+
+  """
+  Defines sorting order for the items according to their property values.
+  """
+  sort: NewsCommentSortInput
+}
+
+input NewsCommentPropsFilterInput {
+  id: IntFilterInput
+  newsId: IntFilterInput
+  commentatorLogin: StringFilterInput
+  body: StringFilterInput
+  creationDate: DateFilterInput
+  lastUpdateDate: DateFilterInput
+}
+
+input NewsCommentSortInput {
+  newsId: SortInput
+  commentatorLogin: SortInput
+  creationDate: SortInput
+  lastUpdateDate: SortInput
+}
+
+input NewsFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Per-property filters."""
+  props: NewsPropsFilterInput!
+}
+
+type NewsPage {
+  """Contains an array of items payload for this page."""
+  data: [News!]!
+
+  """
+  Total number of items a client can query with this request. It must me an integer that is >= 0.
+  """
+  total: Int!
+}
+
+input NewsPaginationInput {
+  """
+  Maximum amount of items to return for page. It must be an integer within the range [0, 500]
+  """
+  limit: Int!
+
+  """
+  Offset that defines an index of the beginning of the page of items. It must be an integer that is >= 0.
+  """
+  offset: Int!
+
+  """Defines limitations for the items of the returned page."""
+  filter: NewsFilterInput
+
+  """
+  Defines sorting order for the items according to their property values.
+  """
+  sort: NewsSortInput
+}
+
+input NewsPropsFilterInput {
+  id: IntFilterInput
+  title: StringFilterInput
+  promoImgId: StringFilterInput
+  creatorLogin: StringFilterInput
+  creationDate: DateFilterInput
+  lastUpdateDate: DateFilterInput
+}
+
+"""Represents a [dis]like instance that the users set to news."""
+type NewsRating {
+  """Login of the user that rated the news."""
+  raterLogin: String!
+
+  """Id of the news that the user rated."""
+  newsId: Int!
+
+  """Defines whether the user liked the news or not."""
+  hasLiked: Boolean!
+
+  """Returns the user that rated the given `news`."""
+  rater: User!
+
+  """Returns the news that was rated by the `rater`."""
+  news: News!
+}
+
+input NewsRatingFilterInput {
+  """
+  Defines the mode (logical operator) to unite all filter conditions (`And` by default).
+  """
+  unionMode: FilterUnion
+
+  """Per-property filters."""
+  props: NewsRatingPropsFilterInput!
+}
+
+type NewsRatingPage {
+  """Contains an array of items payload for this page."""
+  data: [NewsRating!]!
+
+  """
+  Total number of items a client can query with this request. It must me an integer that is >= 0.
+  """
+  total: Int!
+}
+
+input NewsRatingPaginationInput {
+  """
+  Maximum amount of items to return for page. It must be an integer within the range [0, 500]
+  """
+  limit: Int!
+
+  """
+  Offset that defines an index of the beginning of the page of items. It must be an integer that is >= 0.
+  """
+  offset: Int!
+
+  """Defines limitations for the items of the returned page."""
+  filter: NewsRatingFilterInput
+
+  """
+  Defines sorting order for the items according to their property values.
+  """
+  sort: NewsRatingSortInput
+}
+
+input NewsRatingPropsFilterInput {
+  newsId: IntFilterInput
+  raterLogin: StringFilterInput
+  hasLiked: BooleanFilterInput
+}
+
+input NewsRatingSortInput {
+  newsId: SortInput
+  raterLogin: SortInput
+  hasLiked: SortInput
+}
+
+input NewsSortInput {
+  id: SortInput
+  title: SortInput
+  creatorLogin: SortInput
+  creationDate: SortInput
+  lastUpdateDate: SortInput
 }
 
 type Query {
-  """Returns global default user `avatarId`."""
-  getDefaultUserAvatarId: String!
-
   """Returns user by login, or `null` if nothing was found."""
   getUserByLogin(login: String!): User
 
@@ -95,6 +463,20 @@ type Query {
 
   """Requires auth. Returns `User` that represents the current client."""
   getMe: User!
+
+  """Paginates all news ratings."""
+  getNewsRatingsPage(params: NewsRatingPaginationInput!): NewsRatingPage!
+
+  """Paginates all news."""
+  getNewsPage(params: NewsPaginationInput!): NewsPage!
+
+  """
+  Returns a single news instance by `id`, or `null` if nothing was found.
+  """
+  getNewsById(id: Int!): News
+
+  """Paginates all news comments."""
+  getNewsCommentsPage(params: NewsCommentPaginationInput!): NewsCommentPage!
 }
 
 input SignInInput {
@@ -160,7 +542,30 @@ input StringFilterInput {
   nin: [String!]
 }
 
+input UpdateNewsCommentInput {
+  id: Int!
+  body: String!
+}
+
+input UpdateNewsInput {
+  id: Int!
+  title: String
+  body: String
+  promoImgId: String
+}
+
+input UpdateUserInput {
+  """New user name."""
+  name: String
+
+  """New user avatar id. This is currently an uploadcare image uiud."""
+  avatarImgId: String
+}
+
 type User {
+  """Unique user identifier."""
+  login: String!
+
   """Date when this account was created."""
   creationDate: DateTime!
 
@@ -173,16 +578,15 @@ type User {
   """User name to refer to him/her."""
   name: String!
 
-  """Unique user identifier."""
-  login: String!
-
   """
   User avatar picture url, or null of was not set. This is currently an `uploadcare` image uuid.
   """
-  avatarId: String
+  avatarImgId: String
 
-  """Returns existing `avatarid` or default one if former was not set."""
-  avatarIdOrDefault: String!
+  """
+  Returns existing user `avatarImgId` or default one if former was not set.
+  """
+  avatarImgIdOrDefault: String!
 }
 
 type UserAndToken {
@@ -236,7 +640,7 @@ input UserPaginationInput {
 }
 
 input UserPropsFilterInput {
-  avatarId: StringFilterInput
+  avatarImgId: StringFilterInput
   creationDate: DateFilterInput
   lastUpdateDate: DateFilterInput
   login: StringFilterInput
@@ -271,18 +675,9 @@ input UserRoleFilterInput {
 }
 
 input UserSortInput {
-  avatarUrl: SortInput
   login: SortInput
   name: SortInput
   creationDate: SortInput
   lastUpdateDate: SortInput
   role: SortInput
-}
-
-input UserUpdateInput {
-  """New user name."""
-  name: String
-
-  """New user avatar id. This is currently an uploadcare image uiud."""
-  avatarId: String
 }

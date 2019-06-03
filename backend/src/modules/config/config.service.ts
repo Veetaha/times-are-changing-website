@@ -18,8 +18,8 @@ implements TypeOrmOptionsFactory, GqlOptionsFactory, JwtOptionsFactory, AuthOpti
     static readonly isDevelopmentMode = process.env.NODE_ENV !== 'production';
 
     readonly default = {
-        user:     { avatarId:       'default-user-avatar-id' },
-        proposal: { mainPictureUrl: '/assets/default-proposal-main-picture.svg' }
+        user: { avatarImgId: 'default-user-avatar-image-id' },
+        news: { promoImgId:  'default-news-promo-image-id' }
     } as const;
 
     readonly passwordSalt          = this.env.readEnvOrFail('PASSWORD_SALT');

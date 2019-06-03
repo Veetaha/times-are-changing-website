@@ -7,6 +7,6 @@ export enum UserRole {
 }
 
 registerEnumType(UserRole, {
-    name: 'UserRole',
-    description: `Enumeration that defines users' access level`
+    name:        "UserRole",
+    description: "Enumeration that defines users' access level"
 });

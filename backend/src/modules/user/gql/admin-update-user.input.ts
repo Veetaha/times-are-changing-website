@@ -5,14 +5,11 @@ import { NullableOpt     } from '@utils/gql/opts';
 import { ValidateAs      } from '@utils/validation/validations.decorator';
 import { StringField     } from '@utils/gql/decorators/explicit-type-field.decorator';
 import { UserRole        } from '../user-role.enum';
-import { UserUpdateInput } from './user-update.input';
+import { UpdateUserInput } from './update-user.input';
 import { User            } from '../user.entity';
 
-
-
-
 @InputType()
-export class AdminUserUpdateInput extends UserUpdateInput {
+export class AdminUpdateUserInput extends UpdateUserInput {
     @ValidateAs(User, 'login')
     @StringField({ description: 'Defines the login of the user to update' })
     login!: string;

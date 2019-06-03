@@ -7,11 +7,11 @@ import { Client               } from '@modules/auth/client.decorator';
 
 import { UserPage             } from './gql/user-page.object';
 import { UserPaginationInput  } from './gql/user-pagination.input';
-import { UserUpdateInput      } from './gql/user-update.input';
+import { UpdateUserInput      } from './gql/update-user.input';
 import { UserRole             } from './user-role.enum';
 import { User                 } from './user.entity';
 import { UserService          } from './user.service';
-import { AdminUserUpdateInput } from './gql/admin-user-update.input';
+import { AdminUpdateUserInput } from './gql/admin-update-user.input';
 
 @Resolver(User)
 export class UserResolver {
@@ -20,18 +20,14 @@ export class UserResolver {
         private readonly users:  UserService
     ) {}
 
-    @Query(_returns => String, { description: "Returns global default user `avatarId`." })
-    getDefaultUserAvatarId() {
-        return this.config.default.user.avatarId;
-    }
 
-    @ResolveProperty('avatarIdOrDefault', _type => String, {
-        description: "Returns existing `avatarid` or default one if former was not set."
+    @ResolveProperty('avatarImgIdOrDefault', _type => String, {
+        description: "Returns existing user `avatarImgId` or default one if former was not set."
     })
-    avatarIdOrDefault(@Root() {avatarId}: User) {
-        return avatarId == null 
-            ? this.config.default.user.avatarId
-            : avatarId;
+    avatarImgIdOrDefault(@Root() {avatarImgId}: User) {
+        return avatarImgId == null 
+            ? this.config.default.user.avatarImgId
+            : avatarImgId;
     }
     
     @Query(_returns => User, {
@@ -59,7 +55,7 @@ export class UserResolver {
     @Mutation(_returns => User, {
         description: "Requires auth. Updates current client data and returns it."
     })
-    async updateMe(@Client client: User, @Args('params') params: UserUpdateInput){
+    async updateMe(@Client client: User, @Args('params') params: UpdateUserInput){
         return this.users.update(client.login, params);
     }
 
@@ -70,7 +66,7 @@ export class UserResolver {
         "Requires 'Admin' rights. Updates user by the given login and returns it, " +
         "but retuns `null` if there nothing was found for the given login."
     })
-    async updateUser(@Args('params') {login, ...upd}: AdminUserUpdateInput) {
+    async updateUser(@Args('params') {login, ...upd}: AdminUpdateUserInput) {
         return this.users.update(login, upd);
     }
 }

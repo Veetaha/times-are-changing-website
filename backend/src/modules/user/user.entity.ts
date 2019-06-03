@@ -13,6 +13,12 @@ import { StringField, DateField } from '@utils/gql/decorators/explicit-type-fiel
 @ObjectType()
 @Entity()
 export class User {
+    /**
+     * Unique identifier 
+     */
+    @StringColumn(limits.user.login, { primary: true })
+    @StringField({ description: "Unique user identifier."  })
+    login!: string;
 
     @CreateDateColumn() 
     @DateField({ description: "Date when this account was created." })
@@ -33,24 +39,22 @@ export class User {
     @StringColumn(limits.user.name)
     @StringField({ description: "User name to refer to him/her." })        
     name!: string;
-
-    @StringColumn(limits.user.login, { primary: true })
-    @StringField({ description: "Unique user identifier."  })
-    login!: string;
     
     @Column({ select: false })        
     passwordHash?: string;
 
-    @StringColumn(limits.imageUrl, { nullable: true })
+    @StringColumn(limits.imgId, { nullable: true })
     @StringField({
         nullable: true,
         description: 
         "User avatar picture url, or null of was not set. " +
         "This is currently an `uploadcare` image uuid."
     })
-    avatarId?: Nullable<string>;
+    avatarImgId?: Nullable<string>;
 
     isAdmin() {
         return this.role === UserRole.Admin;
     }
+
+    
 }

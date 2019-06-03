@@ -5,7 +5,7 @@ query getUsersPage($params: UserPaginationInput!) {
             role
             name
             login
-            avatarId: avatarIdOrDefault
+            avatarImgId: avatarImgIdOrDefault
             creationDate
         }
     }

@@ -10,7 +10,6 @@ import { User } from '../user.entity';
 
 @InputType()
 export class UserSortInput implements ISortInput<User> {
-    @SortInputField(NullableOpt) avatarUrl?:      Nullable<SortInput>;
     @SortInputField(NullableOpt) login?:          Nullable<SortInput>;
     @SortInputField(NullableOpt) name?:           Nullable<SortInput>;
     @SortInputField(NullableOpt) creationDate?:   Nullable<SortInput>;

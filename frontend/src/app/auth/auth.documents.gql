@@ -5,7 +5,7 @@ fragment EntireUser on User {
     role
     name
     login
-    avatarId: avatarIdOrDefault
+    avatarImgId: avatarImgIdOrDefault
 }
 
 fragment EntireClientAndToken on UserAndToken {

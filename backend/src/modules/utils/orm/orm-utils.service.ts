@@ -62,7 +62,7 @@ export class OrmUtilsService {
     }
 
     /**
-     * Executes fast and effictient `DELETE` query without but does not supply
+     * Executes fast and effictient `DELETE` query without suppling
      * live entity to event subscribers attached to deleted tuple.
      * Returns `true` if deletion was successful, `false` otherwise.
      */

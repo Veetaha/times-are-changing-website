@@ -12,7 +12,7 @@ export class MediaComponent {
 
     readonly screenshotSrcs = _.times(6, i => `/assets/game-screenshot${i + 1}.jpg`);
     readonly ytVideoSrcs = [
-        "https://www.youtube.com/embed/TYG6m9Q7oOw",
-        "https://www.youtube.com/embed/duqLf1Orf0s" 
+        "https://www.youtube.com/embed/duqLf1Orf0s",
+        "https://www.youtube.com/embed/TYG6m9Q7oOw"
     ].map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url));
 }

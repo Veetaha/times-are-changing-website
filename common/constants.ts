@@ -1,10 +1,12 @@
 import { IntRange } from './utils/math/int-range';
 
 export const limits = {
-    proposal: {
-        name:      new IntRange(1, 256),
-        introText: new IntRange(0, 256),
-        bodyText:  new IntRange(0, 5001),
+    news: {
+        title: new IntRange(1, 256),
+        body:  new IntRange(0, 9001),
+    },
+    newsComment: {
+        body: new IntRange(0, 3001)
     },
 
     user: {
@@ -13,5 +15,5 @@ export const limits = {
         login:    new IntRange(2, 37),
     },
 
-    imageUrl:     new IntRange(0, 256)
+    imgId: new IntRange(0, 256)
 };
