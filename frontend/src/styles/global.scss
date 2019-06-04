@@ -34,5 +34,3 @@ body, html {
         background-color: map-get($theme, snack-bar-error);
     }
 }
-
-@debug map-get($theme, snack-bar-warning);

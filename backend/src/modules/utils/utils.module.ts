@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 
-import { MathService       } from './math/math.service';
 import { DebugService      } from './debug/debug.service';
 import { LoggingService    } from './logging/logging.service';
 import { EnvService        } from './env/env.service';
@@ -14,7 +13,6 @@ const exposedServices =  [
     DebugService,
     EnvService,
     AlgorithmsService,
-    MathService,
     WorkflowService,
     OrmUtilsService,
     GqlUtilsService

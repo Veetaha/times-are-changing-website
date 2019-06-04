@@ -1,0 +1,13 @@
+<mdb-carousel [interval]="0" animation="slide">
+    <mdb-carousel-item *ngFor="let ytVideoSrc of ytVideoSrcs">
+        <div class="local-carousel-item">
+            <iframe 
+                [src]="ytVideoSrc" 
+                class="local-carousel-item__payload" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen
+            ></iframe>
+        </div>
+    </mdb-carousel-item>
+</mdb-carousel>

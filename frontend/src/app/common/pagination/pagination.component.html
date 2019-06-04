@@ -22,7 +22,7 @@
         showFirstLastButtons="showFirstLastButtons"
     ></mat-paginator>
 
-    <ng-container *ngTemplateOutlet="templateRef; context: { $implicit: page.data }">
+    <ng-container *ngTemplateOutlet="templateRef; context: { $implicit: page!.data }">
     </ng-container>
 
     <p *ngIf="page!.data.length === 0" class="text-muted">
@@ -34,9 +34,11 @@
 
 </ng-container>
 <ng-template #elseDataNotLoaded>
+
     <mat-progress-spinner
         color="accent"
         mode="indeterminate"
-        class="centered-block"
+        class="local-loading"
     ></mat-progress-spinner>
+
 </ng-template>

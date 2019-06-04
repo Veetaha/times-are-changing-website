@@ -1,14 +1,19 @@
 <mat-nav-list>
     <a routerLink="/" mat-list-item tdLayoutToggle>
-        <mat-icon>home</mat-icon>
-        Home
+        <mat-icon>home</mat-icon>Home
+    </a>
+
+    <a routerLink="/news" mat-list-item tdLayoutToggle>
+        <mat-icon>announcement</mat-icon>News
     </a>
 
     <a routerLink="/users" mat-list-item tdLayoutToggle>
-        <mat-icon>supervised_user_circle</mat-icon>
-        Users
+        <mat-icon>supervised_user_circle</mat-icon>Users
     </a>
 
+    <a routerLink="/media" mat-list-item tdLayoutToggle>
+        <mat-icon>photo_gallery</mat-icon>Media
+    </a>
 
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -19,6 +24,9 @@
         </mat-expansion-panel-header>
 
         <mat-nav-list>
+            <a mat-list-item routerLink="/developer" tdLayoutToggle>
+                <mat-icon>info</mat-icon>Introduction
+            </a>
             <a mat-list-item href="/gql" target="_blank">
                 <mat-icon>play_circle_outline</mat-icon>
                 GraphQL playground
@@ -26,9 +34,10 @@
 
             <a mat-list-item href="/gql/docs" target="_blank">
                 <mat-icon>library_books</mat-icon>
-                Documentation
+                API documentation
             </a>
         </mat-nav-list>
 
     </mat-expansion-panel>
+    
 </mat-nav-list>

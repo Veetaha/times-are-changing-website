@@ -1,13 +1,13 @@
 import _ from 'lodash';
-import { } from 'sqlstring';
-import { Nullable, Debug, Obj } from 'ts-typedefs';
+import { Nullable, Debug, Obj, ValueOf } from 'ts-typedefs';
 import { ColumnMetadata } from 'typeorm/metadata/ColumnMetadata';
+
+import { hasOwnKey } from '@common/utils/obj';
 
 import { AbstractFilterInput } from './inputs/abstract-filter.input';
 import { ObjFilterInput      } from './inputs/obj-filter.input';
 import { FilterUnion         } from './filter-union.enum';
 import { FilterOperator      } from './fitler-operator.enum';
-import { SqlBinOp            } from './sql-bin-op.enum';
 import { 
     andStrategy, 
     orStrategy, 
@@ -19,11 +19,41 @@ import {
 export type QueryVariables = Obj<unknown, string>;
 export type QueryAndParams = [string, QueryVariables];
 
+type OpMap  = typeof FilterBuilder['gqlToSqlMap'];
+type SqlBinOp  = SqlEqOp | SqlRelOp;
+
+type SqlEqOp   = ValueOf<OpMap['eqOp']>;
+type SqlRelOp  = ValueOf<OpMap['relOp']>;
+type SqlLikeOp = ValueOf<OpMap['likeOp']>;
+type SqlInOp   = ValueOf<OpMap['inOp']>;
+
 export class FilterBuilder
 <TMetaObjFilterInput extends ObjFilterInput = ObjFilterInput> 
 {
     private params!:      QueryVariables;
     private lastParamId!: number;
+    private static readonly gqlToSqlMap = {
+        eqOp: {
+            [FilterOperator.Eq]:  '==',
+            [FilterOperator.Neq]:  '<>'
+        },
+        relOp: {
+            [FilterOperator.Lt]:  '<',
+            [FilterOperator.Leq]: '<=',
+            [FilterOperator.Gt]:  '>',
+            [FilterOperator.Geq]: '>='
+        },
+        inOp: {
+            [FilterOperator.In]: 'IN',
+            [FilterOperator.Nin]: 'NOT IN'
+        },
+        likeOp: {
+            [FilterOperator.Like]:   'LILKE',
+            [FilterOperator.Ilike]:  'ILIKE',
+            [FilterOperator.Nlike]:  'NOT LIKE',
+            [FilterOperator.Nilike]: 'NOT ILIKE' 
+        }
+    } as const;
 
     /**
      * Returns `[query, parameters]` tuple that contains filtering `WHERE` clause
@@ -96,28 +126,30 @@ export class FilterBuilder
      * 
      * @param operator Operator type to create according query.
      * @param operand  Operand value to pass as an argument tp `operator`.
-     * @param param2   Database metadata, that describes this property.
+     * @param meta     Database metadata, that describes this property.
      */
     private createFilterForOperator(
         operator: FilterOperator, 
         operand: unknown, 
         meta: ColumnMetadata
     ) {
-        switch (operator) {
-            case FilterOperator.Eq:     return this.tryCreateEq   (this.getColumnName(meta), operand, meta.isNullable, true);
-            case FilterOperator.Neq:    return this.tryCreateEq   (this.getColumnName(meta), operand, meta.isNullable, false);
-            case FilterOperator.Gt:     return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Gt,  operand);
-            case FilterOperator.Lt:     return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Lt,  operand);
-            case FilterOperator.Geq:    return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Geq, operand);
-            case FilterOperator.Leq:    return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Leq, operand);
-            case FilterOperator.In:     return this.tryCreateIn   (this.getColumnName(meta), operand as Nullable<unknown[]>, true);
-            case FilterOperator.Nin:    return this.tryCreateIn   (this.getColumnName(meta), operand as Nullable<unknown[]>, false);
-            case FilterOperator.Regexp:   return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Regexp,   operand);
-            case FilterOperator.Nregexp:  return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Nregexp,  operand);
-            case FilterOperator.Iregexp:  return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Iregexp,  operand);
-            case FilterOperator.Niregexp: return this.tryCreateBinOp(this.getColumnName(meta), SqlBinOp.Niregexp, operand);
-            default: throw new Debug.UnreachableCodeError(operator);
-        }
+        const colname = this.getColumnName(meta);
+        const { eqOp, relOp, inOp, likeOp } = FilterBuilder.gqlToSqlMap;
+        return (
+            hasOwnKey(eqOp, operator) ? 
+            this.tryCreateEq(colname, operand, meta.isNullable, eqOp[operator]) :
+            
+            hasOwnKey(relOp, operator) ? 
+            this.tryCreateBinOp(colname, operand, relOp[operator]) :
+
+            hasOwnKey(inOp, operator) ?
+            this.tryCreateIn(colname, operand, inOp[operator]) : 
+
+            hasOwnKey(likeOp, operator) ? 
+            this.tryCreateLikeOp(colname, operand, likeOp[operator]) :
+
+            (() => { throw new Debug.UnreachableCodeError(operator); })()
+        );
     }
 
     private static getFilterUnionStrategy(mode?: Nullable<FilterUnion>): FilterUnionStrategy {
@@ -159,23 +191,17 @@ export class FilterBuilder
      * @param columnName Name of the column to create filter for.
      * @param operand    Value to compare for equality to.
      * @param isNullable Tell whether this column is nullable in the database schema.
-     * @param shouldBeEq Defines forward or negated equality comparison mode.
+     * @param eqOp       Defines which one of `==` or `<>` operator to use for the query.
      */
     private tryCreateEq(
         columnName: string, 
         operand:    unknown, 
         isNullable: boolean,
-        shouldBeEq: boolean
+        eqOp:       SqlEqOp
     ) {
-        return operand === null && isNullable         ?
-            this.createIsNull(columnName, shouldBeEq) :
-            operand == null                           ?
-            ''                                        :
-            this.tryCreateBinOp(
-                columnName,
-                shouldBeEq ? SqlBinOp.Eq : SqlBinOp.Neq, 
-                operand
-            );
+        return operand === null && isNullable 
+            ? `${columnName} IS ${eqOp === '==' ? '': 'NOT' } NULL` 
+            : this.tryCreateBinOp(columnName, operand, eqOp);
     }
 
 
@@ -183,13 +209,42 @@ export class FilterBuilder
      * Tries to create binary operator filtering query.
      * Does nothing if `operand == null`.
      * 
-     * @param columnName Name of the column to create filter for.
-     * @param operator   Defines the binary operator to use.
-     * @param operand    Value to use as the right hand side for `operator`.
+     * @param columnName  Name of the column to create filter for.
+     * @param operand     Value to use as the right hand side for `operator`.
+     * @param binOp       Defines the particular binary operator to use.
      */
-    private tryCreateBinOp(columnName: string, operator: SqlBinOp, operand: unknown) {    
-        return operand == null ? '' : 
-            `${columnName} ${operator} :${this.createParam(operand)}`; 
+    private tryCreateBinOp(columnName: string, operand: unknown, binOp: SqlBinOp) {    
+        return operand == null 
+            ? '' 
+            : `${columnName} ${binOp} :${this.createParam(operand)}`; 
+    }
+
+    /**
+     * Tries to create like operator filtering query.
+     * Does nothing if `operand == null`.
+     * 
+     * @param columnName  Name of the column to create filter for.
+     * @param operand     Value to use as the right hand side for `operator`.
+     * @param likeOp      Defines the particular `LIKE` operator to use.
+     */
+    private tryCreateLikeOp(columnName: string, operand: unknown, likeOp: SqlLikeOp) {    
+        if (typeof operand !== 'string') {
+            throw new Error('Invalid operand for LIKE operator: value is not a string');
+        }
+        const param = this.createParam(this.escapeLikeOperand(operand));
+        return operand == null 
+            ? '' 
+            : `${columnName} ${likeOp} '%' || :${param} || '%'`; 
+    }
+
+    /**
+     * Escapes string for `LIKE` operator argument. Doesn't add quotes around the string
+     * so that you may interpolate it into your custom `LIKE` search pattern string.
+     * 
+     * @param untrustedOperand Untrusted input string to escape. 
+     */
+    private escapeLikeOperand(untrustedOperand: string) {
+        return untrustedOperand.replace(/%|_|\\/g, '\\$&');
     }
 
     /**
@@ -198,25 +253,14 @@ export class FilterBuilder
      * 
      * @param columnName Name of the column to create filter for.
      * @param operand    Array of values to pass to `IN` operator.
-     * @param shouldBeIn If `false`, then `NOT` operator is used, otherwise no negation is added.
+     * @param inOperator Defines particular `IN` operator to use for the query.
      */
-    private tryCreateIn(columnName: string, operand: Nullable<unknown[]>, shouldBeIn: boolean) {
-        return operand == null ? '' : 
-            `${columnName}${this.getNotIf(!shouldBeIn)}IN (:...${this.createParam(operand)})`;
-    }
-
-    /**
-     * Creates `IS [NOT] NULL` query for the given `columnName`.
-     * 
-     * @param columnName   Name of the column to create filter for.
-     * @param shouldBeNull If `true` `IS NULL` query is returned, `IS NOT NULL` otherwise
-     */
-    private createIsNull(columnName: string, shouldBeNull: boolean) {
-        return `${columnName} IS${this.getNotIf(!shouldBeNull)}NULL`;
-    }
-
-
-    private getNotIf(shouldBeNot: boolean) {
-        return shouldBeNot ? ' NOT ' : ' ';
+    private tryCreateIn(columnName: string, operand: unknown, inOperator: SqlInOp) {
+        if (!Array.isArray(operand)) {
+            throw new Error('Invalid operand for IN operator: value is not an array');
+        }
+        return operand == null 
+            ? '' 
+            : `${columnName} ${inOperator} (:...${this.createParam(operand)})`;
     }
 }

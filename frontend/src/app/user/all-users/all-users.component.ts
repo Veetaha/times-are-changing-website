@@ -1,12 +1,11 @@
-import escapeStringRegExp from 'escape-string-regexp';
 import { Component } from '@angular/core';
 import { ITdDataTableColumn } from '@covalent/core/data-table';
 
 import { PageFetcherFn } from '@app/common/pagination/pagination.interfaces';
-import { SortingOrder  } from '@app/gql/generated';
+import { SortingOrder, FilterUnion, UserPaginationInput  } from '@app/gql/generated';
 
 import { UserService } from '../user.service';
-import { PagedUser } from '../user.interfaces';
+import { PagedUser   } from '../user.interfaces';
 
 
 @Component({
@@ -24,16 +23,21 @@ export class AllUsersComponent {
     ];
 
     usersPageFetcher: PageFetcherFn<PagedUser> = ({limit, offset, search}) => { 
-        const sort = { creationDate: { ordering:  SortingOrder.Desc } };
+        const query: UserPaginationInput = { 
+            limit, 
+            offset, 
+            sort: { creationDate: { ordering: SortingOrder.Desc } }
+        };
 
-        if (search == null) {
-            return this.users.getUsersPage({ limit, offset, sort });
+        if (search != null) {
+            const strFilter = { ilike: search };           
+            query.filter = {
+                unionMode: FilterUnion.Or,
+                props: { name: strFilter, login: strFilter  } 
+            };
         }
 
-        const strFilter = { iregexp: `.*${escapeStringRegExp(search)}.*` };
-        return this.users.getUsersPage({
-            limit, offset, sort, filter: { props: { name: strFilter, login: strFilter } }
-        });
+        return this.users.getUsersPage(query);
     }
 
     constructor(private readonly users: UserService) {}

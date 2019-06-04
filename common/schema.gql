@@ -22,10 +22,10 @@ input BooleanFilterInput {
   """
   unionMode: FilterUnion
 
-  """Defines `target == param` SQL logical expression."""
+  """Defines `target == param` logical expression."""
   eq: Boolean
 
-  """Defines `target <> param` SQL logical expression."""
+  """Defines `target != param` logical expression."""
   neq: Boolean
 }
 
@@ -50,28 +50,28 @@ input DateFilterInput {
   """
   unionMode: FilterUnion
 
-  """Defines `target == param` SQL logical expression."""
+  """Defines `target == param` logical expression."""
   eq: DateTime
 
-  """Defines `target <> param` SQL logical expression."""
+  """Defines `target != param` logical expression."""
   neq: DateTime
 
-  """Defines `target <= param` SQL logical expression."""
+  """Defines `target <= param` logical expression."""
   geq: DateTime
 
-  """Defines `target <= param` SQL logical expression."""
+  """Defines `target <= param` logical expression."""
   leq: DateTime
 
-  """Defines `target > param` SQL logical expression."""
+  """Defines `target > param` logical expression."""
   gt: DateTime
 
-  """Defines `target < param` SQL logical expression."""
+  """Defines `target < param` logical expression."""
   lt: DateTime
 
-  """Defines `target IN param` SQL logical expression."""
+  """Defines `target IN param` logical expression."""
   in: [DateTime!]
 
-  """Defines `target NOT IN param` SQL logical expression."""
+  """Defines `target NOT IN param` logical expression."""
   nin: [DateTime!]
 }
 
@@ -97,28 +97,28 @@ input IntFilterInput {
   """
   unionMode: FilterUnion
 
-  """Defines `target == param` SQL logical expression."""
+  """Defines `target == param` logical expression."""
   eq: Int
 
-  """Defines `target <> param` SQL logical expression."""
+  """Defines `target != param` logical expression."""
   neq: Int
 
-  """Defines `target <= param` SQL logical expression."""
+  """Defines `target <= param` logical expression."""
   geq: Int
 
-  """Defines `target <= param` SQL logical expression."""
+  """Defines `target <= param` logical expression."""
   leq: Int
 
-  """Defines `target > param` SQL logical expression."""
+  """Defines `target > param` logical expression."""
   gt: Int
 
-  """Defines `target < param` SQL logical expression."""
+  """Defines `target < param` logical expression."""
   lt: Int
 
-  """Defines `target IN param` SQL logical expression."""
+  """Defines `target IN param` logical expression."""
   in: [Int!]
 
-  """Defines `target NOT IN param` SQL logical expression."""
+  """Defines `target NOT IN param` logical expression."""
   nin: [Int!]
 }
 
@@ -513,32 +513,36 @@ input StringFilterInput {
   """
   unionMode: FilterUnion
 
-  """Defines `target == param` SQL logical expression."""
+  """Defines `target == param` logical expression."""
   eq: String
 
-  """Defines `target <> param` SQL logical expression."""
+  """Defines `target != param` logical expression."""
   neq: String
 
-  """Applies `param` POSIX case-insensitive regular expression to `target`."""
-  iregexp: String
+  """
+  Matches `target` that contains `param` substring in case-insensitive way.
+  """
+  ilike: String
 
   """
-  Applies `param` POSIX case-insensitive regular expression to `target` and negates the result.
+  Matches `target` that doesnt't contain `param` substring in case-insensitive way.
   """
-  niregexp: String
-
-  """Applies `param` POSIX case-sensitive regular expression to `target`."""
-  regexp: String
+  nilike: String
 
   """
-  Applies `param` POSIX case-sensitive regular expression to `target` and negates the result.
+  Matches `target` that contains `param` substring in case-sensitive way.
   """
-  nregexp: String
+  like: String
 
-  """Defines `target IN param` SQL logical expression."""
+  """
+  Matches `target` that doesn't contain `param` substring in case-sensitive way.
+  """
+  nlike: String
+
+  """Defines `target IN param` logical expression."""
   in: [String!]
 
-  """Defines `target NOT IN param` SQL logical expression."""
+  """Defines `target NOT IN param` logical expression."""
   nin: [String!]
 }
 
@@ -661,16 +665,16 @@ input UserRoleFilterInput {
   """
   unionMode: FilterUnion
 
-  """Defines `target == param` SQL logical expression."""
+  """Defines `target == param` logical expression."""
   eq: UserRole
 
-  """Defines `target <> param` SQL logical expression."""
+  """Defines `target != param` logical expression."""
   neq: UserRole
 
-  """Defines `target IN param` SQL logical expression."""
+  """Defines `target IN param` logical expression."""
   in: [UserRole!]
 
-  """Defines `target NOT IN param` SQL logical expression."""
+  """Defines `target NOT IN param` logical expression."""
   nin: [UserRole!]
 }
 

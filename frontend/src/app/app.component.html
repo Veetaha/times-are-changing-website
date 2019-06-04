@@ -4,7 +4,7 @@
 <td-layout>
 
     <td-navigation-drawer flex sidenavTitle="Times are Changing">
-        <app-navigation-drawer></app-navigation-drawer>
+        <app-nav-drawer></app-nav-drawer>
     </td-navigation-drawer>
 
     <td-layout-nav>
@@ -13,20 +13,18 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <div td-toolbar-content>
-            <app-dashboard></app-dashboard>
-        </div>
+        <app-dashboard td-toolbar-content></app-dashboard>
 
         <mat-progress-bar
             [mode]="isAwaitingResponses ? 'indeterminate' : 'determinate'"
             color="primary"
             value="0"
         ></mat-progress-bar>
-        <div class="content-root">
-            <main class="main">
+        <div class="local-content-root">
+            <main class="local-main">
                 <router-outlet></router-outlet>
             </main>
-            <footer class="footer">
+            <footer class="local-footer">
                 <app-footer></app-footer>
             </footer>
         </div>

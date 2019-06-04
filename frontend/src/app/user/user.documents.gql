@@ -1,12 +1,15 @@
+fragment PagedUser on User {
+    role
+    name
+    login
+    avatarImgId: avatarImgIdOrDefault
+    creationDate
+}
+
+
 query getUsersPage($params: UserPaginationInput!) {
     getUsersPage(params: $params) {
         total
-        data {
-            role
-            name
-            login
-            avatarImgId: avatarImgIdOrDefault
-            creationDate
-        }
+        data { ...PagedUser }
     }
 }

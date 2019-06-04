@@ -7,13 +7,11 @@
         <span class="dashboard-home-btn__text">TaC</span>
     </app-dashboard-anchor>
 
-    <app-dashboard-anchor flex routePath="/media">Media</app-dashboard-anchor>
-    <app-dashboard-anchor flex routePath="/developer">Documentation</app-dashboard-anchor>
 
-    <ng-container *appIfClientRole="authRouteMap.getRoleLimitFor('sign-in'); else elseForNotGuest">
+    <ng-container *appIfClientRole="signInRouteLimit; else elseForNotGuest">
 
         <app-dashboard-anchor flex routePath="/sign-in">Sign in</app-dashboard-anchor>
-        <app-dashboard-anchor *appIfClientRole="authRouteMap.getRoleLimitFor('sign-up')"
+        <app-dashboard-anchor *appIfClientRole="signUpRouteLimit"
             flex
             routePath="/sign-up"
         > Sign up

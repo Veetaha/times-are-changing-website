@@ -2,15 +2,15 @@
     height: 100%;
     width: 100%;
 }
-.content-root {
+.local-content-root {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
-.main {
+.local-main {
     padding: 0 10%;
     flex-grow: 1;
 }
-.footer {
+.local-footer {
     flex-shrink: 0;
 }

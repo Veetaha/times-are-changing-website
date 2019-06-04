@@ -24,10 +24,10 @@ export abstract class AbstractFilterInput<TInputType = unknown> {
     [FilterOperator.Geq]?:      Nullable<TInputType>;
     [FilterOperator.Lt]?:       Nullable<TInputType>;
     [FilterOperator.Leq]?:      Nullable<TInputType>;
-    [FilterOperator.Regexp]?:   Nullable<string>;
-    [FilterOperator.Nregexp]?:  Nullable<string>;
-    [FilterOperator.Iregexp]?:  Nullable<string>;
-    [FilterOperator.Niregexp]?: Nullable<string>;
+    [FilterOperator.Like]?:     Nullable<string>;
+    [FilterOperator.Nlike]?:    Nullable<string>;
+    [FilterOperator.Ilike]?:    Nullable<string>;
+    [FilterOperator.Nilike]?:   Nullable<string>;
     [FilterOperator.In]?:       Nullable<TInputType[]>;
     [FilterOperator.Nin]?:      Nullable<TInputType[]>;
 

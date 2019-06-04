@@ -30,10 +30,10 @@ export abstract class AbstractRouteGuardedComponent extends Disposable implement
         }
         this.addHandle(AuthState.selectClientRole(this.store).subscribe(clientRole => { 
             if (!UserRoleLimit.obeysLimit(routeRoleLimit, clientRole)) {
-                this.store.dispatch(new Warning(
-                    `Current client role no longer permits staying at this page.`
-                ));
-                this.store.dispatch(OpenHomePage);
+                this.store.dispatch([
+                    new Warning(`Current client role no longer permits staying at this page.`),
+                    OpenHomePage
+                ]);
             }
         }));  
         

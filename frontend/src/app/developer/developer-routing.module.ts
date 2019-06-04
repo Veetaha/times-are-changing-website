@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { DeveloperComponent } from './developer/developer.component';
 
-// @dynamic
-const routes: Routes = [
+const routes = [
     {
         path:      'developer',
         component: DeveloperComponent
     }
 ];
 
-// @dynamic
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]

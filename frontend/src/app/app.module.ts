@@ -10,8 +10,9 @@ import { DeveloperModule    } from './developer/developer.module';
 import { FooterComponent    } from './footer/footer.component';
 import { DashboardModule    } from './dashboard/dashboard.module';
 import { UserModule         } from './user/user.module';
-import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
-import { MediaComponent } from './media/media.component';
+import { NavDrawerModule    } from './nav-drawer/nav-drawer.module';
+import { MediaModule        } from './media/media.module';
+import { NewsModule         } from './news/news.module';
 
 @NgModule({
     imports: [   
@@ -20,15 +21,18 @@ import { MediaComponent } from './media/media.component';
         AuthModule,
         ErrorModule,
         UserModule,
-        AppRoutingModule,
-        DashboardModule
+        DashboardModule,
+        MediaModule,
+        NavDrawerModule,
+        NewsModule,
+    
+        // keep it the last in import array because it contains "catch-all" route
+        AppRoutingModule 
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        FooterComponent,
-        NavigationDrawerComponent,
-        MediaComponent
+        FooterComponent
     ],
     bootstrap: [AppComponent]
 })

@@ -1,0 +1,38 @@
+fragment PagedNews on News {
+    id
+    creationDate
+    lastUpdateDate
+    title
+    promoImgId: promoImgIdOrDefault 
+    likesAmount 
+    dislikesAmount 
+    commentsAmount 
+}
+
+fragment EntireNews on News {
+    ...PagedNews
+    body
+    myRating {
+        hasLiked
+    }
+    creator {
+        ...EntireUser #defined in 'auth.documents.gql' FIXME: fix this abomination
+    }
+}
+
+query getNewsById($id: Int!) {
+    getNewsById(id: $id) { ...EntireNews }
+}
+
+query getNewsPage($params: NewsPaginationInput!) {
+    getNewsPage(params: $params) { 
+        total
+        data {...PagedNews }
+    }
+}
+
+mutation createNews($params: CreateNewsInput!) {
+    createNews(params: $params) {
+        id
+    }
+}

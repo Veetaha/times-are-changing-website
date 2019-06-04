@@ -24,10 +24,17 @@ export type AdminUpdateUserInput = {
 export type BooleanFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
     unionMode?: Maybe<FilterUnion>;
-    /** Defines `target == param` SQL logical expression. */
+    /** Defines `target == param` logical expression. */
     eq?: Maybe<Scalars["Boolean"]>;
-    /** Defines `target <> param` SQL logical expression. */
+    /** Defines `target != param` logical expression. */
     neq?: Maybe<Scalars["Boolean"]>;
+};
+
+export type CreateNewsCommentInput = {
+    /** Id of the news to add a comment to. */
+    newsId: Scalars["Int"];
+    /** Comment markdown body text. */
+    body: Scalars["String"];
 };
 
 export type CreateNewsInput = {
@@ -40,21 +47,21 @@ export type CreateNewsInput = {
 export type DateFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
     unionMode?: Maybe<FilterUnion>;
-    /** Defines `target == param` SQL logical expression. */
+    /** Defines `target == param` logical expression. */
     eq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target <> param` SQL logical expression. */
+    /** Defines `target != param` logical expression. */
     neq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target <= param` SQL logical expression. */
+    /** Defines `target <= param` logical expression. */
     geq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target <= param` SQL logical expression. */
+    /** Defines `target <= param` logical expression. */
     leq?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target > param` SQL logical expression. */
+    /** Defines `target > param` logical expression. */
     gt?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target < param` SQL logical expression. */
+    /** Defines `target < param` logical expression. */
     lt?: Maybe<Scalars["DateTime"]>;
-    /** Defines `target IN param` SQL logical expression. */
+    /** Defines `target IN param` logical expression. */
     in?: Maybe<Array<Scalars["DateTime"]>>;
-    /** Defines `target NOT IN param` SQL logical expression. */
+    /** Defines `target NOT IN param` logical expression. */
     nin?: Maybe<Array<Scalars["DateTime"]>>;
 };
 
@@ -70,21 +77,21 @@ export enum FilterUnion {
 export type IntFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
     unionMode?: Maybe<FilterUnion>;
-    /** Defines `target == param` SQL logical expression. */
+    /** Defines `target == param` logical expression. */
     eq?: Maybe<Scalars["Int"]>;
-    /** Defines `target <> param` SQL logical expression. */
+    /** Defines `target != param` logical expression. */
     neq?: Maybe<Scalars["Int"]>;
-    /** Defines `target <= param` SQL logical expression. */
+    /** Defines `target <= param` logical expression. */
     geq?: Maybe<Scalars["Int"]>;
-    /** Defines `target <= param` SQL logical expression. */
+    /** Defines `target <= param` logical expression. */
     leq?: Maybe<Scalars["Int"]>;
-    /** Defines `target > param` SQL logical expression. */
+    /** Defines `target > param` logical expression. */
     gt?: Maybe<Scalars["Int"]>;
-    /** Defines `target < param` SQL logical expression. */
+    /** Defines `target < param` logical expression. */
     lt?: Maybe<Scalars["Int"]>;
-    /** Defines `target IN param` SQL logical expression. */
+    /** Defines `target IN param` logical expression. */
     in?: Maybe<Array<Scalars["Int"]>>;
-    /** Defines `target NOT IN param` SQL logical expression. */
+    /** Defines `target NOT IN param` logical expression. */
     nin?: Maybe<Array<Scalars["Int"]>>;
 };
 
@@ -110,7 +117,17 @@ export type Mutation = {
     /** Requires auth. Deletes the news by id and returns `true`, but throws if news
      * doesn't exist or client has no rights to mutate the news.
      */
-    deleteNews: Scalars["Boolean"];
+    deleteNewsById: Scalars["Boolean"];
+    /** Requires auth. Creates comment on news from behalf of the client. */
+    createNewsComment: NewsComment;
+    /** Requires auth. Updates news comment and returns it, but throws if comment
+     * doesn't exist or client has no rights to mutate the comment.
+     */
+    updateNewsComment: NewsComment;
+    /** Requires auth. Deletes news comment with the given `id`. Returns `true` if
+     * deletion was successful. Throws if client has no rights to delete the target news comment.
+     */
+    deleteNewsCommentById: Scalars["Boolean"];
 };
 
 export type MutationSignInArgs = {
@@ -146,12 +163,24 @@ export type MutationUpdateNewsArgs = {
     params: UpdateNewsInput;
 };
 
-export type MutationDeleteNewsArgs = {
+export type MutationDeleteNewsByIdArgs = {
+    id: Scalars["Int"];
+};
+
+export type MutationCreateNewsCommentArgs = {
+    params: CreateNewsCommentInput;
+};
+
+export type MutationUpdateNewsCommentArgs = {
+    params: UpdateNewsCommentInput;
+};
+
+export type MutationDeleteNewsCommentByIdArgs = {
     id: Scalars["Int"];
 };
 
 export type News = {
-    /** News unique identifier. */
+    /** `News` unique identifier. */
     id: Scalars["Int"];
     /** Date when this news was created. */
     creationDate: Scalars["DateTime"];
@@ -167,10 +196,12 @@ export type News = {
     body: Scalars["String"];
     /** Id (from `UploadCare` file-hosting service) of the image to display as the introduction to the news. */
     promoImgId?: Maybe<Scalars["String"]>;
-    /** Total number of likes for this news. */
-    likes: Scalars["Int"];
-    /** Total number of dislikes for this news. */
-    dislikes: Scalars["Int"];
+    /** Total amoutn of likes for this news. */
+    likesAmount: Scalars["Int"];
+    /** Total amount of dislikes for this news. */
+    dislikesAmount: Scalars["Int"];
+    /** Total amount of comments for this news. */
+    commentsAmount: Scalars["Int"];
     /** Returns the rating that the client has set to this news or `null` if client is
      * not authenticated or he hasn't set any rating to the target news yet.
      */
@@ -179,6 +210,69 @@ export type News = {
     promoImgIdOrDefault: Scalars["String"];
     /** Returns the user that created this news. */
     creator: User;
+};
+
+/** Represents users' thoughts about particular news that they express in text. */
+export type NewsComment = {
+    /** `NewsComment` unique identifier. */
+    id: Scalars["Int"];
+    /** Date when this comment was created. */
+    creationDate: Scalars["DateTime"];
+    /** Date when this comment was updated last time. */
+    lastUpdateDate: Scalars["DateTime"];
+    /** Login of the user that created this comment. */
+    commentatorLogin: Scalars["String"];
+    /** Id of the news that the user commented on. */
+    newsId: Scalars["Int"];
+    /** Comment body markdown text, it may be vulnerable XSS attacks, be sure to
+     * sanitize it on the client side after having converted it to HTML.
+     */
+    body: Scalars["String"];
+    /** Returns the user that commented on the given `news`. */
+    commentator: User;
+    /** Returns the news that was commented by the `commentator`. */
+    news: News;
+};
+
+export type NewsCommentFilterInput = {
+    /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
+    unionMode?: Maybe<FilterUnion>;
+    /** Per-property filters. */
+    props: NewsCommentPropsFilterInput;
+};
+
+export type NewsCommentPage = {
+    /** Contains an array of items payload for this page. */
+    data: Array<NewsComment>;
+    /** Total number of items a client can query with this request. It must me an integer that is >= 0. */
+    total: Scalars["Int"];
+};
+
+export type NewsCommentPaginationInput = {
+    /** Maximum amount of items to return for page. It must be an integer within the range [0, 500] */
+    limit: Scalars["Int"];
+    /** Offset that defines an index of the beginning of the page of items. It must be an integer that is >= 0. */
+    offset: Scalars["Int"];
+    /** Defines limitations for the items of the returned page. */
+    filter?: Maybe<NewsCommentFilterInput>;
+    /** Defines sorting order for the items according to their property values. */
+    sort?: Maybe<NewsCommentSortInput>;
+};
+
+export type NewsCommentPropsFilterInput = {
+    id?: Maybe<IntFilterInput>;
+    newsId?: Maybe<IntFilterInput>;
+    commentatorLogin?: Maybe<StringFilterInput>;
+    body?: Maybe<StringFilterInput>;
+    creationDate?: Maybe<DateFilterInput>;
+    lastUpdateDate?: Maybe<DateFilterInput>;
+};
+
+export type NewsCommentSortInput = {
+    newsId?: Maybe<SortInput>;
+    commentatorLogin?: Maybe<SortInput>;
+    creationDate?: Maybe<SortInput>;
+    lastUpdateDate?: Maybe<SortInput>;
 };
 
 export type NewsFilterInput = {
@@ -275,8 +369,6 @@ export type NewsSortInput = {
 };
 
 export type Query = {
-    /** Returns global default news `promoImgId`. */
-    getDefaultUserAvatarImgId: Scalars["String"];
     /** Returns user by login, or `null` if nothing was found. */
     getUserByLogin?: Maybe<User>;
     /** Paginates all users. */
@@ -289,6 +381,8 @@ export type Query = {
     getNewsPage: NewsPage;
     /** Returns a single news instance by `id`, or `null` if nothing was found. */
     getNewsById?: Maybe<News>;
+    /** Paginates all news comments. */
+    getNewsCommentsPage: NewsCommentPage;
 };
 
 export type QueryGetUserByLoginArgs = {
@@ -309,6 +403,10 @@ export type QueryGetNewsPageArgs = {
 
 export type QueryGetNewsByIdArgs = {
     id: Scalars["Int"];
+};
+
+export type QueryGetNewsCommentsPageArgs = {
+    params: NewsCommentPaginationInput;
 };
 
 export type SignInInput = {
@@ -339,22 +437,27 @@ export type SortInput = {
 export type StringFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
     unionMode?: Maybe<FilterUnion>;
-    /** Defines `target == param` SQL logical expression. */
+    /** Defines `target == param` logical expression. */
     eq?: Maybe<Scalars["String"]>;
-    /** Defines `target <> param` SQL logical expression. */
+    /** Defines `target != param` logical expression. */
     neq?: Maybe<Scalars["String"]>;
-    /** Applies `param` POSIX case-insensitive regular expression to `target`. */
-    iregexp?: Maybe<Scalars["String"]>;
-    /** Applies `param` POSIX case-insensitive regular expression to `target` and negates the result. */
-    niregexp?: Maybe<Scalars["String"]>;
-    /** Applies `param` POSIX case-sensitive regular expression to `target`. */
-    regexp?: Maybe<Scalars["String"]>;
-    /** Applies `param` POSIX case-sensitive regular expression to `target` and negates the result. */
-    nregexp?: Maybe<Scalars["String"]>;
-    /** Defines `target IN param` SQL logical expression. */
+    /** Matches `target` that contains `param` substring in case-insensitive way. */
+    ilike?: Maybe<Scalars["String"]>;
+    /** Matches `target` that doesnt't contain `param` substring in case-insensitive way. */
+    nilike?: Maybe<Scalars["String"]>;
+    /** Matches `target` that contains `param` substring in case-sensitive way. */
+    like?: Maybe<Scalars["String"]>;
+    /** Matches `target` that doesn't contain `param` substring in case-sensitive way. */
+    nlike?: Maybe<Scalars["String"]>;
+    /** Defines `target IN param` logical expression. */
     in?: Maybe<Array<Scalars["String"]>>;
-    /** Defines `target NOT IN param` SQL logical expression. */
+    /** Defines `target NOT IN param` logical expression. */
     nin?: Maybe<Array<Scalars["String"]>>;
+};
+
+export type UpdateNewsCommentInput = {
+    id: Scalars["Int"];
+    body: Scalars["String"];
 };
 
 export type UpdateNewsInput = {
@@ -439,13 +542,13 @@ export enum UserRole {
 export type UserRoleFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
     unionMode?: Maybe<FilterUnion>;
-    /** Defines `target == param` SQL logical expression. */
+    /** Defines `target == param` logical expression. */
     eq?: Maybe<UserRole>;
-    /** Defines `target <> param` SQL logical expression. */
+    /** Defines `target != param` logical expression. */
     neq?: Maybe<UserRole>;
-    /** Defines `target IN param` SQL logical expression. */
+    /** Defines `target IN param` logical expression. */
     in?: Maybe<Array<UserRole>>;
-    /** Defines `target NOT IN param` SQL logical expression. */
+    /** Defines `target NOT IN param` logical expression. */
     nin?: Maybe<Array<UserRole>>;
 };
 
@@ -491,18 +594,65 @@ export type SignInMutation = { __typename?: "Mutation" } & {
     >;
 };
 
+export type PagedNewsFragment = { __typename?: "News" } & Pick<
+    News,
+    | "id"
+    | "creationDate"
+    | "lastUpdateDate"
+    | "title"
+    | "likesAmount"
+    | "dislikesAmount"
+    | "commentsAmount"
+> & { promoImgId: News["promoImgIdOrDefault"] };
+
+export type EntireNewsFragment = { __typename?: "News" } & Pick<
+    News,
+    "body"
+> & {
+        myRating: Maybe<
+            { __typename?: "NewsRating" } & Pick<NewsRating, "hasLiked">
+        >;
+        creator: { __typename?: "User" } & EntireUserFragment;
+    } & PagedNewsFragment;
+
+export type GetNewsByIdQueryVariables = {
+    id: Scalars["Int"];
+};
+
+export type GetNewsByIdQuery = { __typename?: "Query" } & {
+    getNewsById: Maybe<{ __typename?: "News" } & EntireNewsFragment>;
+};
+
+export type GetNewsPageQueryVariables = {
+    params: NewsPaginationInput;
+};
+
+export type GetNewsPageQuery = { __typename?: "Query" } & {
+    getNewsPage: { __typename?: "NewsPage" } & Pick<NewsPage, "total"> & {
+            data: Array<{ __typename?: "News" } & PagedNewsFragment>;
+        };
+};
+
+export type CreateNewsMutationVariables = {
+    params: CreateNewsInput;
+};
+
+export type CreateNewsMutation = { __typename?: "Mutation" } & {
+    createNews: { __typename?: "News" } & Pick<News, "id">;
+};
+
+export type PagedUserFragment = { __typename?: "User" } & Pick<
+    User,
+    "role" | "name" | "login" | "creationDate"
+> & { avatarImgId: User["avatarImgIdOrDefault"] };
+
 export type GetUsersPageQueryVariables = {
     params: UserPaginationInput;
 };
 
 export type GetUsersPageQuery = { __typename?: "Query" } & {
     getUsersPage: { __typename?: "UserPage" } & Pick<UserPage, "total"> & {
-            data: Array<
-                { __typename?: "User" } & Pick<
-                    User,
-                    "role" | "name" | "login" | "creationDate"
-                > & { avatarImgId: User["avatarImgIdOrDefault"] }
-            >;
+            data: Array<{ __typename?: "User" } & PagedUserFragment>;
         };
 };
 
@@ -528,6 +678,41 @@ export const EntireClientAndTokenFragmentDoc = gql`
         }
     }
     ${EntireUserFragmentDoc}
+`;
+export const PagedNewsFragmentDoc = gql`
+    fragment PagedNews on News {
+        id
+        creationDate
+        lastUpdateDate
+        title
+        promoImgId: promoImgIdOrDefault
+        likesAmount
+        dislikesAmount
+        commentsAmount
+    }
+`;
+export const EntireNewsFragmentDoc = gql`
+    fragment EntireNews on News {
+        ...PagedNews
+        body
+        myRating {
+            hasLiked
+        }
+        creator {
+            ...EntireUser
+        }
+    }
+    ${PagedNewsFragmentDoc}
+    ${EntireUserFragmentDoc}
+`;
+export const PagedUserFragmentDoc = gql`
+    fragment PagedUser on User {
+        role
+        name
+        login
+        avatarImgId: avatarImgIdOrDefault
+        creationDate
+    }
 `;
 export const GetMeDocument = gql`
     query getMe {
@@ -580,19 +765,72 @@ export class SignInGQL extends Apollo.Mutation<
 > {
     document = SignInDocument;
 }
+export const GetNewsByIdDocument = gql`
+    query getNewsById($id: Int!) {
+        getNewsById(id: $id) {
+            ...EntireNews
+        }
+    }
+    ${EntireNewsFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class GetNewsByIdGQL extends Apollo.Query<
+    GetNewsByIdQuery,
+    GetNewsByIdQueryVariables
+> {
+    document = GetNewsByIdDocument;
+}
+export const GetNewsPageDocument = gql`
+    query getNewsPage($params: NewsPaginationInput!) {
+        getNewsPage(params: $params) {
+            total
+            data {
+                ...PagedNews
+            }
+        }
+    }
+    ${PagedNewsFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class GetNewsPageGQL extends Apollo.Query<
+    GetNewsPageQuery,
+    GetNewsPageQueryVariables
+> {
+    document = GetNewsPageDocument;
+}
+export const CreateNewsDocument = gql`
+    mutation createNews($params: CreateNewsInput!) {
+        createNews(params: $params) {
+            id
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class CreateNewsGQL extends Apollo.Mutation<
+    CreateNewsMutation,
+    CreateNewsMutationVariables
+> {
+    document = CreateNewsDocument;
+}
 export const GetUsersPageDocument = gql`
     query getUsersPage($params: UserPaginationInput!) {
         getUsersPage(params: $params) {
             total
             data {
-                role
-                name
-                login
-                avatarImgId: avatarImgIdOrDefault
-                creationDate
+                ...PagedUser
             }
         }
     }
+    ${PagedUserFragmentDoc}
 `;
 
 @Injectable({

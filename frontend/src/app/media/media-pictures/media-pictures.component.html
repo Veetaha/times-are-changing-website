@@ -1,0 +1,7 @@
+<mdb-carousel animation="slide">
+    <mdb-carousel-item *ngFor="let imageSrc of screenshotSrcs">
+        <figure class="local-carousel-item">
+            <img [src]="imageSrc" class="local-carousel-item__payload" >
+        </figure>
+    </mdb-carousel-item>
+</mdb-carousel>

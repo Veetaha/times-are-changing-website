@@ -1,3 +1,1 @@
-import { GetUsersPageQuery } from '@app/gql/generated';
-
-export type PagedUser = GetUsersPageQuery['getUsersPage']['data'][number];
+export { PagedUserFragment as PagedUser } from '@app/gql/generated';

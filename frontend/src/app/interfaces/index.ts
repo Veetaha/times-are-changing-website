@@ -4,8 +4,19 @@ import { Observable } from 'rxjs';
 
 export * from '@common/interfaces';
 
+/**
+ * Defines object that should be forwarded to FormGroup constructor in order
+ * to create form controls for the given `TValue`.
+ * @param TValue Object type with keys defining form control names 
+ *               and values defining their appropriate value types.
+ */
 export type TypedFormControls<TValue extends Obj> = Obj<AbstractControl, keyof TValue>;
 
+/**
+ * Defines type safe `FormGroup` that takes form control object shape type into account.
+ * @param TValue Object type with keys defining form control names 
+ *               and values defining their appropriate value types.
+ */
 export type TypedFormGroup<TValue extends Obj> = Merge<FormGroup, { 
     value: TValue,
     valueChanges: Observable<TValue>,

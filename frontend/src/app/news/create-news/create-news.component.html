@@ -1,0 +1,23 @@
+<form
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+    class="form"
+>
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput
+            required
+            [maxlength]="limits.news.title.max - 1"
+            [minlength]="limits.news.title.min"
+            formControlName="title" 
+            type="text"
+        />
+    </mat-form-field>
+    
+    <td-text-editor formControlName="body"></td-text-editor>
+    <button mat-raised-button
+        [disabled]="form.invalid"
+        type="submit"
+        color="primary"
+    >Submit</button>
+</form>

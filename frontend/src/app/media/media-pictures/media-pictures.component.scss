@@ -1,0 +1,12 @@
+.local-carousel-item {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    
+    &__payload {
+        object-fit: contain;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+    }
+}
