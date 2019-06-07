@@ -14,7 +14,6 @@ import { newsRouteAccessMap } from '../news-routing.limits';
 import { CriticalError } from '@app/error/error.actions';
 import { PaginationComponent } from '@app/common/pagination/pagination.component';
 import { TdDialogService } from '@covalent/core/dialogs';
-import { flatMap, filter } from 'rxjs/operators';
 
 @Component({
     selector:    'app-all-news',
