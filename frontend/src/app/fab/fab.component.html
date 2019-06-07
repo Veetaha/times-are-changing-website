@@ -1,0 +1,26 @@
+<ng-container *veeLet="fab$ | async as fab">
+<ng-container *veeLet="clientRole$ | async as clientRole">
+
+<ng-container *ngIf="shouldDisplayFab(fab, clientRole)">
+
+    <button *ngIf="fab.routerLink == null; else elseAnchorFab"  
+        mat-fab 
+        (click)="dispatchClickAction()"
+        color="accent"
+    >
+        <mat-icon>{{fab.fabIcon!}}</mat-icon>
+    </button>
+    <ng-template #elseAnchorFab>
+        <a mat-fab
+            [routerLink]="fab.routerLink" 
+            (click)="deleteFab()"
+            color="accent" >
+            <mat-icon>{{fab.fabIcon!}}</mat-icon>
+        </a>
+    </ng-template>
+
+</ng-container>
+
+
+</ng-container>
+</ng-container>

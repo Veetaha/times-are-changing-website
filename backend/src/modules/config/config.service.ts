@@ -19,7 +19,7 @@ implements TypeOrmOptionsFactory, GqlOptionsFactory, JwtOptionsFactory, AuthOpti
 
     readonly default = {
         user: { avatarImgId: 'default-user-avatar-image-id' },
-        news: { promoImgId:  'default-news-promo-image-id' }
+        news: { promoImgId:  'e1461841-ddf7-4132-b4a7-243ab54b2380' }
     } as const;
 
     readonly passwordSalt          = this.env.readEnvOrFail('PASSWORD_SALT');

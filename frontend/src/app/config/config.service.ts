@@ -20,7 +20,7 @@ export class ConfigService {
 
     static readonly isDevelopmentMode = isDevelopmentMode;
     
-    readonly uploadcarePublicApiKey = '93d19e223c7ee0f0581a';
+    readonly uploadcarePublicApiKey = 'ff0c27dbc59005dd125f';
     readonly snackBarOpts: MatSnackBarConfig = {
         duration: 4000,
         horizontalPosition: 'left',

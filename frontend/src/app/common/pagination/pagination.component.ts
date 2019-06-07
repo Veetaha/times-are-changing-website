@@ -38,7 +38,24 @@ export class PaginationComponent<TData> implements OnInit  {
         // *veeLet="isAwaitingResponses$ | async"
         // As a workaround, deffering initialization till the next spin of event loop
         setTimeout(() => this.fetchPage());
-  	}
+    }
+    
+    /**
+     * Updates current page after some intrinsic application has deleted some 
+     * items from this page.
+     * @param removedItemsAmount Defines the number of items that were deleted from this page.
+     */
+    updateBecausePageItemsRemoved(removedItemsAmount: number) {
+        // FIXME: come up with a more performant solution than refetching the whole page
+
+        // this.page should not be null here, but who knows))
+        this.fetchPage({
+            offset: this.page && this.page.data.length <= removedItemsAmount 
+                ? 0 
+                : this.paginationInput.offset
+        });
+    }
+
 
   	fetchPage({
   		offset = this.paginationInput.offset,

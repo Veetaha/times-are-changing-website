@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { EntireNews } from '../news.interfaces';
+import { ImageService } from '@app/common/image/image.service';
 
 @Component({
     selector:    'app-news-details',
@@ -11,9 +12,13 @@ import { EntireNews } from '../news.interfaces';
 export class NewsDetailsComponent implements OnInit {
     news!: EntireNews;
 
-    constructor(private readonly route: ActivatedRoute) {}
+    constructor(
+        private readonly route: ActivatedRoute,
+        public readonly images: ImageService
+    ) {}
 
     ngOnInit() {
+        // Obtained through `NewsDetailsResolver`
         this.news = this.route.snapshot.data.news as EntireNews;
     }
 }

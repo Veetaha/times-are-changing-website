@@ -1,0 +1,15 @@
+.local {
+    &-promo {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+
+        &__img {
+            display: block;
+            margin: auto;
+            max-height: 50vh;
+            max-width: 100%;
+        }
+
+    }
+}

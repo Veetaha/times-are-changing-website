@@ -1,8 +1,12 @@
-@import 'theme.scss';
+@import 'variables';
 
-.user-role {
-    font-size: 0.7em;
-}
-.user-creation-date {
-    color: map-get($theme, muted-text)
+.local {
+    
+    &-user-role {
+        font-size: 0.7em;
+    }
+
+    &-user-creation-date {
+        color: map-get($theme, muted-text)
+    }
 }

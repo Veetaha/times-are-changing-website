@@ -110,12 +110,14 @@ export type Mutation = {
     rateNews: NewsRating;
     /** Requires auth. Deletes rating instance on behalf of the client. Returns `true` if deletion was successful. */
     deleteNewsRating: Scalars["Boolean"];
-    /** Requires auth. Creates news on behalf of the client and returns it. */
+    /** Requires addmin rights. Creates news on behalf of the client and returns it. */
     createNews: News;
-    /** Requires auth. Updates news and returns it, but throws if news doesn't exist or client has no rights to mutate the news. */
+    /** Requires admin rights. Updates news and returns it, but throws if news doesn't
+     * exist or client has no rights to mutate the news.
+     */
     updateNews: News;
-    /** Requires auth. Deletes the news by id and returns `true`, but throws if news
-     * doesn't exist or client has no rights to mutate the news.
+    /** Requires admin rights. Deletes the news by id and returns `true`, but throws
+     * if news doesn't exist or client has no rights to mutate the news.
      */
     deleteNewsById: Scalars["Boolean"];
     /** Requires auth. Creates comment on news from behalf of the client. */
@@ -641,6 +643,15 @@ export type CreateNewsMutation = { __typename?: "Mutation" } & {
     createNews: { __typename?: "News" } & Pick<News, "id">;
 };
 
+export type DeleteNewsByIdMutationVariables = {
+    id: Scalars["Int"];
+};
+
+export type DeleteNewsByIdMutation = { __typename?: "Mutation" } & Pick<
+    Mutation,
+    "deleteNewsById"
+>;
+
 export type PagedUserFragment = { __typename?: "User" } & Pick<
     User,
     "role" | "name" | "login" | "creationDate"
@@ -820,6 +831,21 @@ export class CreateNewsGQL extends Apollo.Mutation<
     CreateNewsMutationVariables
 > {
     document = CreateNewsDocument;
+}
+export const DeleteNewsByIdDocument = gql`
+    mutation deleteNewsById($id: Int!) {
+        deleteNewsById(id: $id)
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class DeleteNewsByIdGQL extends Apollo.Mutation<
+    DeleteNewsByIdMutation,
+    DeleteNewsByIdMutationVariables
+> {
+    document = DeleteNewsByIdDocument;
 }
 export const GetUsersPageDocument = gql`
     query getUsersPage($params: UserPaginationInput!) {

@@ -1,0 +1,21 @@
+<button mat-raised-button *ngIf="buttonLabel != null"
+    (click)="openDialog()"
+    color="primary"
+    type="button"
+>
+    <mat-icon>attach_file</mat-icon>
+    {{buttonLabel}}
+</button>
+<p class="local-image-info" *ngIf="imageName != null">
+    {{imageName}}
+</p>
+
+<ngx-uploadcare-widget-custom #ucWidget
+    [value]="imgId"
+    [public-key]="uploadcarePublicApiKey"
+    [images-only]="true"
+    [preview-step]="true"
+    (on-upload-complete)="onUploadComplete($event.uuid, $event.name)"
+>
+</ngx-uploadcare-widget-custom>
+

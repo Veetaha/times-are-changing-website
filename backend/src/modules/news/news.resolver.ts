@@ -20,6 +20,7 @@ import { NewsPaginationInput } from './gql/news-pagination.input';
 import { NewsPage            } from './gql/news-page.object';
 import { CreateNewsInput     } from './gql/create-news.input';
 import { UpdateNewsInput     } from './gql/update-news.input';
+import { UserRole } from '@modules/user/user-role.enum';
 
 
 
@@ -92,19 +93,19 @@ export class NewsResolver {
         return this.news.getById(id);
     }
 
-    @Auth()
+    @Auth(UserRole.Admin)
     @Mutation(_returns => News, {
         description: 
-        "Requires auth. Creates news on behalf of the client and returns it."
+        "Requires addmin rights. Creates news on behalf of the client and returns it."
     })
     async createNews(@Client client: User, @Args('params') params: CreateNewsInput) {
         return this.news.create(client.login, params);
     }
 
-    @Auth()
+    @Auth(UserRole.Admin)
     @Mutation(_returns => News, {
         description: 
-        "Requires auth. Updates news and returns it, but throws if news " +
+        "Requires admin rights. Updates news and returns it, but throws if news " +
         "doesn't exist or client has no rights to mutate the news."
     })
     async updateNews(@Client client: User, @Args('params') params: UpdateNewsInput) {
@@ -113,10 +114,10 @@ export class NewsResolver {
     }
 
 
-    @Auth()
+    @Auth(UserRole.Admin)
     @Mutation(_returns => Boolean, {
         description: 
-        "Requires auth. Deletes the news by id and returns `true`, but throws " +
+        "Requires admin rights. Deletes the news by id and returns `true`, but throws " +
         "if news doesn't exist or client has no rights to mutate the news."
     })
     async deleteNewsById(@Client client: User, @ArgsId newsId: number) {

@@ -2,18 +2,17 @@ import { IntRange } from './utils/math/int-range';
 
 export const limits = {
     news: {
-        title: new IntRange(1, 256),
-        body:  new IntRange(0, 9001),
+        title: new IntRange(1, 255),
+        body:  new IntRange(0, 50000),
     },
     newsComment: {
-        body: new IntRange(0, 3001)
+        body: new IntRange(0, 5000)
     },
 
     user: {
-        name:     new IntRange(3, 256),
-        password: new IntRange(5, 37),
-        login:    new IntRange(2, 37),
+        name:     new IntRange(3, 255),
+        password: new IntRange(5, 36),
+        login:    new IntRange(2, 36),
     },
-
-    imgId: new IntRange(0, 256)
+    imgId: new IntRange(36, 36)
 };

@@ -8,23 +8,25 @@ export type PropDecor = PropertyDecorator<unknown, string>;
 
 /**
  * Defines and stores validations for the given property of target class.
+ * AHTUNG! This function may modify `validations` array.
+ * 
  * @param validations `'class-validator'` decorators to store and reuse.
  */
 export function Validations
 (...validations: PropDecor[]): PropDecor {
     return (proto, key) => {
-        const composedValidations = composeDecorators(...validations);
-
-        const meta: undefined | PropDecor[] = Reflect.getOwnMetadata(
+        const meta: undefined | PropDecor = Reflect.getOwnMetadata(
             ValidationsMetaKey, proto.constructor, key
         );
-        if (meta != null) {
-            meta.push(...validations);
-        } else {
-            Reflect.defineMetadata(
-                ValidationsMetaKey, composedValidations, proto.constructor, key
-            );
+        if (meta != null) {         // if there were some validations previously
+            validations.push(meta); // defined, just append them to the resulting validations
         }
+        const composedValidations = composeDecorators(...validations);
+
+        Reflect.defineMetadata(
+            ValidationsMetaKey, composedValidations, proto.constructor, key
+        );
+
         return composedValidations(proto, key);
     }; 
 }
@@ -37,9 +39,9 @@ export function Validations
 export function ValidateAs
 <TSrcClass extends Class>
 (SrcClass: TSrcClass, key: keyof InstanceType<TSrcClass>): PropDecor {
-    const validations = Reflect.getOwnMetadata(ValidationsMetaKey, SrcClass, key as any);
-    if (validations == null) {
+    const validationDecorator = Reflect.getOwnMetadata(ValidationsMetaKey, SrcClass, key as any);
+    if (validationDecorator == null) {
         throw new Error(`No validation were previously defined for ${SrcClass.name}['${key}']`);
     }
-    return validations;
+    return validationDecorator;
 }

@@ -36,3 +36,7 @@ mutation createNews($params: CreateNewsInput!) {
         id
     }
 }
+
+mutation deleteNewsById($id: Int!) {
+    deleteNewsById(id: $id) 
+}

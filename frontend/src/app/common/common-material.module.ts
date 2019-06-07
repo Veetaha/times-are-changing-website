@@ -15,6 +15,7 @@ import { MatExpansionModule       } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule       } from '@angular/material/paginator';
 import { MatTabsModule            } from '@angular/material/tabs';
+import { MatMenuModule            } from '@angular/material/menu';
 
 @NgModule({
     exports: [
@@ -31,7 +32,8 @@ import { MatTabsModule            } from '@angular/material/tabs';
         MatExpansionModule,
         MatProgressSpinnerModule,
         MatPaginatorModule,
-        MatTabsModule
+        MatTabsModule,
+        MatMenuModule
     ]
 })
 export class CommonMaterialModule { }

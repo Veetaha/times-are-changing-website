@@ -15,7 +15,7 @@ export class FormService {
         ...additionalValidators: ValidatorFn[]
     ) {
         return new FormControl(initialValue,[
-            Validators.max(limits.max - 1),
+            Validators.max(limits.max),
             Validators.min(limits.min),
             Validators.required,
             ...additionalValidators

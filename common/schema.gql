@@ -158,17 +158,20 @@ type Mutation {
   """
   deleteNewsRating(newsId: Float!): Boolean!
 
-  """Requires auth. Creates news on behalf of the client and returns it."""
+  """
+  Requires addmin rights. Creates news on behalf of the client and returns it.
+  """
   createNews(params: CreateNewsInput!): News!
 
   """
-  Requires auth. Updates news and returns it, but throws if news doesn't exist or client has no rights to mutate the news.
+  Requires admin rights. Updates news and returns it, but throws if news doesn't
+  exist or client has no rights to mutate the news.
   """
   updateNews(params: UpdateNewsInput!): News!
 
   """
-  Requires auth. Deletes the news by id and returns `true`, but throws if news
-  doesn't exist or client has no rights to mutate the news.
+  Requires admin rights. Deletes the news by id and returns `true`, but throws
+  if news doesn't exist or client has no rights to mutate the news.
   """
   deleteNewsById(id: Int!): Boolean!
 

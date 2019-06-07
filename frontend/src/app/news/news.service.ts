@@ -7,9 +7,10 @@ import * as Gql from '@app/gql/generated';
 export class NewsService {
 
     constructor(
-        private readonly createNewsGQL:  Gql.CreateNewsGQL,
-        private readonly getNewsByIdGQL: Gql.GetNewsByIdGQL,
-        private readonly getNewsPageGQL: Gql.GetNewsPageGQL
+        private readonly createNewsGQL:     Gql.CreateNewsGQL,
+        private readonly getNewsByIdGQL:    Gql.GetNewsByIdGQL,
+        private readonly getNewsPageGQL:    Gql.GetNewsPageGQL,
+        private readonly deleteNewsByIdGQL: Gql.DeleteNewsByIdGQL
     ) {}
 
     createNews(params: Gql.CreateNewsInput) {
@@ -30,4 +31,9 @@ export class NewsService {
             .pipe(map(v => v.data.getNewsPage));
     }
 
+    deleteNewsById(id: number) {
+        return this.deleteNewsByIdGQL
+            .mutate({id})
+            .pipe(map(v => v.data!));
+    }
 }

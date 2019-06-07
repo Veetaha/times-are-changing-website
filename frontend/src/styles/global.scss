@@ -1,4 +1,4 @@
-@import "theme.scss";
+@import "theme";
 
 // override bootstrap styles
 button:focus {
@@ -19,6 +19,7 @@ body, html {
     padding: 0;
 }
 
+// this class is set in `SnackBarService` for all snackbars
 .snack-bar {
     &-info {
         background-color: map-get($theme, snack-bar-info);
@@ -27,10 +28,17 @@ body, html {
         background-color: map-get($theme, snack-bar-success);
     }
     &-warning {
-        color: black;
         background-color: map-get($theme, snack-bar-warning);
     }
     &-error {
         background-color: map-get($theme, snack-bar-error);
     }
+}
+
+// fix td-text-editor for dark theming:
+td-text-editor {
+    color: black;
+    background: white;
+    display: block;
+    border-radius: 4px;
 }

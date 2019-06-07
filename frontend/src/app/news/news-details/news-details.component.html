@@ -4,6 +4,9 @@
         <mat-card-subtitle>created by {{news.creator.login}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+        <figure class="local-promo">
+            <img [src]="images.getImgUrlFromId(news.promoImgId)" class="local-promo__img">
+        </figure>
         <td-markdown [content]="news.body">
         </td-markdown>
     </mat-card-content>

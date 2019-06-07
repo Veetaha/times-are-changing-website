@@ -2,15 +2,23 @@
     height: 100%;
     width: 100%;
 }
-.local-content-root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.local-main {
-    padding: 0 10%;
-    flex-grow: 1;
-}
-.local-footer {
-    flex-shrink: 0;
+.local {
+    &-content-root {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    &-main {
+        padding: 0 10%;
+        flex-grow: 1;
+    }
+    &-footer {
+       flex-shrink: 0;
+    }
+    &-fab {
+        position: fixed;
+        bottom: 45px;
+        right:  45px;
+        z-index: 1;
+    }
 }

@@ -5,7 +5,7 @@ import { UserRole } from '@app/gql/generated';
 
 
 export interface UserRoleLimit {
-    readonly roles:      UserRole[];
+    readonly roles:      ReadonlyArray<UserRole>;
     readonly areAllowed: boolean;
 }
 

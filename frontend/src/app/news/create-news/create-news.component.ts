@@ -13,6 +13,7 @@ import { NewsService         } from '../news.service';
 import { NewsFormService     } from '../news-form.service';
 import { OpenNewsDetailsPage } from '../news-routing.actions';
 import { Success } from '@app/common/common.actions';
+import { ImageService } from '@app/common/image/image.service';
 
 
 @Component({
@@ -26,16 +27,17 @@ export class CreateNewsComponent extends AbstractRouteGuardedComponent {
 
     constructor(
         private readonly news: NewsService,
+        public readonly images: ImageService,
         route:     ActivatedRoute,
         store:     Store,
         newsForms: NewsFormService,
-        forms:     FormService
+        forms:     FormService,
     ) {
         super(route, store);
         this.form = forms.createFormGroup({
             title:      newsForms.createTitleFormControl(''),
             body:       newsForms.createBodyFormControl(''),
-            promoImgId: newsForms.createPromoImgIdFromControl('')
+            promoImgId: newsForms.createPromoImgIdFromControl(null)
         });
     }
 

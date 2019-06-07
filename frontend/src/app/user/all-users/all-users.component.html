@@ -5,7 +5,7 @@
     >
     <ng-container *tdDataTableTemplate="'role'; value as role">
         <span *ngIf="role === 'Admin'; else elseNotAdmin"
-            class="user-role"
+            class="local-user-role"
         > ADMIN
         </span>
         <ng-template #elseNotAdmin>
@@ -17,7 +17,7 @@
         <span flex>
         {{ creationDate | timeAgo }} 
         </span>
-        <small flex class="user-creation-date">
+        <small flex class="local-user-creation-date">
         <time [dateTime]="creationDate">
             ({{creationDate | date: 'd MMM y HH:mm'}})
         </time>

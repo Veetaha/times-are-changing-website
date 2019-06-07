@@ -1,30 +1,9 @@
-<button 
-    *appIfClientRole="createNewsRoleLimit"
-    mat-button
-    routerLink="/news/create"
->
-    Create news
-</button>
-<app-pagination [pageFetcher]="newsPageFetcher">
-<div *appPageBody="let news" layout="column">
-    <mat-card *ngFor="let newsItem of news; trackBy: trackById" 
-        routerLink="/news/{{newsItem.id}}"
-        class="local-news-card" 
+<app-pagination [pageFetcher]="newsPageFetcher" #paginator>
+<div *appPageBody="let newsArr" layout="column">
+    <app-paged-news *ngFor="let news of newsArr; trackBy: trackById"
+        [news]="news"
+        (deleteNews)="deleteNews(news)"
     >
-        <mat-card-header>
-            <mat-card-title>
-                {{newsItem.title}}
-            </mat-card-title>
-            <mat-card-subtitle>
-                published {{ newsItem.creationDate | timeAgo }}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-footer class="local-news-card-footer">
-            <mat-icon>thumb_up</mat-icon>{{newsItem.likesAmount}}
-            <mat-icon>thumb_down</mat-icon>{{newsItem.dislikesAmount}}
-            <mat-icon>comment</mat-icon>{{newsItem.commentsAmount}}
-        </mat-card-footer>
-    </mat-card>
-    
+    </app-paged-news>
 </div>
 </app-pagination>

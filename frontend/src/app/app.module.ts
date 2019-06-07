@@ -13,6 +13,7 @@ import { UserModule         } from './user/user.module';
 import { NavDrawerModule    } from './nav-drawer/nav-drawer.module';
 import { MediaModule        } from './media/media.module';
 import { NewsModule         } from './news/news.module';
+import { FabModule          } from './fab/fab.module';
 
 @NgModule({
     imports: [   
@@ -25,6 +26,7 @@ import { NewsModule         } from './news/news.module';
         MediaModule,
         NavDrawerModule,
         NewsModule,
+        FabModule,
     
         // keep it the last in import array because it contains "catch-all" route
         AppRoutingModule 

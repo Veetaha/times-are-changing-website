@@ -4,8 +4,8 @@ import * as MathJS from 'mathjs';
 import { swapItems } from '../array';
 
 /**
- * Represents a range of integers `[min, max)`, 
- * i.e. min bound is inclusive, but max bound is exclusive.
+ * Represents a range of integers `[min, max]`, 
+ * i.e. both `min` and `max` bound are inclusive.
  * 
  * Note that this class is immutable, create new instance if
  * you need another range bounds.
@@ -15,8 +15,8 @@ export class IntRange {
     /**
      * Returns the number of integers, covered by this range, or `max - min`
      */
-    get rangeLength() {
-        return this.max - this.min;
+    getRangeLength() {
+        return this.max - this.min + 1;
     }
 
     /**
@@ -24,7 +24,7 @@ export class IntRange {
      */
     public readonly min: number;
     /**
-     * Represents maximum range bound (exclusive)
+     * Represents maximum range bound (inclusive)
      */
     public readonly max: number;
 
@@ -33,7 +33,7 @@ export class IntRange {
      * have decimal parts and swaps them if `min > max`.
      * 
      * @param min minimum range bound (inclusive)
-     * @param max maximim range bound (exclusive)
+     * @param max maximim range bound (inclusive)
      */
     constructor(min: number, max: number) {
         if (min > max) {
@@ -46,18 +46,18 @@ export class IntRange {
     }
 
     /**
-     * Retuns `true` if suspect is integer and it goes inside this `IntRange`.
+     * Retuns `true` if suspect is an integer and it goes inside this `IntRange`.
      * @param suspect Value to test wheter it is inside this `IntRange`
      */
     includes(suspect: number) {
-        return Number.isInteger(suspect) && suspect >= this.min && suspect < this.max;
+        return Number.isInteger(suspect) && suspect >= this.min && suspect <= this.max;
     }
 
     /**
-     * Returns a random integer from the range `[min, max)`
+     * Returns a random integer from the range `[min, max]`
      */
     random() {
-        return MathJS.randomInt(this.min, this.max);
+        return MathJS.randomInt(this.min, this.max + 1);
     }
 
     /**
@@ -72,10 +72,10 @@ export class IntRange {
      * 
      * @param range The range of numbers genereted integers are taken from.
      * @param limit The maximum amount of numbers to generate, 
-     *              which is `max - min` by default
+     *              which is `getRangeLength()` by default
      */
-    *randomUniqueIntegers(limit = this.rangeLength){
-        const numbers = _.range(this.min, this.max);
+    *randomUniqueIntegers(limit = this.getRangeLength()){
+        const numbers = _.range(this.min, this.max + 1);
         for (let i = 0; i < numbers.length && i < limit; ++i) {
             swapItems(numbers, i, MathJS.randomInt(i, numbers.length));
             yield numbers[i];

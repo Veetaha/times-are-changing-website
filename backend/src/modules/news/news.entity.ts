@@ -10,12 +10,16 @@ import {
     Column
 } from 'typeorm';
 
+import { imgIdSchema   } from '@common/img-id-schema';
 import { User          } from '@modules/user/user.entity';
-import { StringColumn  } from '@utils/orm/decorators/string-column.decorator';
+import { StringColumn, StringColumnWithFormat  } from '@utils/orm/decorators/string-column.decorator';
 import { StringField, DateField, IntField } 
 from '@utils/gql/decorators/explicit-type-field.decorator';
 
 import { limits } from '@common/constants';
+import { ValidateIfPresent } from '@utils/validation/validate-if-present.decorator';
+import { Validations } from '@utils/validation/validations.decorator';
+import { Matches } from 'class-validator';
 
 @ObjectType()
 @Entity()
@@ -58,8 +62,11 @@ export class News {
     @StringColumn(limits.news.body) 
     body!: string;
     
-        
-    @StringColumn(limits.imgId, { nullable: true })
+    @Validations(
+        Matches(imgIdSchema) as PropertyDecorator,
+        ValidateIfPresent
+    )    
+    @StringColumnWithFormat(imgIdSchema, limits.imgId.max, { nullable: true })
     @StringField({
         nullable: true,
         description: 

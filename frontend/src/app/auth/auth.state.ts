@@ -2,7 +2,9 @@ import { Nullable } from 'ts-typedefs';
 import { tap, skip, map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { State, Selector, StateContext, Action, NgxsOnInit, UpdateState, Store } from '@ngxs/store';
+import { 
+    State, Selector, StateContext, Action, NgxsOnInit, UpdateState, Store 
+} from '@ngxs/store';
 
 
 import { UserRole } from '@app/gql/generated';
@@ -15,7 +17,8 @@ import { ClientAndToken, Client  } from './interfaces';
 import { SignIn, SignUp, SignOut } from './auth.actions';
 import { AuthService             } from './auth.service';
 import { 
-    AuthStateModel as StateModel, createFetchingClientSnap, createAuthSnap, stableUnAuthSnap
+    AuthStateModel as StateModel, createFetchingClientSnap, 
+    createAuthSnap, stableUnAuthSnap
 } from './auth.model';
 
 
