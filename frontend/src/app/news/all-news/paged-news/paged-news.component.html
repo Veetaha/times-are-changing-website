@@ -1,5 +1,10 @@
-<mat-card class="local-card">
-    <mat-card-header routerLink="/news/{{news.id}}">
+<mat-card class="local-card" [class.local-card--emphasized]="emphasizeNews"
+    (mouseover)="emphasizeNews = true"
+    (mouseout)="emphasizeNews = false"
+>
+    <mat-card-header
+        routerLink="/news/{{news.id}}"  
+    >
         <mat-card-title>
             {{news.title}}
         </mat-card-title>

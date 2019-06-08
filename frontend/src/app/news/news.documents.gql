@@ -44,3 +44,13 @@ mutation createNews($params: CreateNewsInput!) {
 mutation deleteNewsById($id: Int!) {
     deleteNewsById(id: $id) 
 }
+
+mutation rateNews($newsId: Int!, $hasLiked: Boolean!) {
+    rateNews(newsId: $newsId, hasLiked: $hasLiked) {
+        hasLiked
+    }
+}
+
+mutation deleteNewsRating($newsId: Int!) {
+    deleteNewsRating(id: $newsId)
+}

@@ -11,12 +11,11 @@
         </td-markdown>
     </mat-card-content>
 </mat-card>
+<app-rating 
+    [rateful]="news"
+    [ratingUpdater]="newsRatingUpdater"
+></app-rating>
 <!-- TODO: optimize comment creation to remove whole page refetch -->
-<app-create-news-comment
-    [newsId]="news.id"
-    (createdComment)="allComments.refetchNewsCommentsPage()"
-> 
-</app-create-news-comment>
 <app-all-news-comments #allComments
     [newsId]="news.id"
 ></app-all-news-comments>

@@ -1,4 +1,4 @@
-<ng-container *veeLet="canClientMutateComment$ | async as canClientMutateComment">
+<ng-container *veeLet="client$ | async as client">
 
 
 <mat-card>
@@ -14,7 +14,7 @@
                 (updated {{comment.lastUpdateDate | timeAgo}})
             </small>
         </mat-card-subtitle>
-        <ng-container *ngIf="canClientMutateComment">
+        <ng-container *ngIf="canClientMutateComment(client)">
             <div class="local-mutate-menu">
                 <button mat-icon-button 
                     [matMenuTriggerFor]="menu" 

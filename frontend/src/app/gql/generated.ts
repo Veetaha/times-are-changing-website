@@ -108,7 +108,10 @@ export type Mutation = {
     updateUser?: Maybe<User>;
     /** Requires auth. Creates or updates existing rating the client gave to the news. */
     rateNews: NewsRating;
-    /** Requires auth. Deletes rating instance on behalf of the client. Returns `true` if deletion was successful. */
+    /** Requires auth. Deletes rating instance on behalf of the client. Returns `true`
+     * if deletion was successful. Argument `id` is the idetifier of the appropriate
+     * news that target rating was attached to.
+     */
     deleteNewsRating: Scalars["Boolean"];
     /** Requires addmin rights. Creates news on behalf of the client and returns it. */
     createNews: News;
@@ -154,7 +157,7 @@ export type MutationRateNewsArgs = {
 };
 
 export type MutationDeleteNewsRatingArgs = {
-    newsId: Scalars["Float"];
+    id: Scalars["Int"];
 };
 
 export type MutationCreateNewsArgs = {
@@ -696,6 +699,24 @@ export type DeleteNewsByIdMutation = { __typename?: "Mutation" } & Pick<
     "deleteNewsById"
 >;
 
+export type RateNewsMutationVariables = {
+    newsId: Scalars["Int"];
+    hasLiked: Scalars["Boolean"];
+};
+
+export type RateNewsMutation = { __typename?: "Mutation" } & {
+    rateNews: { __typename?: "NewsRating" } & Pick<NewsRating, "hasLiked">;
+};
+
+export type DeleteNewsRatingMutationVariables = {
+    newsId: Scalars["Int"];
+};
+
+export type DeleteNewsRatingMutation = { __typename?: "Mutation" } & Pick<
+    Mutation,
+    "deleteNewsRating"
+>;
+
 export type PagedUserFragment = { __typename?: "User" } & Pick<
     User,
     "role" | "name" | "login" | "creationDate"
@@ -958,6 +979,38 @@ export class DeleteNewsByIdGQL extends Apollo.Mutation<
     DeleteNewsByIdMutationVariables
 > {
     document = DeleteNewsByIdDocument;
+}
+export const RateNewsDocument = gql`
+    mutation rateNews($newsId: Int!, $hasLiked: Boolean!) {
+        rateNews(newsId: $newsId, hasLiked: $hasLiked) {
+            hasLiked
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class RateNewsGQL extends Apollo.Mutation<
+    RateNewsMutation,
+    RateNewsMutationVariables
+> {
+    document = RateNewsDocument;
+}
+export const DeleteNewsRatingDocument = gql`
+    mutation deleteNewsRating($newsId: Int!) {
+        deleteNewsRating(id: $newsId)
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class DeleteNewsRatingGQL extends Apollo.Mutation<
+    DeleteNewsRatingMutation,
+    DeleteNewsRatingMutationVariables
+> {
+    document = DeleteNewsRatingDocument;
 }
 export const GetUsersPageDocument = gql`
     query getUsersPage($params: UserPaginationInput!) {

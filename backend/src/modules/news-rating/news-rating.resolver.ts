@@ -2,6 +2,7 @@ import { GraphQLDatabaseLoader } from 'typeorm-loader';
 import { GraphQLResolveInfo    } from 'graphql';
 import { Root, Resolver, Query, Args, Mutation, ResolveProperty, Info } from '@nestjs/graphql';
 
+import { ArgsId      } from '@utils/gql/id/args-id.decorator';
 import { Auth        } from '@modules/auth/auth.decorator';
 import { User        } from '@modules/user/user.entity';
 import { Client      } from '@modules/auth/client.decorator';
@@ -69,9 +70,10 @@ export class NewsRatingResolver {
     @Mutation(_returns => Boolean, {
         description:
         "Requires auth. Deletes rating instance on behalf of the client. " +
-        "Returns `true` if deletion was successful."
+        "Returns `true` if deletion was successful. Argument `id` is the idetifier " +
+        "of the appropriate news that target rating was attached to."
     })
-    async deleteNewsRating(@Client {login}: User, @Args('newsId') newsId: number) {
+    async deleteNewsRating(@Client {login}: User, @ArgsId newsId: number) {
         return this.newsRatings.delete(login, newsId);
     }
 }

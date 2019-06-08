@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 import { ImageService } from '@app/common/image/image.service';
 
@@ -12,13 +12,17 @@ import { UserRole } from '@app/gql/generated';
     styleUrls:  ['./paged-news.component.scss']
 })
 export class PagedNewsComponent {
+    @Input() news!: PagedNews;
+    @Output() deleteNews = new EventEmitter<undefined>();
+
     editAndDeleteNewsRoleLimit: UserRoleLimit = {
         areAllowed: true, 
         roles: [UserRole.Admin]  
     };
+    emphasizeNews = false;
 
-    @Input() news!: PagedNews;
-    @Output() deleteNews = new EventEmitter<undefined>();
+    @ViewChild('card',   { read: ElementRef }) card!:   ElementRef<HTMLElement>;
+    @ViewChild('header', { read: ElementRef }) header!: ElementRef<HTMLElement>;
 
     constructor(
         public readonly images: ImageService

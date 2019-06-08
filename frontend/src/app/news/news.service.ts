@@ -7,11 +7,25 @@ import * as Gql from '@app/gql/generated';
 export class NewsService {
 
     constructor(
-        private readonly createNewsGQL:     Gql.CreateNewsGQL,
-        private readonly getNewsByIdGQL:    Gql.GetNewsByIdGQL,
-        private readonly getNewsPageGQL:    Gql.GetNewsPageGQL,
-        private readonly deleteNewsByIdGQL: Gql.DeleteNewsByIdGQL
+        private readonly rateNewsGQL:         Gql.RateNewsGQL,
+        private readonly createNewsGQL:       Gql.CreateNewsGQL,
+        private readonly getNewsByIdGQL:      Gql.GetNewsByIdGQL,
+        private readonly getNewsPageGQL:      Gql.GetNewsPageGQL,
+        private readonly deleteNewsByIdGQL:   Gql.DeleteNewsByIdGQL,
+        private readonly deleteNewsRatingGQL: Gql.DeleteNewsRatingGQL
     ) {}
+
+    deleteNewsRating(newsId: number) {
+        return this.deleteNewsRatingGQL
+            .mutate({newsId})
+            .pipe(map(v => v.data!));
+    }
+
+    rateNews(newsId: number, hasLiked: boolean) {
+        return this.rateNewsGQL
+            .mutate({newsId, hasLiked})
+            .pipe(map(v => v.data!.rateNews));
+    }
 
     createNews(params: Gql.CreateNewsInput) {
         return this.createNewsGQL
@@ -36,4 +50,5 @@ export class NewsService {
             .mutate({id})
             .pipe(map(v => v.data!));
     }
+
 }

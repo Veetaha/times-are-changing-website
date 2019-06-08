@@ -3,6 +3,9 @@
     width: 100%;
 }
 .local {
+    &-body {
+        height: 100%;
+    }
     &-content-root {
         display: flex;
         flex-direction: column;

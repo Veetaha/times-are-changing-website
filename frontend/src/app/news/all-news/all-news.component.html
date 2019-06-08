@@ -3,6 +3,7 @@
     <app-paged-news *ngFor="let news of newsArr; trackBy: trackById"
         [news]="news"
         (deleteNews)="deleteNews(news)"
+        class="local-paged-news"
     >
     </app-paged-news>
 </div>

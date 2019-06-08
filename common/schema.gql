@@ -154,9 +154,11 @@ type Mutation {
   ): NewsRating!
 
   """
-  Requires auth. Deletes rating instance on behalf of the client. Returns `true` if deletion was successful.
+  Requires auth. Deletes rating instance on behalf of the client. Returns `true`
+  if deletion was successful. Argument `id` is the idetifier of the appropriate
+  news that target rating was attached to.
   """
-  deleteNewsRating(newsId: Float!): Boolean!
+  deleteNewsRating(id: Int!): Boolean!
 
   """
   Requires addmin rights. Creates news on behalf of the client and returns it.

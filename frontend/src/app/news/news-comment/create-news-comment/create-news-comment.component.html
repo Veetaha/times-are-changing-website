@@ -9,14 +9,17 @@
         <form
             [formGroup]="form"
             (ngSubmit)="submitForm()"
+            class="local-form"
         >   
             <td-text-editor 
                 formControlName="body" 
-            ></td-text-editor>
+                class="local-form__control local-form__editor"
+            >
+            </td-text-editor>
             
             <button mat-raised-button
                 [disabled]="form.invalid"
-
+                class="local-form__control"
                 type="submit"
                 color="primary"
             > Submit

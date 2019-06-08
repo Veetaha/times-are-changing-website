@@ -84,7 +84,7 @@ export class NewsCommentService {
      * @returns `true` if comment was successfully deleted, `false` otherwise.
      */
     async delete(id: number) {
-        return this.orm.delete(this.repo, {id});
+        return this.orm.removeOne(this.repo, {id});
     }
 
     /**

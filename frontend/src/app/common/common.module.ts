@@ -13,6 +13,7 @@ import { CommonCovalentModule } from './common-covalent.module';
 import { UploadImageComponent } from './image/upload-image/upload-image.component';
 import { SnackBarComponent    } from './snack-bar/snack-bar.component';
 import { PaginationModule     } from './pagination/pagination.module';
+import { RatingComponent      } from './rating/rating.component';
 
 const reexports = [
     VeeModule,
@@ -30,12 +31,14 @@ const reexports = [
     imports: reexports,
     declarations: [
         UploadImageComponent,
-        SnackBarComponent
+        SnackBarComponent,
+        RatingComponent
     ],
     exports: [
         ...reexports,
         UploadImageComponent,
-        SnackBarComponent
+        SnackBarComponent,
+        RatingComponent
     ],
     entryComponents: [
         SnackBarComponent

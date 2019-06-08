@@ -12,22 +12,26 @@
         <button mat-icon-button td-menu-button tdLayoutToggle>
             <mat-icon>menu</mat-icon>
         </button>
-
         <app-dashboard td-toolbar-content></app-dashboard>
-
-        <mat-progress-bar
-            [mode]="isAwaitingResponses ? 'indeterminate' : 'determinate'"
-            color="primary"
-            value="0"
-        ></mat-progress-bar>
-        <div class="local-content-root">
-            <app-fab class="local-fab"></app-fab>
-            <main class="local-main">
-                <router-outlet></router-outlet>
-            </main>
-            <footer class="local-footer">
-                <app-footer></app-footer>
-            </footer>
+        <div class="local-body">
+            <!-- 
+                TODO: attach progress bar to toolbar so that it isn't get
+                left when scrolling the page
+            -->
+            <mat-progress-bar
+                [mode]="isAwaitingResponses ? 'determinate' : 'determinate'"
+                color="primary"
+                value="0"
+            ></mat-progress-bar>
+            <div class="local-content-root">
+                <app-fab class="local-fab"></app-fab>
+                <main class="local-main">
+                    <router-outlet></router-outlet>
+                </main>
+                <footer class="local-footer">
+                    <app-footer></app-footer>
+                </footer>
+            </div>
         </div>
     </td-layout-nav>
 

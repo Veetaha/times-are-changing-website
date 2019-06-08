@@ -8,6 +8,10 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 export type FileIdChangeHandler = (fileId: string) => void;
 
+/**
+ * TODO: add `startedUpload` and `completedUpload` events in order to prevent
+ * submiting forms while uploading images.
+ */
 @Component({
     selector:    'app-upload-image',
     templateUrl: './upload-image.component.html',

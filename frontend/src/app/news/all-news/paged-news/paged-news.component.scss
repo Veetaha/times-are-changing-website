@@ -1,7 +1,13 @@
+@import 'variables';
+
 .local {
     &-card {
         margin: 15px;
 
+        &--emphasized {
+            transform: scale(1.02);
+            transition: transform 150ms linear;
+        }
         &-footer {
             display: flex;
             justify-content: left;
@@ -20,6 +26,7 @@
         margin-right: 0;
 
         &__img {
+            display: block;
             max-width: 100%;
             max-height: 300px;
         }

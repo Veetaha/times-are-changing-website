@@ -1,0 +1,26 @@
+<ng-container *veeLet="isAwaitingResponses$ | async as isAwaitingResponses">
+<ng-container *veeLet="client$ | async as client">
+
+
+<button mat-raised-button 
+    aria-label="Set like"
+    class="local-btn"
+    [class.local-btn--active]="isButtonActive(true)"
+    [disabled]="client == null || isAwaitingResponses"
+    (click)="onRatingBtnClicked(true)"
+>
+    <mat-icon>thumb_up</mat-icon>{{rateful.likesAmount}}
+</button>
+<button mat-raised-button 
+    aria-label="Set dislike"
+    class="local-btn"
+    [class.local-btn--active]="isButtonActive(false)"
+    [disabled]="client == null || isAwaitingResponses"
+    (click)="onRatingBtnClicked(false)"
+>
+    <mat-icon>thumb_down</mat-icon>{{rateful.dislikesAmount}}
+</button>
+
+
+</ng-container>
+</ng-container>

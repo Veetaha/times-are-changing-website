@@ -1,0 +1,11 @@
+@import 'variables';
+
+.local {
+    &-btn {
+        color: mat-color(map-get($theme, primary))
+
+        &--active {
+            color: mat-color(map-get($theme, accent))
+        }
+    }
+}
