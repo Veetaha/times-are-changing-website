@@ -3,11 +3,19 @@
 
 <mat-card>
     <mat-card-header>
-        <mat-card-title>
-            {{comment.commentator.name}}
+        <mat-card-title 
+            routerLink="/users/{{comment.commentator.login}}"
+            class="local-commentator" 
+        >
+            <app-user-avatar 
+                [avatarImgId]="comment.commentator.avatarImgId"
+                class="local-commentator__avatar"
+            >
+            </app-user-avatar>
+            <span class="local-commentator__name">{{comment.commentator.name}}</span>
         </mat-card-title>
         <mat-card-subtitle>
-            Commented {{comment.creationDate | timeAgo}}
+            commented {{comment.creationDate | timeAgo}}
             <small *ngIf="comment.creationDate !== comment.lastUpdateDate"
                 class="local-last-update-date"
             >  

@@ -1,0 +1,27 @@
+<ng-container *veeLet="user$ | async as user">
+
+<div class="local-root">
+    <div class="local-profile-back">
+        <app-user-avatar 
+            [avatarImgId]="user.avatarImgId" 
+            class="local-user-avatar"
+        ></app-user-avatar>
+        <span class="local-user-name">{{user.name}}</span>
+        <span class="local-user-login">{{user.login}}</span>
+        <app-user-role [role]="user.role" class="local-user-role"></app-user-role>
+    </div>
+    <ul class="local-profile-details">
+        <li class="local-user-prop">
+            <span class="local-user-prop__descr">Registered</span>
+            <time>{{user.creationDate | date: dateFormat}}</time> 
+            <small class="local-time-ago">({{user.creationDate | timeAgo}})</small>
+        </li> 
+        <li class="local-user-prop">
+            <span class="local-user-prop__descr">Last profile update</span>
+            <time>{{user.lastUpdateDate | date: dateFormat}}</time> 
+            <small class="local-time-ago">({{user.lastUpdateDate | timeAgo}})</small>
+        </li> 
+    </ul>
+</div>
+
+</ng-container>

@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'mixins';
+
+.local {    
+    &-profile-back {
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("/assets/default-user-profile-back.jpg");
+        background-size: cover;
+        @include vertical-padding(20px);
+    }
+    &-user-avatar {
+        display: block;
+        margin: 20px;
+        width: 150px;
+    }
+    &-user-name {
+        font-weight: bold;
+        @include vertical-margin(4px);
+    }
+    &-user-login {
+        font-size: 0.7em;
+    }
+    &-user-role {
+        font-weight: bold;
+    }
+    &-profile-details {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+    }
+    &-user-prop {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        @include vertical-margin(15px);
+
+        &__descr {
+            font-weight: bold;
+            color: mat-color(map-get($theme, primary), 300)
+        }
+    }
+    &-local-time-ago {
+        color: map-get($theme, muted-text);
+    }
+}

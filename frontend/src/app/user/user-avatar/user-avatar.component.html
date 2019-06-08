@@ -1,0 +1,15 @@
+<figure class="local-avatar">
+    <img *ngIf="userLogin != null; else elseDontProvideLink"
+        routerLink="/users/{{userLogin}}"
+        [src]="userAvatarUrl"
+        class="local-avatar__img" 
+        alt="User avatar"
+    />
+    <ng-template #elseDontProvideLink>
+        <img 
+            [src]="userAvatarUrl"
+            class="local-avatar__img" 
+            alt="User avatar"
+        />
+    </ng-template>
+</figure>

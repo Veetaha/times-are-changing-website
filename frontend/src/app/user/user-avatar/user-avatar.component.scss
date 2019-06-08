@@ -1,0 +1,18 @@
+@import 'variables';
+
+.local {
+
+    &-avatar {
+        width: fit-content;
+        overflow: hidden;
+        margin: 0;
+
+        &__img {
+            display: block;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+    }
+
+}

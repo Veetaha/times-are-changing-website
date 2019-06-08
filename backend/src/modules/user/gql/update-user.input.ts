@@ -7,7 +7,7 @@ import { StringField       } from '@utils/gql/decorators/explicit-type-field.dec
 import { ValidateAs        } from '@utils/validation/validations.decorator';
 
 @InputType()
-export class UpdateUserInput implements NullableProps<User> {
+export class UpdateMeInput implements NullableProps<User> {
     @ValidateAs(User, 'name')
     @ValidateIfPresent
     @StringField({

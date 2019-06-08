@@ -26,14 +26,13 @@ export class UploadImageComponent implements ControlValueAccessor {
     /** underlying dialog widget 3d-party implementation */
     @ViewChild('ucWidget') ucWidget!: UcWidgetComponent | UcWidgetCustomComponent;
 
-    imageName: Nullable<string> = null;
-
     /**
      * If `null`, no button is displayed, otherwise displays a primary material
      * button with an icon and `buttonLabel` as its text content.
      */
     @Input() buttonLabel: Nullable<string> = null;
-
+    
+    imageName: Nullable<string> = null;
     uploadcarePublicApiKey: string;
     /** Current image id */
     imgId!: string;

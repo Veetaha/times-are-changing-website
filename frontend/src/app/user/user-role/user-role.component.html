@@ -1,0 +1,6 @@
+<span *ngIf="role === 'Admin'; else elseNotAdmin" class="local-user-role"> 
+    ADMIN
+</span>
+<ng-template #elseNotAdmin>
+    <mat-icon>person</mat-icon>
+</ng-template>

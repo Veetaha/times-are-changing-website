@@ -1,0 +1,25 @@
+@mixin scale-on-hover(
+    $scale-factor: 1.05, 
+    $transition-duration: 100ms, 
+    $timing-function: ease-out
+) {
+    &:hover {
+        transition: {
+            timing-function: $timing-function;
+            duration:        $transition-duration;
+        }
+        transform: scale($scale-factor, $scale-factor);
+    }
+}
+@mixin shape-circle($radius) {
+    @include shape-square(2 * $radius);
+    border-radius: 50%;
+}
+@mixin shape-square($size) {
+    width:  $size;
+    height: $size;
+}
+@mixin horizontal-margin($size)  { margin:  { left: $size; right:  $size; } }
+@mixin horizontal-padding($size) { padding: { left: $size; right:  $size; } }
+@mixin vertical-margin($size)    { margin:  { top:  $size; bottom: $size; } }
+@mixin vertical-padding($size)   { padding: { top:  $size; bottom: $size; } }

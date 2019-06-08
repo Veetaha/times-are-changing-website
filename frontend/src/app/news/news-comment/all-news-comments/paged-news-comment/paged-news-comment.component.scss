@@ -1,6 +1,19 @@
 @import 'variables';
+@import 'mixins';
 
 .local {
+    &-commentator {
+        display: flex;
+        align-items: center;
+
+        &__avatar {
+            width: 47px;
+        }
+        &__name {
+            margin-left: 15px;
+        }
+    }
+
     &-last-update-date {
         color: map-get($theme, muted-text)
     }

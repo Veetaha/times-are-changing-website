@@ -2,7 +2,7 @@
 <ng-container *veeLet="client$ | async as client">
 
 
-<button mat-raised-button 
+<button mat-button 
     aria-label="Set like"
     class="local-btn"
     [class.local-btn--active]="isButtonActive(true)"
@@ -11,7 +11,7 @@
 >
     <mat-icon>thumb_up</mat-icon>{{rateful.likesAmount}}
 </button>
-<button mat-raised-button 
+<button mat-button 
     aria-label="Set dislike"
     class="local-btn"
     [class.local-btn--active]="isButtonActive(false)"

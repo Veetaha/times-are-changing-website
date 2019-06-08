@@ -1,0 +1,20 @@
+<ng-container *veeLet="client$ | async as client">
+<ng-container *ngIf="client != null">
+
+<button mat-button 
+    routerLink="users/{{client.login}}"
+>
+    <div class="local-root">
+        <app-user-avatar class="local-client-avatar"
+            [avatarImgId]="client.avatarImgId"
+            [userLogin]="client.login"
+        ></app-user-avatar>
+        <span class="local-client-name">
+            {{client.name}}
+        </span>
+    </div>
+</button>
+
+
+</ng-container>
+</ng-container>

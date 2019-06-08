@@ -1,27 +1,43 @@
+<ng-container *veeLet="client$ | async as client">
+
+
 <app-pagination [pageFetcher]="usersPageFetcher">
     <td-data-table *appPageBody="let users" 
         [data]="users"
         [columns]="tableColumnsConfig"
+        [clickable]="true"
+        (rowClick)="openUserProfilePage($event.row.login)"
     >
     <ng-container *tdDataTableTemplate="'role'; value as role">
-        <span *ngIf="role === 'Admin'; else elseNotAdmin"
-            class="local-user-role"
-        > ADMIN
-        </span>
-        <ng-template #elseNotAdmin>
-            <mat-icon>person</mat-icon>
-        </ng-template>
-
+        <app-user-role [role]="role"></app-user-role>
     </ng-container>
-    <div *tdDataTableTemplate="'creationDate'; value as creationDate" layout="row" flex>
-        <span flex>
+    <div *tdDataTableTemplate="'user'; row as user" 
+        class="local-user-col"
+        [class.local-user-col--client]="client?.login === user.login"
+        routerLink="/users/{{user.login}}"
+    >
+        <app-user-avatar 
+            [avatarImgId]="user.avatarImgId"
+            class="local-user-col__avatar"
+        ></app-user-avatar>
+        <bdi class="local-user-col__name">{{user.name}}</bdi>
+        <bdi class="local-user-col__login">({{user.login}})</bdi>
+    </div>
+
+    <div *tdDataTableTemplate="'creationDate'; value as creationDate" 
+        class="local-date-col"
+    >
+        <span>
         {{ creationDate | timeAgo }} 
         </span>
-        <small flex class="local-user-creation-date">
+        <small class="local-user-creation-date">
         <time [dateTime]="creationDate">
-            ({{creationDate | date: 'd MMM y HH:mm'}})
+            ({{creationDate | date: dateFormat}})
         </time>
         </small>
     </div>
     </td-data-table>
 </app-pagination>
+
+
+</ng-container>

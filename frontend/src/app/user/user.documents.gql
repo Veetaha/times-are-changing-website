@@ -1,15 +1,31 @@
 fragment PagedUser on User {
+    login
+    creationDate
     role
     name
-    login
     avatarImgId: avatarImgIdOrDefault
-    creationDate
 }
 
+# ------------------- Queries -------------------
 
 query getUsersPage($params: UserPaginationInput!) {
     getUsersPage(params: $params) {
         total
         data { ...PagedUser }
     }
+}
+
+# `EntireUser` is defined in `auth.documents`
+query getUserByLogin($login: String!) {
+    getUserByLogin(login: $login) { ...EntireUser } 
+}
+
+# ------------------- Mutations -------------------
+
+mutation updateMe($params: UpdateMeInput!) {
+    updateMe(params: $params) { ...EntireUser }
+}
+
+mutation updateUser($params: UpdateUserInput!) {
+    updateUser(params: $params) { ...EntireUser }
 }

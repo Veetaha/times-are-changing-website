@@ -3,6 +3,10 @@
     width: 100%;
 }
 .local {
+    &-dashboard {
+        display: block;
+        width: 100%;
+    }
     &-body {
         height: 100%;
     }

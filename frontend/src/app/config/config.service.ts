@@ -19,14 +19,15 @@ type NgxsModuleOptions = NonNullable<Parameters<(typeof NgxsModule)['forRoot']>[
 export class ConfigService {
 
     static readonly isDevelopmentMode = isDevelopmentMode;
-    
+
     readonly uploadcarePublicApiKey = 'ff0c27dbc59005dd125f';
     readonly snackBarOpts: MatSnackBarConfig = {
         duration: 4000,
         horizontalPosition: 'left',
         verticalPosition: 'bottom',
     };
-    
+    readonly dateFormat = 'd MMM y HH:mm'; // https://angular.io/api/common/DatePipe
+
     private readonly httpLinkHandler: HttpLinkHandler;
 
     

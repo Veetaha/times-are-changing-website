@@ -4,12 +4,14 @@ import { Store      } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { isValidId    } from '@common/utils/validations';
-import { Warning      } from '@app/error/error.actions';
-import { OpenHomePage } from '@app/app.actions';
+import { isValidId } from '@common/utils/validations';
+import { CriticalError } from '@app/error/error.actions';
 
 import { NewsService } from '../news.service';
 
+/**
+ * Prefetches news data before navigating to the news details page.
+ */
 @Injectable({ providedIn: 'root' })
 export class NewsDetailsResolverService implements Resolve<void> {
     constructor(
@@ -20,15 +22,14 @@ export class NewsDetailsResolverService implements Resolve<void> {
     resolve(route: ActivatedRouteSnapshot): void | Observable<any> {
         const newsId = parseInt(route.paramMap.get('id')!, 10);
         return !isValidId(newsId)
-            ? this.failWithWarning(`Invalid news id '${newsId}'`)
+            ? this.failWithMessage(`Invalid news id '${newsId}'`)
             : this.news.getNewsById(newsId).pipe(map(news => news == null 
-                ? this.failWithWarning(`Failed to fetch news #${newsId}`)
+                ? this.failWithMessage(`Failed to fetch news #${newsId}`)
                 : news
             ));        
     }
 
-    private failWithWarning(warningMessage: string) {
-        this.store.dispatch(new Warning(warningMessage));
-        this.store.dispatch(OpenHomePage);
+    private failWithMessage(message: string) {
+        this.store.dispatch(new CriticalError(message));
     }
 }

@@ -1,1 +1,4 @@
-export { PagedUserFragment as PagedUser } from '@app/gql/generated';
+export { 
+    PagedUserFragment as PagedUser,
+    EntireUserFragment as EntireUser
+} from '@app/gql/generated';

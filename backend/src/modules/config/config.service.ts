@@ -18,7 +18,7 @@ implements TypeOrmOptionsFactory, GqlOptionsFactory, JwtOptionsFactory, AuthOpti
     static readonly isDevelopmentMode = process.env.NODE_ENV !== 'production';
 
     readonly default = {
-        user: { avatarImgId: 'default-user-avatar-image-id' },
+        user: { avatarImgId: '0fadeccd-aede-431b-acf1-b0626b5a5586' },
         news: { promoImgId:  'e1461841-ddf7-4132-b4a7-243ab54b2380' }
     } as const;
 

@@ -7,11 +7,11 @@ import { Client               } from '@modules/auth/client.decorator';
 
 import { UserPage             } from './gql/user-page.object';
 import { UserPaginationInput  } from './gql/user-pagination.input';
-import { UpdateUserInput      } from './gql/update-user.input';
+import { UpdateMeInput      } from './gql/update-user.input';
 import { UserRole             } from './user-role.enum';
 import { User                 } from './user.entity';
 import { UserService          } from './user.service';
-import { AdminUpdateUserInput } from './gql/admin-update-user.input';
+import { UpdateUserInput } from './gql/admin-update-user.input';
 
 @Resolver(User)
 export class UserResolver {
@@ -55,7 +55,7 @@ export class UserResolver {
     @Mutation(_returns => User, {
         description: "Requires auth. Updates current client data and returns it."
     })
-    async updateMe(@Client client: User, @Args('params') params: UpdateUserInput){
+    async updateMe(@Client client: User, @Args('params') params: UpdateMeInput){
         return this.users.update(client.login, params);
     }
 
@@ -66,7 +66,7 @@ export class UserResolver {
         "Requires 'Admin' rights. Updates user by the given login and returns it, " +
         "but retuns `null` if there nothing was found for the given login."
     })
-    async updateUser(@Args('params') {login, ...upd}: AdminUpdateUserInput) {
+    async updateUser(@Args('params') {login, ...upd}: UpdateUserInput) {
         return this.users.update(login, upd);
     }
 }

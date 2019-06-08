@@ -1,12 +1,39 @@
 @import 'variables';
+@import 'mixins';
 
 .local {
-    
-    &-user-role {
-        font-size: 0.7em;
-    }
 
     &-user-creation-date {
         color: map-get($theme, muted-text)
+    }
+
+    &-user-col {
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+        flex-wrap: wrap;
+
+        &__avatar { 
+            display: block;
+            width: 47px;
+            margin: 8px;
+        }
+        &__name {  
+            @include horizontal-margin(15px);
+        }
+        &__login {
+            font-size: 0.8em;
+            color: map-get($theme, muted-text);
+        }
+        &--client {
+            font-weight: bold;
+        }
+    }
+
+    &-date-col {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
     }
 }

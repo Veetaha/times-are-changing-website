@@ -10,16 +10,6 @@ export type Scalars = {
     DateTime: string;
 };
 
-export type AdminUpdateUserInput = {
-    /** New user name. */
-    name?: Maybe<Scalars["String"]>;
-    /** New user avatar id. This is currently an uploadcare image uiud. */
-    avatarImgId?: Maybe<Scalars["String"]>;
-    /** Defines the login of the user to update */
-    login: Scalars["String"];
-    role?: Maybe<UserRole>;
-};
-
 /** Filter input parameters for `Boolean` type. */
 export type BooleanFilterInput = {
     /** Defines the mode (logical operator) to unite all filter conditions (`And` by default). */
@@ -144,11 +134,11 @@ export type MutationSignUpArgs = {
 };
 
 export type MutationUpdateMeArgs = {
-    params: UpdateUserInput;
+    params: UpdateMeInput;
 };
 
 export type MutationUpdateUserArgs = {
-    params: AdminUpdateUserInput;
+    params: UpdateUserInput;
 };
 
 export type MutationRateNewsArgs = {
@@ -460,6 +450,13 @@ export type StringFilterInput = {
     nin?: Maybe<Array<Scalars["String"]>>;
 };
 
+export type UpdateMeInput = {
+    /** New user name. */
+    name?: Maybe<Scalars["String"]>;
+    /** New user avatar id. This is currently an uploadcare image uiud. */
+    avatarImgId?: Maybe<Scalars["String"]>;
+};
+
 export type UpdateNewsCommentInput = {
     id: Scalars["Int"];
     body: Scalars["String"];
@@ -477,6 +474,9 @@ export type UpdateUserInput = {
     name?: Maybe<Scalars["String"]>;
     /** New user avatar id. This is currently an uploadcare image uiud. */
     avatarImgId?: Maybe<Scalars["String"]>;
+    /** Defines the login of the user to update */
+    login: Scalars["String"];
+    role?: Maybe<UserRole>;
 };
 
 export type User = {
@@ -564,9 +564,9 @@ export type UserSortInput = {
     lastUpdateDate?: Maybe<SortInput>;
     role?: Maybe<SortInput>;
 };
-export type EntireUserFragment = { __typename: "User" } & Pick<
+export type EntireUserFragment = { __typename?: "User" } & Pick<
     User,
-    "creationDate" | "lastUpdateDate" | "role" | "name" | "login"
+    "login" | "creationDate" | "lastUpdateDate" | "role" | "name"
 > & { avatarImgId: User["avatarImgIdOrDefault"] };
 
 export type EntireClientAndTokenFragment = {
@@ -719,7 +719,7 @@ export type DeleteNewsRatingMutation = { __typename?: "Mutation" } & Pick<
 
 export type PagedUserFragment = { __typename?: "User" } & Pick<
     User,
-    "role" | "name" | "login" | "creationDate"
+    "login" | "creationDate" | "role" | "name"
 > & { avatarImgId: User["avatarImgIdOrDefault"] };
 
 export type GetUsersPageQueryVariables = {
@@ -732,17 +732,40 @@ export type GetUsersPageQuery = { __typename?: "Query" } & {
         };
 };
 
+export type GetUserByLoginQueryVariables = {
+    login: Scalars["String"];
+};
+
+export type GetUserByLoginQuery = { __typename?: "Query" } & {
+    getUserByLogin: Maybe<{ __typename?: "User" } & EntireUserFragment>;
+};
+
+export type UpdateMeMutationVariables = {
+    params: UpdateMeInput;
+};
+
+export type UpdateMeMutation = { __typename?: "Mutation" } & {
+    updateMe: { __typename?: "User" } & EntireUserFragment;
+};
+
+export type UpdateUserMutationVariables = {
+    params: UpdateUserInput;
+};
+
+export type UpdateUserMutation = { __typename?: "Mutation" } & {
+    updateUser: Maybe<{ __typename?: "User" } & EntireUserFragment>;
+};
+
 import gql from "graphql-tag";
 import { Injectable } from "@angular/core";
 import * as Apollo from "apollo-angular";
 export const EntireUserFragmentDoc = gql`
     fragment EntireUser on User {
-        __typename
+        login
         creationDate
         lastUpdateDate
         role
         name
-        login
         avatarImgId: avatarImgIdOrDefault
     }
 `;
@@ -796,11 +819,11 @@ export const EntireNewsFragmentDoc = gql`
 `;
 export const PagedUserFragmentDoc = gql`
     fragment PagedUser on User {
+        login
+        creationDate
         role
         name
-        login
         avatarImgId: avatarImgIdOrDefault
-        creationDate
     }
 `;
 export const GetMeDocument = gql`
@@ -1032,4 +1055,58 @@ export class GetUsersPageGQL extends Apollo.Query<
     GetUsersPageQueryVariables
 > {
     document = GetUsersPageDocument;
+}
+export const GetUserByLoginDocument = gql`
+    query getUserByLogin($login: String!) {
+        getUserByLogin(login: $login) {
+            ...EntireUser
+        }
+    }
+    ${EntireUserFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class GetUserByLoginGQL extends Apollo.Query<
+    GetUserByLoginQuery,
+    GetUserByLoginQueryVariables
+> {
+    document = GetUserByLoginDocument;
+}
+export const UpdateMeDocument = gql`
+    mutation updateMe($params: UpdateMeInput!) {
+        updateMe(params: $params) {
+            ...EntireUser
+        }
+    }
+    ${EntireUserFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class UpdateMeGQL extends Apollo.Mutation<
+    UpdateMeMutation,
+    UpdateMeMutationVariables
+> {
+    document = UpdateMeDocument;
+}
+export const UpdateUserDocument = gql`
+    mutation updateUser($params: UpdateUserInput!) {
+        updateUser(params: $params) {
+            ...EntireUser
+        }
+    }
+    ${EntireUserFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class UpdateUserGQL extends Apollo.Mutation<
+    UpdateUserMutation,
+    UpdateUserMutationVariables
+> {
+    document = UpdateUserDocument;
 }

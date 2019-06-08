@@ -1,10 +1,9 @@
 fragment EntireUser on User {
-    __typename
+    login
     creationDate
     lastUpdateDate
     role
     name
-    login
     avatarImgId: avatarImgIdOrDefault
 }
 

@@ -3,18 +3,6 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-input AdminUpdateUserInput {
-  """New user name."""
-  name: String
-
-  """New user avatar id. This is currently an uploadcare image uiud."""
-  avatarImgId: String
-
-  """Defines the login of the user to update"""
-  login: String!
-  role: UserRole
-}
-
 """Filter input parameters for `Boolean` type."""
 input BooleanFilterInput {
   """
@@ -134,13 +122,13 @@ type Mutation {
   signUp(params: SignUpInput!): UserAndToken!
 
   """Requires auth. Updates current client data and returns it."""
-  updateMe(params: UpdateUserInput!): User!
+  updateMe(params: UpdateMeInput!): User!
 
   """
   Requires 'Admin' rights. Updates user by the given login and returns it, but
   retuns `null` if there nothing was found for the given login.
   """
-  updateUser(params: AdminUpdateUserInput!): User
+  updateUser(params: UpdateUserInput!): User
 
   """
   Requires auth. Creates or updates existing rating the client gave to the news.
@@ -551,6 +539,14 @@ input StringFilterInput {
   nin: [String!]
 }
 
+input UpdateMeInput {
+  """New user name."""
+  name: String
+
+  """New user avatar id. This is currently an uploadcare image uiud."""
+  avatarImgId: String
+}
+
 input UpdateNewsCommentInput {
   id: Int!
   body: String!
@@ -569,6 +565,10 @@ input UpdateUserInput {
 
   """New user avatar id. This is currently an uploadcare image uiud."""
   avatarImgId: String
+
+  """Defines the login of the user to update"""
+  login: String!
+  role: UserRole
 }
 
 type User {
