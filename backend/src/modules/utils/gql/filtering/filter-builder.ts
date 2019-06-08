@@ -34,7 +34,7 @@ export class FilterBuilder
     private lastParamId!: number;
     private static readonly gqlToSqlMap = {
         eqOp: {
-            [FilterOperator.Eq]:  '==',
+            [FilterOperator.Eq]:  '=',
             [FilterOperator.Neq]:  '<>'
         },
         relOp: {
@@ -200,7 +200,7 @@ export class FilterBuilder
         eqOp:       SqlEqOp
     ) {
         return operand === null && isNullable 
-            ? `${columnName} IS ${eqOp === '==' ? '': 'NOT' } NULL` 
+            ? `${columnName} IS ${eqOp === '=' ? '': 'NOT' } NULL` 
             : this.tryCreateBinOp(columnName, operand, eqOp);
     }
 

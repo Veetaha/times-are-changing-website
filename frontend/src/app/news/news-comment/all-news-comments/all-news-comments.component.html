@@ -1,0 +1,15 @@
+<app-pagination #paginator
+    [noSearch]="true"
+    [pageFetcher]="newsCommentsPageFetcher" 
+    nothingWasFoundMessage="There are currently no comments. Be first to express your thoughts!"
+>
+<section *appPageBody="let newsComments" class="local-comment-section">
+    <h1 class="local-comment-section__heading">Comments</h1>
+    <app-paged-news-comment *ngFor="let comment of newsComments; trackBy: trackById"
+        [comment]="comment"
+        (deleteComment)="deleteNewsComment(comment.id)"
+        class="local-comment"
+    >
+    </app-paged-news-comment>
+</section>
+</app-pagination>

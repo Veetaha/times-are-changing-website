@@ -1,6 +1,6 @@
 
 <ng-container *ngIf="page; else elseDataNotLoaded">
-    <td-search-input
+    <td-search-input *ngIf="!noSearch"
         [debounce]="400"
         [placeholder]="searchInputPlaceholder"
         [showUnderline]="true"
@@ -18,7 +18,8 @@
                 limit:  $event.pageSize
             });
         "
-        color="primary"
+        color="accent"
+        [style.display]="shouldDisplayPaginationControls() ? 'block' : 'none'"
         showFirstLastButtons="showFirstLastButtons"
     ></mat-paginator>
 

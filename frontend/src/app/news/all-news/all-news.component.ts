@@ -1,19 +1,20 @@
 import _ from 'lodash';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { TdDialogService } from '@covalent/core/dialogs';
 
-import { trackById     } from '@utils/track-by-id';
-import { Success } from '@app/common/common.actions';
-import { PageFetcherFn } from '@app/common/pagination/pagination.interfaces';
-import { SortingOrder  } from '@app/gql/generated';
-import { SetFab, DeleteFab } from '@app/fab/fab.actions';
+import { trackById           } from '@utils/track-by-id';
+import { Success             } from '@app/common/common.actions';
+import { PageFetcherFn       } from '@app/common/pagination/pagination.interfaces';
+import { SortingOrder        } from '@app/gql/generated';
+import { SetFab, DeleteFab   } from '@app/fab/fab.actions';
+import { CriticalError       } from '@app/error/error.actions';
+import { PaginationComponent } from '@app/common/pagination/pagination.component';
 
 import { PagedNews          } from '../news.interfaces';
 import { NewsService        } from '../news.service';
 import { newsRouteAccessMap } from '../news-routing.limits';
-import { CriticalError } from '@app/error/error.actions';
-import { PaginationComponent } from '@app/common/pagination/pagination.component';
-import { TdDialogService } from '@covalent/core/dialogs';
+
 
 @Component({
     selector:    'app-all-news',

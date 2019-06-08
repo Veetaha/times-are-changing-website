@@ -1,0 +1,43 @@
+<ng-container *veeLet="canClientMutateComment$ | async as canClientMutateComment">
+
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{comment.commentator.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            Commented {{comment.creationDate | timeAgo}}
+            <small *ngIf="comment.creationDate !== comment.lastUpdateDate"
+                class="local-last-update-date"
+            >  
+                (updated {{comment.lastUpdateDate | timeAgo}})
+            </small>
+        </mat-card-subtitle>
+        <ng-container *ngIf="canClientMutateComment">
+            <div class="local-mutate-menu">
+                <button mat-icon-button 
+                    [matMenuTriggerFor]="menu" 
+                    class="local-mutate-menu__btn"
+                >
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu>
+                <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>Edit (in dev)
+                </button>
+                <button mat-menu-item (click)="deleteComment.emit()">
+                    <mat-icon>delete</mat-icon>Delete
+                </button>
+            </mat-menu>
+        </ng-container>
+    </mat-card-header>
+    <mat-card-content>
+        <td-markdown [content]="comment.body"></td-markdown>
+    </mat-card-content>
+
+</mat-card>
+
+
+</ng-container>

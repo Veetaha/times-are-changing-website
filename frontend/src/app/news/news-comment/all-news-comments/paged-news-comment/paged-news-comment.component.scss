@@ -1,0 +1,12 @@
+@import 'variables';
+
+.local {
+    &-last-update-date {
+        color: map-get($theme, muted-text)
+    }
+    &-mutate-menu {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

@@ -1,0 +1,34 @@
+fragment PagedNewsComment on NewsComment {
+    id
+    creationDate
+    lastUpdateDate
+    body
+    commentator {
+        login
+        name
+        avatarImgId: avatarImgIdOrDefault
+    }
+}
+
+# ------------------- Queries -------------------
+
+query getNewsCommentsPage($params: NewsCommentPaginationInput!) {
+    getNewsCommentsPage(params: $params) {
+        total
+        data { ...PagedNewsComment }
+    }
+}
+
+# ------------------- Mutations -------------------
+
+mutation createNewsComment($params: CreateNewsCommentInput!) {
+    createNewsComment(params: $params) {
+        id
+        creationDate
+        lastUpdateDate
+    }
+}
+
+mutation deleteNewsCommentById($id: Int!) {
+    deleteNewsCommentById(id: $id)
+}

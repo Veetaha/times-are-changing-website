@@ -1,0 +1,13 @@
+.local {
+    &-comment-section {
+        margin-top: 25px;
+
+        &__heading {
+            text-align: center;
+        }
+    }
+    &-comment {
+        display: block;
+        margin-top: 5px;
+    }
+}

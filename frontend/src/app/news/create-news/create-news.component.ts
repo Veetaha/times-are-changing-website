@@ -54,7 +54,7 @@ export class CreateNewsComponent extends AbstractRouteGuardedComponent {
             ]),
             err => this.store.dispatch(new Warning(
                 `Backend failed to create news. Please submit an error report ` +
-                `to our webmaster with the following info: '${err}'.`
+                `to our webmaster with the following info: '${err.message}'.`
             ))
         );
     }

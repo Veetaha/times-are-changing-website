@@ -596,6 +596,50 @@ export type SignInMutation = { __typename?: "Mutation" } & {
     >;
 };
 
+export type PagedNewsCommentFragment = { __typename?: "NewsComment" } & Pick<
+    NewsComment,
+    "id" | "creationDate" | "lastUpdateDate" | "body"
+> & {
+        commentator: { __typename?: "User" } & Pick<User, "login" | "name"> & {
+                avatarImgId: User["avatarImgIdOrDefault"];
+            };
+    };
+
+export type GetNewsCommentsPageQueryVariables = {
+    params: NewsCommentPaginationInput;
+};
+
+export type GetNewsCommentsPageQuery = { __typename?: "Query" } & {
+    getNewsCommentsPage: { __typename?: "NewsCommentPage" } & Pick<
+        NewsCommentPage,
+        "total"
+    > & {
+            data: Array<
+                { __typename?: "NewsComment" } & PagedNewsCommentFragment
+            >;
+        };
+};
+
+export type CreateNewsCommentMutationVariables = {
+    params: CreateNewsCommentInput;
+};
+
+export type CreateNewsCommentMutation = { __typename?: "Mutation" } & {
+    createNewsComment: { __typename?: "NewsComment" } & Pick<
+        NewsComment,
+        "id" | "creationDate" | "lastUpdateDate"
+    >;
+};
+
+export type DeleteNewsCommentByIdMutationVariables = {
+    id: Scalars["Int"];
+};
+
+export type DeleteNewsCommentByIdMutation = { __typename?: "Mutation" } & Pick<
+    Mutation,
+    "deleteNewsCommentById"
+>;
+
 export type PagedNewsFragment = { __typename?: "News" } & Pick<
     News,
     | "id"
@@ -690,6 +734,19 @@ export const EntireClientAndTokenFragmentDoc = gql`
     }
     ${EntireUserFragmentDoc}
 `;
+export const PagedNewsCommentFragmentDoc = gql`
+    fragment PagedNewsComment on NewsComment {
+        id
+        creationDate
+        lastUpdateDate
+        body
+        commentator {
+            login
+            name
+            avatarImgId: avatarImgIdOrDefault
+        }
+    }
+`;
 export const PagedNewsFragmentDoc = gql`
     fragment PagedNews on News {
         id
@@ -775,6 +832,61 @@ export class SignInGQL extends Apollo.Mutation<
     SignInMutationVariables
 > {
     document = SignInDocument;
+}
+export const GetNewsCommentsPageDocument = gql`
+    query getNewsCommentsPage($params: NewsCommentPaginationInput!) {
+        getNewsCommentsPage(params: $params) {
+            total
+            data {
+                ...PagedNewsComment
+            }
+        }
+    }
+    ${PagedNewsCommentFragmentDoc}
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class GetNewsCommentsPageGQL extends Apollo.Query<
+    GetNewsCommentsPageQuery,
+    GetNewsCommentsPageQueryVariables
+> {
+    document = GetNewsCommentsPageDocument;
+}
+export const CreateNewsCommentDocument = gql`
+    mutation createNewsComment($params: CreateNewsCommentInput!) {
+        createNewsComment(params: $params) {
+            id
+            creationDate
+            lastUpdateDate
+        }
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class CreateNewsCommentGQL extends Apollo.Mutation<
+    CreateNewsCommentMutation,
+    CreateNewsCommentMutationVariables
+> {
+    document = CreateNewsCommentDocument;
+}
+export const DeleteNewsCommentByIdDocument = gql`
+    mutation deleteNewsCommentById($id: Int!) {
+        deleteNewsCommentById(id: $id)
+    }
+`;
+
+@Injectable({
+    providedIn: "root"
+})
+export class DeleteNewsCommentByIdGQL extends Apollo.Mutation<
+    DeleteNewsCommentByIdMutation,
+    DeleteNewsCommentByIdMutationVariables
+> {
+    document = DeleteNewsCommentByIdDocument;
 }
 export const GetNewsByIdDocument = gql`
     query getNewsById($id: Int!) {

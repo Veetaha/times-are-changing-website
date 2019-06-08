@@ -20,6 +20,8 @@ fragment EntireNews on News {
     }
 }
 
+# ------------------- Queries -------------------
+
 query getNewsById($id: Int!) {
     getNewsById(id: $id) { ...EntireNews }
 }
@@ -30,6 +32,8 @@ query getNewsPage($params: NewsPaginationInput!) {
         data {...PagedNews }
     }
 }
+
+# ------------------- Mutations -------------------
 
 mutation createNews($params: CreateNewsInput!) {
     createNews(params: $params) {

@@ -15,13 +15,10 @@ export class PaginationComponent<TData> implements OnInit  {
     @Input() searchInputPlaceholder = 'Type here to search';
     @Input() nothingWasFoundMessage = 'Nothing was found';
     @Input() showFirstLastButtons   = true;
+    @Input() hideControlsIfSinglePage = true;       
     @Input() pageSizeOptions        = [5, 10, 20, 50, 100];
-    @Input('pageFetcher') pageFetcher!: PageFetcherFn<TData>;
-    
-    isSearchEnabled = false;
-    @Input() set noSearch(value: unknown) {
-        this.isSearchEnabled = value === '' || Boolean(value);
-    }
+    @Input() pageFetcher!: PageFetcherFn<TData>;
+    @Input() noSearch = false;
 
     @ContentChild(PageBodyDirective, { read: TemplateRef }) 
     templateRef?: TemplateRef<PaginationCtx<TData>>;
@@ -39,7 +36,7 @@ export class PaginationComponent<TData> implements OnInit  {
         // As a workaround, deffering initialization till the next spin of event loop
         setTimeout(() => this.fetchPage());
     }
-    
+
     /**
      * Updates current page after some intrinsic application has deleted some 
      * items from this page.
@@ -54,6 +51,10 @@ export class PaginationComponent<TData> implements OnInit  {
                 ? 0 
                 : this.paginationInput.offset
         });
+    }
+
+    shouldDisplayPaginationControls() {
+        return !this.hideControlsIfSinglePage || this.page!.total > this.paginationInput.limit;
     }
 
 
