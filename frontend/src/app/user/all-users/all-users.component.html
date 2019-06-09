@@ -1,17 +1,32 @@
 <ng-container *veeLet="client$ | async as client">
 
 
-<app-pagination [pageFetcher]="usersPageFetcher">
+<app-pagination [pageFetcher]="usersPageFetcher" #paginator>
+    <form *appPaginationFilters [formGroup]="filtersForm">
+        <mat-form-field>
+            <mat-label>User role</mat-label>
+            <mat-select formControlName="role" multiple>
+                <mat-option *ngFor="let role of userRoleFilterValues" [value]="role">
+                    {{role}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
     <td-data-table *appPageBody="let users" 
         [data]="users"
         [columns]="tableColumnsConfig"
         [clickable]="true"
+        [sortable]="sortableCols"
         (rowClick)="openUserProfilePage($event.row.login)"
+        (sortChange)="changeSorting($event.name, $event.order)"
+        sortBy="creationDate"
+        sortOrder="DESC"
     >
     <ng-container *tdDataTableTemplate="'role'; value as role">
         <app-user-role [role]="role"></app-user-role>
     </ng-container>
-    <div *tdDataTableTemplate="'user'; row as user" 
+    <div *tdDataTableTemplate="'name'; row as user" 
         class="local-user-col"
         [class.local-user-col--client]="client?.login === user.login"
         routerLink="/users/{{user.login}}"

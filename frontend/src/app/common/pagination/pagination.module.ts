@@ -1,7 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule    } from '@angular/core';
+
 import { CommonCovalentModule } from '../common-covalent.module';
 import { CommonMaterialModule } from '../common-material.module';
-import { PaginationComponent, PageBodyDirective } from './pagination.component';
+
+import { PaginationComponent } from './pagination.component';
+import { PageBodyDirective, PaginationFiltersDirective } from './pagination.directives';
+import { PaginationSearchInputComponent } 
+from './pagination-search-input/pagination-search-input.component';
 
 @NgModule({
     imports: [
@@ -10,11 +15,14 @@ import { PaginationComponent, PageBodyDirective } from './pagination.component';
     ],
     declarations: [
         PaginationComponent,
-        PageBodyDirective
+        PageBodyDirective,
+        PaginationFiltersDirective,
+        PaginationSearchInputComponent
     ],
     exports: [
         PaginationComponent,
-        PageBodyDirective
+        PageBodyDirective,
+        PaginationFiltersDirective
     ]
 })
 export class PaginationModule {}

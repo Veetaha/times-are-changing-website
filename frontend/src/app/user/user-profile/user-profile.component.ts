@@ -50,7 +50,7 @@ export class UserProfileComponent extends Disposable implements OnInit, OnDestro
         
         this.addHandle(combineLatest(this.client$, this.user$).subscribe(([client, user]) =>
             this.store.dispatch(this.canClientMutateUser(client, user)
-               ? new SetFab({ fabIcon: 'edit' })
+               ? new SetFab({ fabIcon: 'edit', tooltip: 'Edit profile' })
                : DeleteFab.instance
             )
         ));

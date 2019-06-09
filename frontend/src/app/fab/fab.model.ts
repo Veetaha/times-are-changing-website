@@ -11,12 +11,15 @@ export type FabStateModel = DeepReadonly<{
      * if route is not `null | undefined`.
      */ 
     routerLink?: Nullable<string>;        
-    /** defines role limit that client must obey to in order to view fab */
+    /** defines role limit that client must obey to in order to view fab. */
     roleLimit?:  Nullable<UserRoleLimit>;
+    /** Tooltip text that will be diplayed when the users hovers over the fab. */
+    tooltip?: Nullable<string>;
 }>;
 
 export const noFabSnap = {
     fabIcon:    null,
+    tooltip:    null,
     routerLink: null,
     roleLimit:  null
 };

@@ -78,6 +78,8 @@ export class AuthState implements NgxsOnInit {
                 tap(client => ctx.setState(createAuthSnap({ token, client }))),
                 catchError(() => {
                     ctx.setState(stableUnAuthSnap);
+                    // FIXME: token doesn't get nullified when it is invalid
+                    // TODO:  watch for token expiration
                     throw new Error('Could not restore previous client session.');
                 })
             );

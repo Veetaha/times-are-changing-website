@@ -6,11 +6,11 @@
         <mat-card-title>API documentation</mat-card-title>
         <mat-card-subtitle>GraphQL</mat-card-subtitle>
     </mat-card-header>
-    <figure mat-card-image class="developer-promo">
+    <figure mat-card-image class="local-promo">
         <img 
             src="/assets/developer-promo.jpg" 
             alt="Build tools photo"
-            class="developer-promo__image"
+            class="local-promo__image"
         >
     </figure>
     <mat-card-content> 
@@ -34,6 +34,7 @@
                 matTooltip `disabled` attribute should always be `false`, 
                 thats why didn't set this directive directly onto the button
             -->
+            click
             <span [matTooltip]="clientAuthToken == null 
                 ? 'You need to be authorized in the first place'
                 : 'Your auth token will be written to the clipboard'
@@ -44,10 +45,11 @@
                     (click)="notifyTokenCopied()"
                     tooltipPosition="top"
                 >
-                    click here in order to copy your auth token to clipboard
+                here
                 </button>
             </span>
-            and set the <code>HTTP</code> headers in the lower panel.
+            in order to copy your auth token to clipboard and set the 
+            <code>HTTP</code> headers in the lower panel.
         </p>
         
 <pre><code>{{'{'}}

@@ -1,16 +1,29 @@
+<div class="local-root">
 
 <ng-container *ngIf="page; else elseDataNotLoaded">
-    <td-search-input *ngIf="!noSearch"
-        [debounce]="400"
+    <app-pagination-search-input *ngIf="!noSearch" class="local-search"
+        (search)="fetchPage({ offset: 0, search: $event })"
         [placeholder]="searchInputPlaceholder"
-        [showUnderline]="true"
-        (searchDebounce)="fetchPage({ offset: 0, search: $event })"
-    >
-    </td-search-input>
+    ></app-pagination-search-input>
+    
+    <ng-container *ngIf="filtersTemplateRef != null">
+        <mat-slide-toggle (change)="pageFetcherOpts.hasFiltering = $event.checked">
+            Advanced search
+        </mat-slide-toggle>
+        <mat-expansion-panel 
+            [expanded]="pageFetcherOpts.hasFiltering"
+            class="local-filters"
+        >
+            <ng-container *ngTemplateOutlet="filtersTemplateRef; context: { $implicit: page!.data }">
+            </ng-container>
+        </mat-expansion-panel>
+    </ng-container>
+
+
     <mat-paginator #paginator
         [length]         ="page!.total"
-        [pageSize]       ="paginationInput.limit"
-        [pageIndex]      ="paginationInput.offset / paginationInput.limit"
+        [pageSize]       ="pageFetcherOpts.limit"
+        [pageIndex]      ="pageFetcherOpts.offset / pageFetcherOpts.limit"
         [pageSizeOptions]="pageSizeOptions"
         (page)="
             fetchPage({
@@ -23,14 +36,14 @@
         showFirstLastButtons="showFirstLastButtons"
     ></mat-paginator>
 
-    <ng-container *ngTemplateOutlet="templateRef; context: { $implicit: page!.data }">
+    <ng-container *ngTemplateOutlet="pageBodyTemplateRef; context: { $implicit: page!.data }">
     </ng-container>
 
     <p *ngIf="page!.data.length === 0" class="text-muted">
         <strong>{{nothingWasFoundMessage}}</strong>
     </p>
-    <small *ngIf="paginationInput.search" class="text-muted">
-        Search results for "{{paginationInput.search}}"
+    <small *ngIf="pageFetcherOpts.search" class="text-muted">
+        Search results for "{{pageFetcherOpts.search}}"
     </small>
 
 </ng-container>
@@ -43,3 +56,5 @@
     ></mat-progress-spinner>
 
 </ng-template>
+
+</div>

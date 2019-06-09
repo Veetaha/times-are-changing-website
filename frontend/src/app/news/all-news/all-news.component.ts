@@ -43,7 +43,8 @@ export class AllNewsComponent implements OnDestroy {
         this.store.dispatch(new SetFab({
             fabIcon: 'add',
             roleLimit: newsRouteAccessMap.getRoleLimitFor('news/create'),
-            routerLink: 'news/create'
+            routerLink: 'news/create',
+            tooltip: 'Create news'
         }));
     }
     ngOnDestroy() {

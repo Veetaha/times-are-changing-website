@@ -5,6 +5,9 @@
 
     <button *ngIf="fab.routerLink == null; else elseAnchorFab"  
         mat-fab 
+        matTooltipPosition="left"
+        [matTooltipDisabled]="fab.tooltip == null"
+        [matTooltip]="fab.tooltip"
         (click)="dispatchClickAction()"
         color="accent"
     >
@@ -12,9 +15,13 @@
     </button>
     <ng-template #elseAnchorFab>
         <a mat-fab
+            matTooltipPosition="left"
             [routerLink]="fab.routerLink" 
+            [matTooltipDisabled]="fab.tooltip == null"
+            [matTooltip]="fab.tooltip"
             (click)="deleteFab()"
-            color="accent" >
+            color="accent" 
+        > 
             <mat-icon>{{fab.fabIcon!}}</mat-icon>
         </a>
     </ng-template>

@@ -32,7 +32,8 @@ export class NewsDetailsComponent implements OnInit, OnDestroy {
     ) {
         this.store.dispatch(new SetFab({
             fabIcon: 'edit',
-            roleLimit: { roles: [UserRole.Admin], areAllowed: true }
+            roleLimit: { roles: [UserRole.Admin], areAllowed: true },
+            tooltip: 'Edit news'
         }));
     }
 

@@ -1,0 +1,24 @@
+<form class="local-root">
+    <button mat-icon-button
+        (click)="search.emit(searchInput.value)"
+        type="button"
+        aria-label="Do search"
+    >
+        <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field class="local-input">
+        <input #searchInput matInput
+            (keydown.enter)="$event.preventDefault();"
+            (keyup.enter)="search.emit(searchInput.value)"
+            [placeholder]="placeholder"
+            type="text"
+        >
+        <button mat-icon-button matSuffix  
+            [style.display]="searchInput.value ? 'block' : 'none'"
+            (click)="searchInput.value = ''"
+            aria-label="Clear" 
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</form>

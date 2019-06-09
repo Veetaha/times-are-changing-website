@@ -88,7 +88,7 @@ export class FilterBuilder
         const result: QueryAndParams = [
             unionStrat.wrapOperands(_.reduce(
                 input.props, 
-                (query, value, key) => unionStrat.addOperand(
+                (query, value, key) => value == null ? query : unionStrat.addOperand(
                     query,
                     this.createFilterForProperty(value, meta[key])
                 ),
@@ -229,7 +229,10 @@ export class FilterBuilder
      */
     private tryCreateLikeOp(columnName: string, operand: unknown, likeOp: SqlLikeOp) {    
         if (typeof operand !== 'string') {
-            throw new Error('Invalid operand for LIKE operator: value is not a string');
+            throw new Error(
+                `Invalid operand for '${FilterOperator.Like}' or '${FilterOperator.Nilike}' ` +
+                "operator: value is not a string"
+            );
         }
         const param = this.createParam(this.escapeLikeOperand(operand));
         return operand == null 
@@ -256,8 +259,11 @@ export class FilterBuilder
      * @param inOperator Defines particular `IN` operator to use for the query.
      */
     private tryCreateIn(columnName: string, operand: unknown, inOperator: SqlInOp) {
-        if (!Array.isArray(operand)) {
-            throw new Error('Invalid operand for IN operator: value is not an array');
+        if (!Array.isArray(operand) || operand.length === 0) {
+            throw new Error(
+                `invalid operand for '${FilterOperator.In}' or '${FilterOperator.Nin}' ` +
+                "operator: value is not an array or array is empty"
+            );
         }
         return operand == null 
             ? '' 

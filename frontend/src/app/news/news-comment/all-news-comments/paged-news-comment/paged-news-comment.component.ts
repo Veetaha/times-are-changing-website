@@ -28,8 +28,8 @@ export class PagedNewsCommentComponent implements OnInit {
     }
 
     constructor(
-        public readonly images: ImageService,
-        private readonly store: Store
+        private readonly store: Store,
+        readonly images: ImageService
     ) {}
 
     ngOnInit() {

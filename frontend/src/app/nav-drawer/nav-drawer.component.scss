@@ -1,9 +1,10 @@
+@import 'mixins';
+
 mat-icon {
     margin-right: 16px;
 }
 mat-expansion-panel-header {
-    padding-left: 16px;
-    padding-right: 16px;
+    @include horizontal-padding(16px);
 }
 mat-panel-title {
     align-items: center;
