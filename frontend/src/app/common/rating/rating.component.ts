@@ -35,9 +35,10 @@ export class RatingComponent {
     onRatingBtnClicked(isLikeBtn: boolean) {
         const { myRating } = this.rateful;
 
-        // if no intial rating was set or client swapped like to dislike or vice versa
+        // if no initial rating was set or client swapped like to dislike or vice versa
         // otherwise, remove his [dis]like
-        
+
+        debugger; // FIXME: rating counts doesn't get updated under some conditions
         const newRating = myRating == null || myRating.hasLiked !== isLikeBtn
             ? { hasLiked: isLikeBtn }
             : null;

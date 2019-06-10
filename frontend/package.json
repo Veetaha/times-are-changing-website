@@ -29,6 +29,8 @@
     "@covalent/markdown": "^2.0.1",
     "@covalent/text-editor": "^2.0.0",
     "@fortawesome/fontawesome-free": "~5.6.3",
+    "@ngx-gallery/core": "^4.0.3",
+    "@ngx-gallery/lightbox": "^4.0.3",
     "@ngxs/form-plugin": "^3.4.3",
     "@ngxs/logger-plugin": "^3.4.3",
     "@ngxs/router-plugin": "^3.4.3",

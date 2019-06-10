@@ -1,12 +1,16 @@
-.local-carousel-item {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-    
-    &__payload {
-        object-fit: contain;
-        overflow: hidden;
-        display: block;
-        width: 100%;
+.local {
+    &-root {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 30px;
     }
+    &-picture {
+        padding: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        &__img {
+            width: 100%;
+        }
+    }
+    
 }

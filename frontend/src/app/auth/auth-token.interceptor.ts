@@ -24,9 +24,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
         return next.handle(token != null
             ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) })
             : req
-        ).pipe(finalize(
-            () => this.store.dispatch(new AwaitResponse(false))
-        ));
+        ).pipe(finalize(() => this.store.dispatch(new AwaitResponse(false))));
     }
 
     

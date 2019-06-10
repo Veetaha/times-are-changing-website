@@ -18,11 +18,10 @@ import { NewsService } from '../news.service';
 })
 export class NewsDetailsComponent implements OnInit, OnDestroy {
     news!: EntireNews;
-    newsRatingUpdater: RatingUpdater = newRating => {
-        return newRating == null 
-            ? this.newsService.deleteNewsRating(this.news.id)
-            : this.newsService.rateNews(this.news.id, newRating.hasLiked)
-    }
+    newsRatingUpdater: RatingUpdater = newRating => newRating == null 
+        ? this.newsService.deleteNewsRating(this.news.id)
+        : this.newsService.rateNews(this.news.id, newRating.hasLiked)
+    
 
     constructor(
         private readonly route: ActivatedRoute,

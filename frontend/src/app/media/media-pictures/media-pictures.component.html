@@ -1,9 +1,10 @@
-&lt;app-media-pictures&gt; is under development
-
-<!-- <ui-carousel [infinite]="true">
-    <ui-carousel-item *ngFor="let imageSrc of screenshotSrcs">
-        <figure class="local-carousel-item">
-            <img [src]="imageSrc" class="local-carousel-item__payload" >
-        </figure>
-    </ui-carousel-item>
-</ui-carousel> -->
+<div class="local-root">
+    <button *ngFor="let image of images; index as i" 
+        mat-button
+        (click)="openLightbox(i)"
+        type="button"
+        class="local-picture"
+    >
+        <img [src]="image.data.src" class="local-picture__img"/>
+    </button>
+</div>
