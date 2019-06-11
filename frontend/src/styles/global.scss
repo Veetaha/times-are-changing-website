@@ -1,12 +1,12 @@
 @import "theme";
 
 // override bootstrap styles
-button:focus {
-    outline: none;
-}
-a:hover {
-    color: inherit;
-}
+// button:focus {
+//     outline: none;
+// }
+// a:hover {
+//     color: inherit;
+// }
 // end override
 
 [ng-reflect-router-link] {
@@ -15,27 +15,30 @@ a:hover {
 html {
     font-size: 10px; // for better itercation with `rem` units
 }
-
+body {
+    font-size: 1.6rem;
+}
 body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-size: 16px;
 }
-
+pre {
+    word-wrap: normal;
+}
 // this class is set in `SnackBarService` for all snackbars
 .snack-bar {
     &-info {
-        background-color: map-get($theme, snack-bar-info);
+        background-color: mat-color(map-get($theme, info));
     }
     &-success {
-        background-color: map-get($theme, snack-bar-success);
+        background-color: mat-color(map-get($theme, success));
     }
     &-warning {
-        background-color: map-get($theme, snack-bar-warning);
+        background-color: mat-color(map-get($theme, soft-warn));
     }
     &-error {
-        background-color: map-get($theme, snack-bar-error);
+        background-color: mat-color(map-get($theme, warn));
     }
 }
 

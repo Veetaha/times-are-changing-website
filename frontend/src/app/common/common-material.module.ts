@@ -18,6 +18,9 @@ import { MatTabsModule            } from '@angular/material/tabs';
 import { MatMenuModule            } from '@angular/material/menu';
 import { MatSlideToggleModule     } from '@angular/material/slide-toggle';
 import { MatSelectModule          } from '@angular/material/select';
+import { MatRippleModule          } from '@angular/material/core';
+
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -38,7 +41,9 @@ import { MatSelectModule          } from '@angular/material/select';
         MatTabsModule,
         MatMenuModule,
         MatSlideToggleModule,
-        MatSelectModule
+        MatSelectModule,
+        MatRippleModule,
+        LayoutModule
     ]
 })
 export class CommonMaterialModule { }

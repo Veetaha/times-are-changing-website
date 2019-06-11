@@ -62,7 +62,7 @@ export class AllNewsCommentsComponent {
         this.newsComments.deleteNewsCommentById(commentId).subscribe(
             () => {
                 this.store.dispatch(new Success(`Successfully deleted comment.`));
-                this.paginator.updateBecausePageItemsRemoved(1);
+                this.paginator.updateDueToPageItemsRemoved(1);
             },
             err => this.store.dispatch(new CriticalError(
                 `Failed to delete comment: ${err.message}`

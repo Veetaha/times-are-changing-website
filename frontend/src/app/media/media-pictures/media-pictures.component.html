@@ -1,10 +1,9 @@
 <div class="local-root">
-    <button *ngFor="let image of images; index as i" 
-        mat-button
+    <figure *ngFor="let image of images; index as i"
+        matRipple
         (click)="openLightbox(i)"
-        type="button"
         class="local-picture"
     >
         <img [src]="image.data.src" class="local-picture__img"/>
-    </button>
+    </figure>
 </div>

@@ -1,22 +1,22 @@
 @import 'variables';
 
 .local {
-    &-card {
+    &-root {
         margin: 15px;
-
         &--emphasized {
             transform: scale(1.02);
             transition: transform 150ms linear;
         }
-        &-footer {
-            display: flex;
-            justify-content: left;
-            margin: 15px;
+    }
 
-            &__counts {
-                margin-left: 15px;
-                margin-right: 15px;
-            }
+    &-footer {
+        display: flex;
+        justify-content: left;
+        margin: 15px;
+
+        &__counts {
+            margin-left: 15px;
+            margin-right: 15px;
         }
     }
 

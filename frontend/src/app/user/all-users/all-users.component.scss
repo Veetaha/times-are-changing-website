@@ -4,7 +4,7 @@
 .local {
 
     &-user-creation-date {
-        color: map-get($theme, muted-text)
+        color: mat-color(map-get($theme, muted-text))
     }
 
     &-user-col {
@@ -23,7 +23,7 @@
         }
         &__login {
             font-size: 0.8em;
-            color: map-get($theme, muted-text);
+            color: mat-color(map-get($theme, muted-text));
         }
         &--client {
             font-weight: bold;

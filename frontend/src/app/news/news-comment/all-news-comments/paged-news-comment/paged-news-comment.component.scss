@@ -15,7 +15,7 @@
     }
 
     &-last-update-date {
-        color: map-get($theme, muted-text)
+        color: mat-color(map-get($theme, muted-text))
     }
     &-mutate-menu {
         width: 100%;

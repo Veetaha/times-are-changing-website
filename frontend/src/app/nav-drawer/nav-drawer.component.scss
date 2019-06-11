@@ -1,5 +1,16 @@
 @import 'mixins';
+@import 'breakpoints';
 
+.local {
+    &-dashboard-navs {
+        display: none;
+        @include for-small-screen-width {
+            display: block;
+        }
+    }
+}
+
+// TODO: refactor?
 mat-icon {
     margin-right: 16px;
 }

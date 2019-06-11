@@ -1,21 +1,28 @@
+@import 'variables';
+@import 'mixins';
+@import 'breakpoints';
+
 .local {
     &-root {
         margin: 0;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        width: 100%;
     }
-    &-main-nav {
+    &-nav {
         align-items: center;
-        display: flex;
-        flex-wrap: wrap;
+        display: flex; 
         flex-grow: 1;
         justify-content: flex-start;
     }
     &-user-profile {
         flex-shrink: 1;
     }
+     
+    @include for-small-screen-width {  
+        &-nav, &-user-profile {
+            display: none; 
+        }
+    } 
+    
 
     &-home-btn {
         margin: auto 30px;
@@ -25,4 +32,5 @@
             font-size: 1.1em;
         }
     }
+   
 }

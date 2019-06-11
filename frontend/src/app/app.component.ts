@@ -1,8 +1,8 @@
 import { Component,  } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { delay } from 'rxjs/operators';
 
 import { CommonState } from './common/common.state';
-import { delay } from 'rxjs/operators';
 
 @Component({
     selector:    'app-root',
@@ -10,6 +10,7 @@ import { delay } from 'rxjs/operators';
     styleUrls:  ['./app.component.scss']
 })
 export class AppComponent {
+
     // FIXME: using delay(0) workaround because of `ExpressionChangedAfterItHasBeenCheckedError`
     // This error arises in `<media-pictures>` gallery component.
     isAwaitingResponses$ = this.store

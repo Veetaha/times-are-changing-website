@@ -1,4 +1,16 @@
-&lt;app-media-videos&gt; is under development
+<div class="local-root">
+    <button *ngFor="let ytVideoId of ytVideoIds; index as i" 
+        mat-button
+        (click)="openLightbox(i)"
+        type="button"
+        class="local-video-thumbnail"
+    >
+        <img 
+            src="https://img.youtube.com/vi/{{ytVideoId}}/0.jpg" 
+            class="local-video-thumbnail__img"
+        />
+    </button>
+</div>
 <!-- <mat-carousel [interval]="0" animation="slide">
     <mat-carousel-slide *ngFor="let ytVideoSrc of ytVideoSrcs">
         <div class="local-carousel-item">

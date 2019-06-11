@@ -3,7 +3,7 @@
 
 <td-layout>
 
-    <td-navigation-drawer flex sidenavTitle="Times are Changing">
+    <td-navigation-drawer sidenavTitle="Times are Changing">
         <app-nav-drawer></app-nav-drawer>
     </td-navigation-drawer>
 
@@ -15,13 +15,14 @@
         <app-dashboard td-toolbar-content class="local-dashboard"></app-dashboard>
         <div class="local-body">
             <!-- 
-                TODO: attach progress bar to toolbar so that it isn't get
+                TODO: attach progress bar to toolbar so that it doesn't get
                 left when scrolling the page
             -->
             <mat-progress-bar
-                [mode]="isAwaitingResponses ? 'determinate' : 'determinate'"
+                [mode]="isAwaitingResponses ? 'indeterminate' : 'determinate'"
                 color="primary"
-                value="0"
+                value="100"
+                class="local-progress-bar"
             ></mat-progress-bar>
             <div class="local-content-root">
                 <app-fab class="local-fab"></app-fab>

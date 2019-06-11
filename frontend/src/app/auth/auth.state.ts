@@ -71,21 +71,23 @@ export class AuthState implements NgxsOnInit {
         this.log.warning('Using temporary workaround @Action(UpdateState) instead of ngxsOnInit()');
 
         const { token } = ctx.getState();
-        if (token != null) {
-            ctx.setState(createFetchingClientSnap(token));
-            // you should subscribe to this observable when moving this code to ngxsOnInit()
-            return this.auth.getMe().pipe(
-                tap(client => ctx.setState(createAuthSnap({ token, client }))),
-                catchError(() => {
-                    ctx.setState(stableUnAuthSnap);
-                    // FIXME: token doesn't get nullified when it is invalid
-                    // TODO:  watch for token expiration
-                    throw new Error('Could not restore previous client session.');
-                })
-            );
-        } else {
-            ctx.setState(stableUnAuthSnap);
+        if (token == null) {
+            return void ctx.setState(stableUnAuthSnap);
         }
+        ctx.setState(createFetchingClientSnap(token));
+        
+        // you should subscribe to this observable when moving this code to ngxsOnInit()
+        // otherwise now subsription is handle get onwed by @ngxs/store
+
+        return this.auth.getMe().pipe(
+            tap(client => ctx.setState(createAuthSnap({ token, client }))),
+            catchError(() => {
+                ctx.setState(stableUnAuthSnap);
+                // FIXME: token doesn't get nullified when it is invalid
+                // TODO:  watch for token expiration
+                throw new Error('Could not restore previous client session.');
+            })
+        );
     }
 
     @Action(SignIn)

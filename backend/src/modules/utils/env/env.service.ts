@@ -5,8 +5,6 @@ import * as Dotenv from 'dotenv';
 
 import { Injectable } from '@nestjs/common';
 
-import * as I from '@app/interfaces';
-
 
 @Injectable()
 export class EnvService {
@@ -45,7 +43,7 @@ export class EnvService {
         return Joi.attempt(
             parseInt(this.readEnvOrFail(varId), 10),
             Joi.number().integer().min(0).max(65535).required(),
-        ) as I.port_t;
+        );
     }
 
 

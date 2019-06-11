@@ -1,10 +1,11 @@
-<mat-card class="local-card" [class.local-card--emphasized]="emphasizeNews"
+<mat-card matRipple
+    routerLink="/news/{{news.id}}"
+    [class.local-root--emphasized]="emphasizeNews"
     (mouseover)="emphasizeNews = true"
     (mouseout)="emphasizeNews = false"
+    class="local-root" 
 >
-    <mat-card-header
-        routerLink="/news/{{news.id}}"  
-    >
+    <mat-card-header>
         <mat-card-title>
             {{news.title}}
         </mat-card-title>
@@ -13,17 +14,17 @@
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <figure class="local-promo" routerLink="/news/{{news.id}}">
+        <figure class="local-promo">
             <img 
                 [src]="images.getImgUrlFromId(news.promoImgId)" 
                 class="local-promo__img"
             />
         </figure>
     </mat-card-content>
-    <mat-card-footer class="local-card-footer">
-        <div class="local-card-footer__counts"><mat-icon>thumb_up</mat-icon>{{news.likesAmount}}</div>
-        <div class="local-card-footer__counts"><mat-icon>thumb_down</mat-icon>{{news.dislikesAmount}}</div>
-        <div class="local-card-footer__counts"><mat-icon>comment</mat-icon>{{news.commentsAmount}}</div>
+    <mat-card-footer class="local-footer">
+        <div class="local-footer__counts"><mat-icon>thumb_up</mat-icon>{{news.likesAmount}}</div>
+        <div class="local-footer__counts"><mat-icon>thumb_down</mat-icon>{{news.dislikesAmount}}</div>
+        <div class="local-footer__counts"><mat-icon>comment</mat-icon>{{news.commentsAmount}}</div>
     </mat-card-footer>
     <mat-card-actions *appIfClientRole="editAndDeleteNewsRoleLimit">
         <button mat-raised-button color="accent" type="button">

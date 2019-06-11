@@ -1,4 +1,32 @@
+<ng-container *veeLet="client$ | async as client">
+
+    
 <mat-nav-list>
+
+    <section class="local-dashboard-navs">
+        <ng-container *ngIf="client == null; else elseAuthenticatedClient">
+
+            <a routerLink="/sign-in" mat-list-item tdLayoutToggle>
+                <mat-icon>fingerprint</mat-icon>Sign in
+            </a>
+            <a routerLink="/sign-up" mat-list-item tdLayoutToggle>
+                <mat-icon>perm_identity</mat-icon>Sign up
+            </a>
+            
+        </ng-container>
+        <ng-template #elseAuthenticatedClient>
+
+            <a routerLink="users/{{client.login}}" mat-list-item tdLayoutToggle>
+                <mat-icon>person</mat-icon>Profile
+            </a>
+            <a mat-list-item tdLayoutToggle (click)="trySignOut()">
+                <mat-icon>directions_run</mat-icon>
+                Sign out
+            </a>
+
+        </ng-template>
+    </section>
+
     <a routerLink="/" mat-list-item tdLayoutToggle>
         <mat-icon>home</mat-icon>Home
     </a>
@@ -22,8 +50,7 @@
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                <mat-icon>code</mat-icon> 
-                Developer
+                <mat-icon>code</mat-icon>Developer
             </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -44,5 +71,7 @@
 
     </mat-expansion-panel>
 
-
 </mat-nav-list>
+
+
+</ng-container>

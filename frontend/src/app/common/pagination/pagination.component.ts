@@ -16,18 +16,6 @@ import { PaginationFiltersDirective, PageBodyDirective } from './pagination.dire
 })
 export class PaginationComponent<TData> extends Disposable implements OnInit {
     /**
-     * Amount of milliseconds to wait before calling `pageFetcher` after user
-     * has stopped typing search request.
-     */
-    @Input() debounceSearchTime = 400;
-
-    /**
-     * Amount of milliseconds to wait before calling `pageFetcher` after user
-     * has stopped changing search filters.
-     */
-    @Input() debounceFilteringTime = 100;
-
-    /**
      * Placeholder text for search input.
      */
     @Input() searchInputPlaceholder = 'Type here to search';
@@ -90,7 +78,7 @@ export class PaginationComponent<TData> extends Disposable implements OnInit {
      * items from this page.
      * @param removedItemsAmount Defines the number of items that were deleted from this page.
      */
-    updateBecausePageItemsRemoved(removedItemsAmount: number) {
+    updateDueToPageItemsRemoved(removedItemsAmount: number) {
         // FIXME: come up with a more performant solution than refetching the whole page
 
         // this.page should not be null here, but who knows))

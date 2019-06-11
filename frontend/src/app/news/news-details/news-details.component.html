@@ -7,15 +7,11 @@
         <figure class="local-promo">
             <img [src]="images.getImgUrlFromId(news.promoImgId)" class="local-promo__img">
         </figure>
-        <td-markdown [content]="news.body">
-        </td-markdown>
+        <td-markdown [content]="news.body"></td-markdown>
     </mat-card-content>
 </mat-card>
-<app-rating 
-    [rateful]="news"
-    [ratingUpdater]="newsRatingUpdater"
-></app-rating>
+
+<app-rating [rateful]="news" [ratingUpdater]="newsRatingUpdater"></app-rating>
+
 <!-- TODO: optimize comment creation to remove whole page refetch -->
-<app-all-news-comments #allComments
-    [newsId]="news.id"
-></app-all-news-comments>
+<app-all-news-comments #allComments [newsId]="news.id"></app-all-news-comments>

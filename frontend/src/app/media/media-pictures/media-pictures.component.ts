@@ -14,8 +14,8 @@ export class MediaPicturesComponent {
     readonly galleryId = 'MediaPictures';
     // 6 screenshots from '/assets/' dir, update this counter when amount of 
     // pictures that need to be display in this gallery changes
-    readonly images = _.times(6, i => { 
-        const imgUrl = `/assets/game-screenshot${i + 1}.jpg`;
+    readonly images = _.times(7, i => { 
+        const imgUrl = `/assets/img/game-screenshot${i + 1}.jpg`;
         return new ImageItem({ src: imgUrl, thumb: imgUrl });
     });
 
@@ -36,7 +36,7 @@ export class MediaPicturesComponent {
             if      (e.deltaY > 0) this.galleryRef.next();
             else if (e.deltaY < 0) this.galleryRef.prev();
         },
-        /* throttle time */ 400,
+        /* throttle time */     400,
         { leading: true }
     );
 

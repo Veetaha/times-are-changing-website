@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
     styleUrls:  ['./home.component.scss']
 })
 export class HomeComponent {
-    readonly carouselImageSrcs = _.times(6, i => `/assets/game-screenshot${i + 1}.jpg`);
 }

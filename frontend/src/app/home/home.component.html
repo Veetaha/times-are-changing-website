@@ -1,15 +1,105 @@
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Times are Changing</mat-card-title>
-        <mat-card-subtitle>Pony game</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-    <figure>
+<article class="local-root">
+    
+<h1 class="local-headline">Times are Changing</h1>
+<section class="local-main-content">
+    <figure class="local-promo-image">
         <img 
-            src="/assets/website-logo.jpg" 
+            src="/assets/img/home-promo.jpg" 
             alt="'Times are Changing' website logo"
-            class="website-logo"
+            class="local-promo-image__img"
         />
     </figure>
-    </mat-card-content>
-</mat-card>
+    <div class="local-game-description">
+        <section>
+            <p>
+                <strong>Times are Changing (Pony Game)</strong> 
+                - is a game project with different elements of different genres, 
+                out of which "CyberPunk" and "Sci-FI" prevail.
+                The game is developed by a group of enthusiasts who take up their 
+                particular position in the project.
+            </p>
+            
+            <p>
+                The action takes place in the future of the pony world. The main character 
+                is a mare, she lives in a fairly progressive city, but one day she comes 
+                across a document that triggers her interest to explore something new. 
+                What exactly will she end up with her adventures and what is going to happen 
+                afterwards is up to the player.
+            </p>
+        </section>
+        <section>
+            <p class="local-badge">
+                <span class="local-badge__title">Game status</span>
+                <span class="local-badge__content local-badge__content--stable">
+                    development
+                </span>
+            </p>
+            <p class="local-badge">
+                <span class="local-badge__title">Team status</span>
+                <span class="local-badge__content local-badge__content--warning">
+                        &#x000BD; involved
+                </span>
+                <span class="local-badge__description">
+                    The rest can't be loaded in terms of tasks, or they've already done 
+                    everything that was required.
+                </span>
+            </p>
+            <p class="local-badge">
+                <span class="local-badge__title">Game server</span>
+                <span class="local-badge__content local-badge__content--critical">
+                    disabled
+                </span>
+                <span class="local-badge__description">
+                    In development.
+                </span>
+            </p>
+        </section>
+        <section>
+            <p>
+                The universe of <strong>Times are Changing</strong> is an alternative 
+                world where technology coexists with magic. The main character 
+                had been living a quiet life until she occasionally encountered 
+                a secret document on the old computer equipment of the company 
+                she works for. The government has covered all the evidence of 
+                its terrible mistake made in the past, except, as it turns out, one.
+                All the ponies who have already tried to get to the bottom of the 
+                truth have gone missing with no apparent trace, and now the 
+                sinistrous information is in the hooves of the main character. 
+            </p>
+            <p>
+                What should she do? Should she start her own investigation, 
+                endangering her life and the lives of her closest ponies, or 
+                leave everything as is and forget about it, like a bad dream? 
+                Each of the chosen options has many ramifications, 
+                where the player will face a moral choice, since even the 
+                slightest detail matters. 
+            </p> 
+                In addition to the main story, there are side-quests, that are 
+                always available for you. Throughout the journey, the player 
+                will be accompanied by a deep atmosphere of the surrounding world, 
+                consisting of beautiful landscapes and ambient, an excellent 
+                ad-hoc soundtrack, as well as music from other popular composers. 
+            <p>
+                You can play from the first person and from the third, 
+                where the second option implies no graphic interface 
+                and holograms, which increases the realism of the gameplay. 
+                For the future we've planned to add a multiplayer, 
+                that will include tons of game modes. 
+            </p>
+            <p>   
+                The game is still a work in progress at the moment ...
+            </p>
+        </section>
+    </div>
+</section>
+
+<figure class="local-promo-video">
+    <figcaption class="local-promo-video__caption">Powered by Unreal Engine 4</figcaption>
+    <!-- muted issue: https://github.com/angular/angular/issues/23009 -->
+    <video class="local-promo-video__vid" controls autoplay [muted]="true">
+        <source src="/assets/videos/home-promo.mp4" type="video/mp4"/>
+        Your browser does not support the video tag.
+    </video>
+</figure>
+
+</article>

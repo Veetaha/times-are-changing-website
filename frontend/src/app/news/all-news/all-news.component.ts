@@ -51,7 +51,7 @@ export class AllNewsComponent implements OnDestroy {
         this.store.dispatch(DeleteFab.instance);
     }
 
-    // TODO: disable deleted news while waiting for server response
+    // TODO: disable deleting news while waiting for server response
     async deleteNews(news: PagedNews) {
         const confirmed = await this.dialogs.openConfirm({
             message: `Are you sure you want to delete news "${news.title}"?`,
@@ -66,7 +66,7 @@ export class AllNewsComponent implements OnDestroy {
         this.news.deleteNewsById(news.id).subscribe(
             () => {
                 this.store.dispatch(new Success(`Successfully deleted news "${newsTitle}"`));
-                this.paginator.updateBecausePageItemsRemoved(1);
+                this.paginator.updateDueToPageItemsRemoved(1);
             },
             err => this.store.dispatch(new CriticalError(
                 `Failed to delete news "${newsTitle}": ${err.message}`

@@ -1,10 +1,12 @@
-import { NgModule                } from '@angular/core';
-import { BrowserModule           } from '@angular/platform-browser';
-import { UcWidgetModule          } from 'ngx-uploadcare-widget';
-import { ClipboardModule         } from 'ngx-clipboard';
+import { NgModule        } from '@angular/core';
+import { BrowserModule   } from '@angular/platform-browser';
+import { UcWidgetModule  } from 'ngx-uploadcare-widget';
+import { ClipboardModule } from 'ngx-clipboard';
+import { AgmCoreModule   } from '@agm/core';
 
 import { VeeModule     } from '@utils/vee/vee.module';
 import { GraphQLModule } from '@app/gql/gql.module';
+import { ConfigService } from '@app/config/config.service';
 
 import { CommonNgxsModule     } from './common-ngxs.module';
 import { CommonMaterialModule } from './common-material.module';
@@ -15,8 +17,6 @@ import { UploadImageComponent } from './image/upload-image/upload-image.componen
 import { SnackBarComponent    } from './snack-bar/snack-bar.component';
 import { PaginationModule     } from './pagination/pagination.module';
 import { RatingComponent      } from './rating/rating.component';
-
-
 
 const reexports = [
     CommonGalleryModule,
@@ -32,7 +32,10 @@ const reexports = [
 ];
 
 @NgModule({
-    imports: reexports,
+    imports: [
+        ...reexports,
+        AgmCoreModule.forRoot({ apiKey: ConfigService.googleMapsApiKey })
+    ],
     declarations: [
         UploadImageComponent,
         SnackBarComponent,
@@ -40,6 +43,7 @@ const reexports = [
     ],
     exports: [
         ...reexports,
+        AgmCoreModule,
         UploadImageComponent,
         SnackBarComponent,
         RatingComponent

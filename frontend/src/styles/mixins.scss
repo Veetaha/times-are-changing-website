@@ -23,3 +23,10 @@
 @mixin horizontal-padding($size) { padding: { left: $size; right:  $size; } }
 @mixin vertical-margin($size)    { margin:  { top:  $size; bottom: $size; } }
 @mixin vertical-padding($size)   { padding: { top:  $size; bottom: $size; } }
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}

@@ -1,14 +1,14 @@
-import { Nullable } from 'ts-typedefs';
-
+import { Nullable            } from 'ts-typedefs';
 import { Reflector           } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard as PassportAuthGuard } from '@nestjs/passport';
 import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 
-import { User         } from '@modules/user/user.entity';
-import { UserRole     } from '@modules/user/user-role.enum';
-import { RolesMetaKey, OptionalAuthMetaKey } from './constants';
+import { User           } from '@modules/user/user.entity';
+import { UserRole       } from '@modules/user/user-role.enum';
 import { ResolveContext } from '@modules/common/resolve-context.class';
+
+import { rolesMetaKey, optionalAuthMetaKey } from './constants';
 
 
 @Injectable()
@@ -18,9 +18,7 @@ export class AuthGuard extends PassportAuthGuard('jwt') {
         super();
     }
 
-    /**
-     * @override
-     */
+    /** @override */
     getRequest(ctx: ExecutionContext) {
         return this.getResolveContext(ctx).getRequest();
     }
@@ -69,11 +67,11 @@ export class AuthGuard extends PassportAuthGuard('jwt') {
     }
 
     private isOptionalAuth(ctx: ExecutionContext) {
-        return this.reflector.get<Nullable<true>>(OptionalAuthMetaKey, ctx.getHandler());
+        return this.reflector.get<Nullable<true>>(optionalAuthMetaKey, ctx.getHandler());
     }
 
     private getAllowedRoles(ctx: ExecutionContext) {
-        return this.reflector.get<UserRole[]>(RolesMetaKey, ctx.getHandler());
+        return this.reflector.get<UserRole[]>(rolesMetaKey, ctx.getHandler());
     }
 
     private getResolveContext(ctx: ExecutionContext): ResolveContext {

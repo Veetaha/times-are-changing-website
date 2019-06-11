@@ -38,7 +38,7 @@ export class RatingComponent {
         // if no initial rating was set or client swapped like to dislike or vice versa
         // otherwise, remove his [dis]like
 
-        debugger; // FIXME: rating counts doesn't get updated under some conditions
+        // FIXME: rating counts doesn't get updated under some conditions
         const newRating = myRating == null || myRating.hasLiked !== isLikeBtn
             ? { hasLiked: isLikeBtn }
             : null;

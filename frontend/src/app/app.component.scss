@@ -3,6 +3,23 @@
     width: 100%;
 }
 .local {
+    $progress-bar-height: 4px;
+    &-progress-bar {
+        position: fixed;
+        top: 64px;  // height of top toolbar
+        // TODO: find a better solution
+        // mat-toolbar changes it height:
+        @media (max-width: 599px) { 
+            top: 56px;
+        }
+        z-index: 2; // TODO: workaround being overlapped by main content
+        height: $progress-bar-height;
+    }
+    &-main {
+        margin-top: $progress-bar-height + 5px; // make enough space for progress-bar
+        padding: 0 10%;
+        flex-grow: 1;
+    }
     &-dashboard {
         display: block;
         width: 100%;
@@ -15,10 +32,6 @@
         flex-direction: column;
         height: 100%;
     }
-    &-main {
-        padding: 0 10%;
-        flex-grow: 1;
-    }
     &-footer {
        flex-shrink: 0;
     }
@@ -26,6 +39,6 @@
         position: fixed;
         bottom: 45px;
         right:  45px;
-        z-index: 1;
+        z-index: 2;
     }
 }

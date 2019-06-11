@@ -1,2 +1,2 @@
-export const RolesMetaKey = 'app:roles';
-export const OptionalAuthMetaKey = 'app:optionalAuth';
+export const rolesMetaKey = 'app:roles';
+export const optionalAuthMetaKey = 'app:optionalAuth';

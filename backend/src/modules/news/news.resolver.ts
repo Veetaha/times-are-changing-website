@@ -5,14 +5,15 @@ import { Root, Resolver, Query, Args, Mutation, ResolveProperty, Info } from "@n
 
 import { ArgsId } from '@utils/gql/id/args-id.decorator';
 
+import { ConfigService      } from '@modules/config/config.service';
+import { DataLoader         } from '@modules/common/data-loader.decorator';
+import { Auth, OptionalAuth } from '@modules/auth/auth.decorator';
+import { Client             } from '@modules/auth/client.decorator';
+import { NewsRating         } from '@modules/news-rating/news-rating.entity';
 import { NewsRatingService  } from '@modules/news-rating/news-rating.service';
 import { UserService        } from '@modules/user/user.service';
-import { ConfigService      } from '@modules/config/config.service';
-import { Client             } from '@modules/auth/client.decorator';
+import { UserRole           } from '@modules/user/user-role.enum';
 import { User               } from '@modules/user/user.entity';
-import { DataLoader         } from '@modules/common/data-loader.decorator';
-import { NewsRating         } from '@modules/news-rating/news-rating.entity';
-import { Auth, OptionalAuth } from '@modules/auth/auth.decorator';
 
 import { News                } from './news.entity';
 import { NewsService         } from './news.service';
@@ -20,11 +21,6 @@ import { NewsPaginationInput } from './gql/news-pagination.input';
 import { NewsPage            } from './gql/news-page.object';
 import { CreateNewsInput     } from './gql/create-news.input';
 import { UpdateNewsInput     } from './gql/update-news.input';
-import { UserRole } from '@modules/user/user-role.enum';
-
-
-
-
 
 
 @Resolver(News)

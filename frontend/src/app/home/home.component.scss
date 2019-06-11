@@ -1,4 +1,77 @@
-.website-logo {
-    max-width:  80vw;
-    max-height: 40vh;
+@import 'variables';
+@import 'mixins';
+
+.local {
+    &-badge {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &__description {
+            font-size: 1.8rem;
+            color: mat-color(map-get($theme, muted-text));
+        }
+        &__title {
+            font-size: 2.3rem;
+            font-weight: 500;
+        }
+        &__content {
+            margin: 0.8rem;
+            text-align: center;
+            padding: 0.4rem 1rem;
+            border-radius: 1.5rem;
+            color: mat-color(map-get($theme, foreground));
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            @mixin badge-color($theme-color, $hue) {
+                background-color: mat-color(map-get($theme, $theme-color), $hue);
+            }
+            &--stable {
+                @include badge-color(accent, 700);
+            }
+            &--warning {
+                @include badge-color(soft-warn, 800);
+            }
+            &--critical {
+                @include badge-color(warn, 700);
+            }
+        }
+    }
+
+    &-root {
+        margin-bottom: 30px;
+    }
+    &-headline {
+        text-align: center;
+    }
+    &-promo-video {
+        width: 60%;        
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__caption {
+            margin: 10px;
+        }
+        &__vid {
+            width: 100%;
+        }
+    }
+    &-promo-image {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        // TODO: add vignette (https://stackoverflow.com/a/23935891)
+        &__img {
+            border-radius: 10px;
+            width: 100%; 
+        }
+    }
+    &-game-description {
+        @include horizontal-padding(15%);
+    }
+    &-main-content {
+        font-size: 1.9rem;
+    }
 }

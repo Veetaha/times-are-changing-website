@@ -12,7 +12,7 @@
             </mat-select>
         </mat-form-field>
     </form>
-
+    <!-- TODO: migrate to <mat-table>, because <td-data-table> doesn't define trackBy. -->
     <td-data-table *appPageBody="let users" 
         [data]="users"
         [columns]="tableColumnsConfig"

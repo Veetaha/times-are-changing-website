@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector:    'app-media',
@@ -8,11 +7,4 @@ import { DomSanitizer } from '@angular/platform-browser';
     styleUrls:  ['./media.component.scss']
 })
 export class MediaComponent {
-    constructor(private readonly sanitizer: DomSanitizer) {}
-
-    readonly screenshotSrcs = _.times(6, i => `/assets/game-screenshot${i + 1}.jpg`);
-    readonly ytVideoSrcs = [
-        "https://www.youtube.com/embed/duqLf1Orf0s",
-        "https://www.youtube.com/embed/TYG6m9Q7oOw"
-    ].map(url => this.sanitizer.bypassSecurityTrustResourceUrl(url));
 }
