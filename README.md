@@ -166,3 +166,8 @@ You need to run this method inside of `NgZone`
 ```ts
 this.zone.run(() => this.snackBarRef.dismiss());
 ```
+
+---
+
+### <video muted> doesnt work.
+See this issue https://github.com/angular/angular/issues/23009.
