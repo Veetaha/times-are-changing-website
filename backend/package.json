@@ -40,7 +40,7 @@
         "swagger-ui-express": "latest",
         "ts-node": "^8.0.3",
         "tsconfig-paths": "latest",
-        "type-graphql": "^0.17.1",
+        "type-graphql": "^0.17.6",
         "typeorm": "latest",
         "typeorm-loader": "0.0.1-0.5",
         "typescript": "^3.4.5"
