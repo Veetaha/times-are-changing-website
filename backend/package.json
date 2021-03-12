@@ -58,7 +58,7 @@
         "@types/sqlstring": "^2.2.1",
         "@types/supertest": "latest",
         "jest": "latest",
-        "madge": "^3.4.4",
+        "madge": "^4.0.1",
         "nodemon": "latest",
         "supertest": "latest",
         "ts-jest": "^24.0.2",
