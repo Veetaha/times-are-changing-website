@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/Veetaha/times-are-changing-website#readme",
   "dependencies": {
-    "@hapi/joi": "^15.0.3",
+    "@hapi/joi": "^15.1.1",
     "@ngxs/router-plugin": "^3.4.3",
     "@ngxs/storage-plugin": "^3.4.3",
     "async-mutex": "^0.1.3",
